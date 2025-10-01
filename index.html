@@ -4,91 +4,246 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>✨ ১২-পিস হালাল আতর কম্বো প্যাক ✨</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <style>
-/* Reset & Base */
+/* Base */
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Poppins',sans-serif;background:#f5f6fa;color:#333;scroll-behavior:smooth;}
-h2{margin-bottom:15px;text-align:center;font-weight:700;}
+body{font-family:'Poppins',sans-serif;background:#FFC0CB;color:#000000;scroll-behavior:smooth;}
+h2{margin-bottom:15px;text-align:center;font-weight:700;color:#000000;font-family:'Amiri', serif;}
 .section{padding:20px 15px;}
 a{text-decoration:none;}
 
-/* Hero Carousel */
-.hero-carousel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:15px;padding:15px 0;}
-.hero-carousel::-webkit-scrollbar{display:none;}
-.hero-carousel .hero-card{flex:0 0 auto;width:160px;scroll-snap-align:start;border-radius:15px;overflow:hidden;position:relative;cursor:pointer;transition:0.3s;box-shadow:0 5px 20px rgba(0,0,0,0.2);}
-.hero-carousel .hero-card img{width:100%;display:block;transition:0.3s;}
-.hero-carousel .hero-card:hover img{transform:scale(1.05);}
-.hero-carousel .hero-card span{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.6);color:#fff;font-size:0.85rem;padding:4px 8px;border-radius:8px;}
+/* Hero Slideshow */
+.hero-slideshow{
+  position:relative;
+  width:100%;
+  max-width:500px;
+  height:260px;
+  margin:20px auto;
+  overflow:hidden;
+  border-radius:20px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+.hero-slideshow .slide{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  opacity:0;
+  transform:scale(0.95);
+  transition:0.8s all ease-in-out;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.hero-slideshow .slide.active{
+  opacity:1;
+  transform:scale(1);
+  z-index:10;
+}
+.hero-slideshow .slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:18px;
+  border:2px solid #FF5722;
+}
+.hero-slideshow .slide span{
+  position:absolute;
+  bottom:15px;
+  left:50%;
+  transform:translateX(-50%);
+  background: #FF5722;
+  color: #FFFFFF;
+  padding:6px 12px;
+  border-radius:10px;
+  font-weight:600;
+  font-family:'Amiri', serif;
+  font-size:1rem;
+}
 
-/* Big Floating Order Button */
-.big-order-btn{position:fixed;bottom:20px;right:20px;background:linear-gradient(90deg,#ff5722,#ff9800);color:#fff;padding:14px 18px;border-radius:50px;font-weight:700;box-shadow:0 8px 25px rgba(0,0,0,0.25);z-index:999;transition:0.3s;}
-.big-order-btn:hover{transform:scale(1.05);}
+/* Dot Indicators */
+.hero-slideshow .dots{
+  position:absolute;
+  bottom:10px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:8px;
+}
+.hero-slideshow .dots .dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:rgba(0,0,0,0.3);
+  cursor:pointer;
+  transition:0.3s;
+}
+.hero-slideshow .dots .dot.active{
+  background:#FF5722;
+  transform:scale(1.2);
+}
+
+/* Hero Order Button */
+.hero-order-btn{
+  display:block;
+  width:90%;
+  max-width:400px;
+  margin:15px auto 30px auto;
+  padding:14px 0;
+  background: #FF5722;
+  color: #FFFFFF;
+  font-weight:700;
+  font-size:1.2rem;
+  text-align:center;
+  border-radius:50px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  transition:0.3s;
+}
+.hero-order-btn:hover{
+  transform:scale(1.05);
+  background:#E64A19;
+}
 
 /* Product Cards */
 .product-list{display:flex;flex-direction:column;gap:12px;}
-.product-card{display:flex;gap:12px;background:#fff;padding:15px;border-radius:15px;box-shadow:0 6px 25px rgba(0,0,0,0.15);transition:0.3s;align-items:center;}
-.product-card img{width:90px;height:90px;object-fit:cover;border-radius:12px;}
-.product-card:hover{transform:scale(1.02);}
+.product-card{
+  display:flex;
+  gap:12px;
+  background:#FFD1DC;
+  border-left:4px solid #FF5722;
+  padding:16px;
+  border-radius:18px;
+  color:#000000;
+  transition: transform 0.2s;
+  align-items:center;
+}
+.product-card:hover{transform:scale(1.03);}
+.product-card img{width:90px;height:90px;object-fit:cover;border-radius:15px;}
 .p-info{flex:1;display:flex;flex-direction:column;gap:6px;}
-.select-qty{display:flex;gap:8px;align-items:center;}
-.select-qty input[type="number"]{width:60px;padding:5px;border-radius:8px;border:1px solid #ccc;text-align:center;}
-.select-qty label{display:flex;align-items:center;gap:5px;cursor:pointer;user-select:none;}
+.p-info h4{color:#000000;font-family:'Amiri', serif;font-weight:600;}
+.p-info p{color:#000000;font-weight:500;}
+.select-qty{display:flex;gap:10px;align-items:center;margin-top:5px;}
+.toggle-select{
+  padding:6px 12px;
+  background:#FF5722;
+  color:#FFFFFF;
+  border:none;
+  border-radius:12px;
+  font-weight:600;
+  cursor:pointer;
+}
+.toggle-select.active{background:#E64A19;}
+.qty-spinner{display:flex;align-items:center;gap:5px;}
+.qty-spinner button{
+  padding:4px 10px;
+  background:#FF5722;
+  border:none;
+  border-radius:8px;
+  font-size:1.1rem;
+  cursor:pointer;
+  transition:0.2s;
+  color:#FFFFFF;
+}
+.qty-spinner button:hover{background:#E64A19;}
+.qty-spinner input{
+  width:50px;
+  text-align:center;
+  border-radius:8px;
+  border:1px solid #FF5722;
+  padding:4px;
+  background:#FFFFFF;
+  color:#000000;
+}
+.qty-spinner input:disabled{background:#FFE4E1;color:#555;}
 
 /* Form Styling */
-form{max-width:550px;margin:15px auto;background:#fff;padding:20px;border-radius:15px;box-shadow:0 8px 25px rgba(0,0,0,0.2);}
-form label{display:block;margin-top:10px;font-weight:600;}
-form input, form textarea, form select{width:100%;padding:12px;margin-top:5px;border-radius:10px;border:1px solid #ccc;font-size:1rem;}
-form button{background:linear-gradient(90deg,#ff5722,#ff9800);color:#fff;border:none;padding:14px;width:100%;border-radius:12px;margin-top:15px;font-size:1.1rem;font-weight:700;cursor:pointer;transition:0.3s;}
-form button:hover{transform:scale(1.03);background:linear-gradient(90deg,#ff7043,#f57c00);}
+form{
+  max-width:550px;
+  margin:15px auto;
+  background:#FFE4E1;
+  padding:20px;
+  border-radius:18px;
+}
+form label{color:#000000;font-weight:600;display:block;margin-top:10px;}
+form input, form textarea, form select{
+  width:100%;
+  padding:12px;
+  margin-top:5px;
+  border-radius:10px;
+  border:1px solid #FF5722;
+  background:#FFFFFF;
+  color:#000000;
+  font-size:1rem;
+}
+form button{
+  background:#FF5722;
+  color:#FFFFFF;
+  border:none;
+  border-radius:12px;
+  width:100%;
+  padding:14px;
+  margin-top:15px;
+  font-weight:700;
+  cursor:pointer;
+}
+form button:hover{background:#E64A19;}
 
-/* Price Box Sticky Bottom */
-.price-box{position:sticky;bottom:0;background:linear-gradient(135deg,#ff7e5f,#feb47b);color:#fff;padding:15px;margin-top:20px;border-radius:12px;text-align:center;box-shadow:0 6px 25px rgba(0,0,0,0.3);}
-.price-box h3{margin-bottom:5px;}
-.price-box p{margin:3px 0;font-weight:600;}
+/* Price Box */
+.price-box{
+  background: #FFCCBC;
+  color:#000000;
+  border-radius:15px;
+  text-align:center;
+  padding:12px;
+}
 
 /* Video Section */
 .video-section{margin:20px 0;}
-.video-container{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:15px;box-shadow:0 6px 25px rgba(0,0,0,0.25);}
-.video-container iframe, .video-container video{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:15px;}
+.video-container{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:20px;}
+.video-container iframe, .video-container video{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:20px;}
 
 /* Footer */
-footer{background:#212121;color:#ccc;text-align:center;padding:15px;margin-top:25px;font-size:0.9rem;}
-footer a{color:#ffb74d;text-decoration:none;}
+footer{background:#FF5722;color:#FFFFFF;text-align:center;padding:15px;margin-top:25px;font-size:0.9rem;font-family:'Amiri', serif;}
+footer a{color:#FFFFFF;text-decoration:none;}
 
 /* Social Buttons */
-.social-btn{position:fixed;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;text-decoration:none;box-shadow:0 5px 15px rgba(0,0,0,0.3);transition:0.3s;z-index:1000;}
+.social-btn{position:fixed;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;text-decoration:none;box-shadow:0 5px 15px rgba(0,0,0,0.2);transition:0.3s;z-index:1000;}
 .social-btn:hover{transform:scale(1.1);}
 .whatsapp{background:#25D366;bottom:20px;right:20px;}
 .messenger{background:#0084FF;bottom:80px;right:20px;}
 
 /* Responsive */
 @media(max-width:480px){
-  .hero-carousel .hero-card{width:120px;}
   .product-card{flex-direction:column;align-items:flex-start;}
   .product-card img{width:100%;height:auto;}
   form{padding:15px;}
+  .hero-slideshow{height:220px;}
 }
 </style>
 </head>
 <body>
 
-<!-- Hero Carousel -->
-<div class="hero-carousel">
-  <div class="hero-card" data-id="combo">
-    <img src="photo ator.png" alt="Combo Pack">
+<!-- Hero Slideshow -->
+<div class="hero-slideshow">
+  <div class="slide active">
+    <img src="photo ator.png" alt="১২-পিস আতর কম্বো">
     <span>✨ ১২-পিস আতর কম্বো</span>
   </div>
-  <div class="hero-card" data-id="special">
-    <img src="photo ator2.png" alt="Attar Bottles">
+  <div class="slide">
+    <img src="photo ator2.png" alt="স্পেশাল আতর">
     <span>🌿 স্পেশাল আতর</span>
+  </div>
+  <div class="dots">
+    <span class="dot active" data-index="0"></span>
+    <span class="dot" data-index="1"></span>
   </div>
 </div>
 
-<!-- Big Floating Order Button -->
-<a href="#order" class="big-order-btn">অর্ডার করুন</a>
+<!-- Hero Order Button -->
+<a href="#order" class="hero-order-btn">অর্ডার করুন</a>
 
 <!-- Video Section -->
 <div class="video-section section">
@@ -111,8 +266,12 @@ footer a{color:#ffb74d;text-decoration:none;}
         <h4>✨ ১২-পিস আতর কম্বো</h4>
         <p>💰 590 টাকা</p>
         <div class="select-qty">
-          <label><input type="checkbox" class="product-check" value="combo"> সিলেক্ট</label>
-          <input type="number" class="qty" data-id="combo" value="1" min="1" max="50" disabled>
+          <button class="toggle-select" data-id="combo">Select</button>
+          <div class="qty-spinner">
+            <button class="dec" data-id="combo">−</button>
+            <input type="number" class="qty" data-id="combo" value="1" min="1" max="50" disabled>
+            <button class="inc" data-id="combo">+</button>
+          </div>
         </div>
       </div>
     </div>
@@ -122,8 +281,12 @@ footer a{color:#ffb74d;text-decoration:none;}
         <h4>🌿 স্পেশাল আতর (৫মি.লি.)</h4>
         <p>💰 250 টাকা</p>
         <div class="select-qty">
-          <label><input type="checkbox" class="product-check" value="special"> সিলেক্ট</label>
-          <input type="number" class="qty" data-id="special" value="1" min="1" max="50" disabled>
+          <button class="toggle-select" data-id="special">Select</button>
+          <div class="qty-spinner">
+            <button class="dec" data-id="special">−</button>
+            <input type="number" class="qty" data-id="special" value="1" min="1" max="50" disabled>
+            <button class="inc" data-id="special">+</button>
+          </div>
         </div>
       </div>
     </div>
@@ -136,20 +299,16 @@ footer a{color:#ffb74d;text-decoration:none;}
   <form onsubmit="sendToWhatsApp(event)">
     <label>নাম:</label>
     <input type="text" id="name" required>
-
     <label>মোবাইল নম্বর:</label>
     <input type="text" id="phone" required>
-
     <label>ঠিকানা:</label>
     <textarea id="address" rows="3" required></textarea>
-
     <label>আপনার এলাকা:</label>
     <select id="area" required>
       <option value="">-- এলাকা নির্বাচন করুন --</option>
       <option value="dhaka">ঢাকার ভিতরে</option>
       <option value="outside">ঢাকার বাইরে</option>
     </select>
-
     <button type="submit">অর্ডার কনফার্ম করুন</button>
   </form>
 
@@ -169,71 +328,26 @@ footer a{color:#ffb74d;text-decoration:none;}
 <a href="https://m.me/yourpageusername" class="social-btn messenger" target="_blank"><i class="fab fa-facebook-messenger"></i></a>
 
 <script>
+// Hero Slideshow
+const slides=document.querySelectorAll(".hero-slideshow .slide");
+const dots=document.querySelectorAll(".hero-slideshow .dot");
+let currentSlide=0;
+function showSlide(index){slides.forEach((s,i)=>s.classList.toggle("active",i===index));dots.forEach((d,i)=>d.classList.toggle("active",i===index));}
+let slideInterval=setInterval(()=>{currentSlide=(currentSlide+1)%slides.length;showSlide(currentSlide);},3000);
+dots.forEach(dot=>dot.addEventListener("click",()=>{currentSlide=parseInt(dot.dataset.index);showSlide(currentSlide);resetInterval();}));
+function resetInterval(){clearInterval(slideInterval);slideInterval=setInterval(()=>{currentSlide=(currentSlide+1)%slides.length;showSlide(currentSlide);},3000);}
+showSlide(currentSlide);
+
+// Product Selection + Quantity
 const areaSelect=document.getElementById("area");
 const deliveryCharge=document.getElementById("delivery-charge");
 const totalPrice=document.getElementById("total-price");
 const prices={combo:590,special:250};
-
-document.querySelectorAll(".hero-card, .product-card").forEach(card=>{
-  card.addEventListener("click",()=>{
-    const id=card.dataset.id;
-    const chk=document.querySelector(`.product-check[value="${id}"]`);
-    const qty=document.querySelector(`.qty[data-id="${id}"]`);
-    if(chk){ chk.checked=!chk.checked; qty.disabled=!chk.checked; updateTotal();}
-  });
-});
-
-function updateTotal(){
-  let subtotal=0;
-  document.querySelectorAll(".product-check").forEach(chk=>{
-    if(chk.checked){
-      let id=chk.value;
-      let qty=document.querySelector(`.qty[data-id="${id}"]`).value;
-      subtotal+=prices[id]*parseInt(qty);
-    }
-  });
-  let charge=0;
-  if(areaSelect.value==='dhaka') charge=50;
-  if(areaSelect.value==='outside') charge=100;
-  if(areaSelect.value){deliveryCharge.innerText=charge+" টাকা"; totalPrice.innerText=`✅ মোট: ${subtotal+charge} টাকা`;}
-  else{deliveryCharge.innerText="-"; totalPrice.innerText="";}
-}
-
-document.querySelectorAll(".product-check").forEach(chk=>{
-  chk.addEventListener("change",()=>{
-    let qty=document.querySelector(`.qty[data-id="${chk.value}"]`);
-    qty.disabled=!chk.checked; updateTotal();
-  });
-});
-
-document.querySelectorAll(".qty,#area").forEach(el=>{
-  el.addEventListener("input",updateTotal);
-  el.addEventListener("change",updateTotal);
-});
-
-function sendToWhatsApp(e){
-  e.preventDefault();
-  let name=document.getElementById("name").value;
-  let phone=document.getElementById("phone").value;
-  if(!/^[0-9]{11}$/.test(phone)){alert("সঠিক ১১ ডিজিটের মোবাইল নাম্বার দিন");return;}
-  let address=document.getElementById("address").value;
-  let area=document.getElementById("area").value;
-  let details="";let subtotal=0;
-  document.querySelectorAll(".product-check").forEach(chk=>{
-    if(chk.checked){
-      let id=chk.value;
-      let qty=document.querySelector(`.qty[data-id="${id}"]`).value;
-      let pname=id==='combo'?'১২-পিস কম্বো':'স্পেশাল আতর';
-      let total=prices[id]*qty;
-      details+=`${pname} × ${qty} = ${total} টাকা%0A`;
-      subtotal+=total;
-    }
-  });
-  let charge=area==='dhaka'?50:100;
-  let msg=`অর্ডার ডিটেইলস:%0A👤 নাম: ${name}%0A📞 মোবাইল: ${phone}%0A🏠 ঠিকানা: ${address}%0A📍 এলাকা: ${area==='dhaka'?'ঢাকার ভিতরে':'ঢাকার বাইরে'}%0A------------------%0A${details}💰 সাবটোটাল: ${subtotal} টাকা%0A🚚 ডেলিভারি: ${charge} টাকা%0A✅ মোট: ${subtotal+charge} টাকা`;
-  window.open("https://wa.me/8801753146192?text="+msg,"_blank");
-}
+document.querySelectorAll(".toggle-select").forEach(btn=>{btn.addEventListener("click",()=>{const id=btn.dataset.id;const qtyInput=document.querySelector(`.qty[data-id="${id}"]`);btn.classList.toggle("active");qtyInput.disabled=!btn.classList.contains("active");updateTotal();});});
+document.querySelectorAll(".inc,.dec").forEach(btn=>{btn.addEventListener("click",()=>{const id=btn.dataset.id;const qtyInput=document.querySelector(`.qty[data-id="${id}"]`);if(qtyInput.disabled) return;let val=parseInt(qtyInput.value);if(btn.classList.contains("inc")&&val<parseInt(qtyInput.max)) val++;if(btn.classList.contains("dec")&&val>parseInt(qtyInput.min)) val--;qtyInput.value=val;updateTotal();});});
+function updateTotal(){let subtotal=0;document.querySelectorAll(".toggle-select").forEach(btn=>{const id=btn.dataset.id;const qtyInput=document.querySelector(`.qty[data-id="${id}"]`);if(btn.classList.contains("active")) subtotal+=parseInt(qtyInput.value)*prices[id];});let charge=0;if(areaSelect.value==='dhaka') charge=50;if(areaSelect.value==='outside') charge=100;if(areaSelect.value){deliveryCharge.innerText=charge+" টাকা";totalPrice.innerText=`✅ মোট: ${subtotal+charge} টাকা`;}else{deliveryCharge.innerText="-";totalPrice.innerText="";}}
+document.querySelectorAll(".qty,#area").forEach(el=>{el.addEventListener("input",updateTotal);el.addEventListener("change",updateTotal);});
+function sendToWhatsApp(e){e.preventDefault();let name=document.getElementById("name").value;let phone=document.getElementById("phone").value;if(!/^[0-9]{11}$/.test(phone)){alert("সঠিক ১১ ডিজিটের মোবাইল নাম্বার দিন");return;}let address=document.getElementById("address").value;let area=document.getElementById("area").value;let details="";let subtotal=0;document.querySelectorAll(".toggle-select").forEach(btn=>{if(btn.classList.contains("active")){const id=btn.dataset.id;const qty=document.querySelector(`.qty[data-id="${id}"]`).value;let pname=id==='combo'?'১২-পিস কম্বো':'স্পেশাল আতর';let total=prices[id]*qty;details+=`${pname} × ${qty} = ${total} টাকা%0A`;subtotal+=total;}});let charge=area==='dhaka'?50:100;let msg=`অর্ডার ডিটেইলস:%0A👤 নাম: ${name}%0A📞 মোবাইল: ${phone}%0A🏠 ঠিকানা: ${address}%0A📍 এলাকা: ${area==='dhaka'?'ঢাকার ভিতরে':'ঢাকার বাইরে'}%0A------------------%0A${details}💰 সাবটোটাল: ${subtotal} টাকা%0A🚚 ডেলিভারি: ${charge} টাকা%0A✅ মোট: ${subtotal+charge} টাকা`;window.open("https://wa.me/8801753146192?text="+msg,"_blank");}
 </script>
-
 </body>
 </html>
