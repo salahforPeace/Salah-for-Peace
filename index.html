@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨ ১২-পিস হালাল আতর কম্বো প্যাক ✨</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+/* Reset & Base */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Poppins',sans-serif;background:#f5f6fa;color:#333;scroll-behavior:smooth;}
+h2{margin-bottom:15px;text-align:center;font-weight:700;}
+.section{padding:20px 15px;}
+a{text-decoration:none;}
+
+/* Hero Carousel */
+.hero-carousel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:15px;padding:15px 0;}
+.hero-carousel::-webkit-scrollbar{display:none;}
+.hero-carousel .hero-card{flex:0 0 auto;width:160px;scroll-snap-align:start;border-radius:15px;overflow:hidden;position:relative;cursor:pointer;transition:0.3s;box-shadow:0 5px 20px rgba(0,0,0,0.2);}
+.hero-carousel .hero-card img{width:100%;display:block;transition:0.3s;}
+.hero-carousel .hero-card:hover img{transform:scale(1.05);}
+.hero-carousel .hero-card span{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.6);color:#fff;font-size:0.85rem;padding:4px 8px;border-radius:8px;}
+
+/* Big Floating Order Button */
+.big-order-btn{position:fixed;bottom:20px;right:20px;background:linear-gradient(90deg,#ff5722,#ff9800);color:#fff;padding:14px 18px;border-radius:50px;font-weight:700;box-shadow:0 8px 25px rgba(0,0,0,0.25);z-index:999;transition:0.3s;}
+.big-order-btn:hover{transform:scale(1.05);}
+
+/* Product Cards */
+.product-list{display:flex;flex-direction:column;gap:12px;}
+.product-card{display:flex;gap:12px;background:#fff;padding:15px;border-radius:15px;box-shadow:0 6px 25px rgba(0,0,0,0.15);transition:0.3s;align-items:center;}
+.product-card img{width:90px;height:90px;object-fit:cover;border-radius:12px;}
+.product-card:hover{transform:scale(1.02);}
+.p-info{flex:1;display:flex;flex-direction:column;gap:6px;}
+.select-qty{display:flex;gap:8px;align-items:center;}
+.select-qty input[type="number"]{width:60px;padding:5px;border-radius:8px;border:1px solid #ccc;text-align:center;}
+.select-qty label{display:flex;align-items:center;gap:5px;cursor:pointer;user-select:none;}
+
+/* Form Styling */
+form{max-width:550px;margin:15px auto;background:#fff;padding:20px;border-radius:15px;box-shadow:0 8px 25px rgba(0,0,0,0.2);}
+form label{display:block;margin-top:10px;font-weight:600;}
+form input, form textarea, form select{width:100%;padding:12px;margin-top:5px;border-radius:10px;border:1px solid #ccc;font-size:1rem;}
+form button{background:linear-gradient(90deg,#ff5722,#ff9800);color:#fff;border:none;padding:14px;width:100%;border-radius:12px;margin-top:15px;font-size:1.1rem;font-weight:700;cursor:pointer;transition:0.3s;}
+form button:hover{transform:scale(1.03);background:linear-gradient(90deg,#ff7043,#f57c00);}
+
+/* Price Box Sticky Bottom */
+.price-box{position:sticky;bottom:0;background:linear-gradient(135deg,#ff7e5f,#feb47b);color:#fff;padding:15px;margin-top:20px;border-radius:12px;text-align:center;box-shadow:0 6px 25px rgba(0,0,0,0.3);}
+.price-box h3{margin-bottom:5px;}
+.price-box p{margin:3px 0;font-weight:600;}
+
+/* Video Section */
+.video-section{margin:20px 0;}
+.video-container{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:15px;box-shadow:0 6px 25px rgba(0,0,0,0.25);}
+.video-container iframe, .video-container video{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:15px;}
+
+/* Footer */
+footer{background:#212121;color:#ccc;text-align:center;padding:15px;margin-top:25px;font-size:0.9rem;}
+footer a{color:#ffb74d;text-decoration:none;}
+
+/* Social Buttons */
+.social-btn{position:fixed;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;text-decoration:none;box-shadow:0 5px 15px rgba(0,0,0,0.3);transition:0.3s;z-index:1000;}
+.social-btn:hover{transform:scale(1.1);}
+.whatsapp{background:#25D366;bottom:20px;right:20px;}
+.messenger{background:#0084FF;bottom:80px;right:20px;}
+
+/* Responsive */
+@media(max-width:480px){
+  .hero-carousel .hero-card{width:120px;}
+  .product-card{flex-direction:column;align-items:flex-start;}
+  .product-card img{width:100%;height:auto;}
+  form{padding:15px;}
+}
+</style>
+</head>
+<body>
+
+<!-- Hero Carousel -->
+<div class="hero-carousel">
+  <div class="hero-card" data-id="combo">
+    <img src="photo ator.png" alt="Combo Pack">
+    <span>✨ ১২-পিস আতর কম্বো</span>
+  </div>
+  <div class="hero-card" data-id="special">
+    <img src="photo ator2.png" alt="Attar Bottles">
+    <span>🌿 স্পেশাল আতর</span>
+  </div>
+</div>
+
+<!-- Big Floating Order Button -->
+<a href="#order" class="big-order-btn">অর্ডার করুন</a>
+
+<!-- Video Section -->
+<div class="video-section section">
+  <h2>🎥 প্রোডাক্ট ভিডিও</h2>
+  <div class="video-container">
+    <video autoplay muted loop playsinline controls>
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+      আপনার ব্রাউজার ভিডিও সমর্থন করে না।
+    </video>
+  </div>
+</div>
+
+<!-- Product Selection -->
+<div class="section">
+  <h2>🛍️ প্রোডাক্ট নির্বাচন করুন</h2>
+  <div class="product-list">
+    <div class="product-card" data-id="combo">
+      <img src="photo ator.png" alt="১২-পিস আতর কম্বো">
+      <div class="p-info">
+        <h4>✨ ১২-পিস আতর কম্বো</h4>
+        <p>💰 590 টাকা</p>
+        <div class="select-qty">
+          <label><input type="checkbox" class="product-check" value="combo"> সিলেক্ট</label>
+          <input type="number" class="qty" data-id="combo" value="1" min="1" max="50" disabled>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" data-id="special">
+      <img src="photo ator2.png" alt="স্পেশাল আতর">
+      <div class="p-info">
+        <h4>🌿 স্পেশাল আতর (৫মি.লি.)</h4>
+        <p>💰 250 টাকা</p>
+        <div class="select-qty">
+          <label><input type="checkbox" class="product-check" value="special"> সিলেক্ট</label>
+          <input type="number" class="qty" data-id="special" value="1" min="1" max="50" disabled>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Order Form -->
+<div class="section" id="order">
+  <h2>অর্ডার ফর্ম</h2>
+  <form onsubmit="sendToWhatsApp(event)">
+    <label>নাম:</label>
+    <input type="text" id="name" required>
+
+    <label>মোবাইল নম্বর:</label>
+    <input type="text" id="phone" required>
+
+    <label>ঠিকানা:</label>
+    <textarea id="address" rows="3" required></textarea>
+
+    <label>আপনার এলাকা:</label>
+    <select id="area" required>
+      <option value="">-- এলাকা নির্বাচন করুন --</option>
+      <option value="dhaka">ঢাকার ভিতরে</option>
+      <option value="outside">ঢাকার বাইরে</option>
+    </select>
+
+    <button type="submit">অর্ডার কনফার্ম করুন</button>
+  </form>
+
+  <div class="price-box">
+    <h3>💰 অর্ডার সারাংশ</h3>
+    <p>🚚 ডেলিভারি চার্জ: <span id="delivery-charge">-</span></p>
+    <p id="total-price"></p>
+  </div>
+</div>
+
+<footer>
+  © 2025 আপনার কোম্পানি | সর্বস্বত্ব সংরক্ষিত
+</footer>
+
+<!-- Social Buttons -->
+<a href="https://wa.me/8801753146192" class="social-btn whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<a href="https://m.me/yourpageusername" class="social-btn messenger" target="_blank"><i class="fab fa-facebook-messenger"></i></a>
+
+<script>
+const areaSelect=document.getElementById("area");
+const deliveryCharge=document.getElementById("delivery-charge");
+const totalPrice=document.getElementById("total-price");
+const prices={combo:590,special:250};
+
+document.querySelectorAll(".hero-card, .product-card").forEach(card=>{
+  card.addEventListener("click",()=>{
+    const id=card.dataset.id;
+    const chk=document.querySelector(`.product-check[value="${id}"]`);
+    const qty=document.querySelector(`.qty[data-id="${id}"]`);
+    if(chk){ chk.checked=!chk.checked; qty.disabled=!chk.checked; updateTotal();}
+  });
+});
+
+function updateTotal(){
+  let subtotal=0;
+  document.querySelectorAll(".product-check").forEach(chk=>{
+    if(chk.checked){
+      let id=chk.value;
+      let qty=document.querySelector(`.qty[data-id="${id}"]`).value;
+      subtotal+=prices[id]*parseInt(qty);
+    }
+  });
+  let charge=0;
+  if(areaSelect.value==='dhaka') charge=50;
+  if(areaSelect.value==='outside') charge=100;
+  if(areaSelect.value){deliveryCharge.innerText=charge+" টাকা"; totalPrice.innerText=`✅ মোট: ${subtotal+charge} টাকা`;}
+  else{deliveryCharge.innerText="-"; totalPrice.innerText="";}
+}
+
+document.querySelectorAll(".product-check").forEach(chk=>{
+  chk.addEventListener("change",()=>{
+    let qty=document.querySelector(`.qty[data-id="${chk.value}"]`);
+    qty.disabled=!chk.checked; updateTotal();
+  });
+});
+
+document.querySelectorAll(".qty,#area").forEach(el=>{
+  el.addEventListener("input",updateTotal);
+  el.addEventListener("change",updateTotal);
+});
+
+function sendToWhatsApp(e){
+  e.preventDefault();
+  let name=document.getElementById("name").value;
+  let phone=document.getElementById("phone").value;
+  if(!/^[0-9]{11}$/.test(phone)){alert("সঠিক ১১ ডিজিটের মোবাইল নাম্বার দিন");return;}
+  let address=document.getElementById("address").value;
+  let area=document.getElementById("area").value;
+  let details="";let subtotal=0;
+  document.querySelectorAll(".product-check").forEach(chk=>{
+    if(chk.checked){
+      let id=chk.value;
+      let qty=document.querySelector(`.qty[data-id="${id}"]`).value;
+      let pname=id==='combo'?'১২-পিস কম্বো':'স্পেশাল আতর';
+      let total=prices[id]*qty;
+      details+=`${pname} × ${qty} = ${total} টাকা%0A`;
+      subtotal+=total;
+    }
+  });
+  let charge=area==='dhaka'?50:100;
+  let msg=`অর্ডার ডিটেইলস:%0A👤 নাম: ${name}%0A📞 মোবাইল: ${phone}%0A🏠 ঠিকানা: ${address}%0A📍 এলাকা: ${area==='dhaka'?'ঢাকার ভিতরে':'ঢাকার বাইরে'}%0A------------------%0A${details}💰 সাবটোটাল: ${subtotal} টাকা%0A🚚 ডেলিভারি: ${charge} টাকা%0A✅ মোট: ${subtotal+charge} টাকা`;
+  window.open("https://wa.me/8801753146192?text="+msg,"_blank");
+}
+</script>
+
+</body>
+</html>
