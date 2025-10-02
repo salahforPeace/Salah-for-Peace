@@ -7,27 +7,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
+/* ------------------- Styles ------------------- */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Poppins',sans-serif;background:#FFC0CB;color:#000;scroll-behavior:smooth;}
 h2{margin-bottom:15px;text-align:center;font-weight:700;color:#000;font-family:'Amiri', serif;}
 .section{padding:20px 15px;}
 a{text-decoration:none;}
-
-/* ================= HEADER ================= */
-header{
-  width: 100%;
-  background:#FF5722;
-  color:#fff;
-  padding:20px 10px;
-  text-align:center;
-  font-weight:700;
-  font-size:1.2rem;
-  line-height:1.4;
-  box-shadow:0 2px 6px rgba(0,0,0,0.2);
-}
-
-/* ================= HERO SLIDESHOW ================= */
-.hero-slideshow{position:relative;width:100%;max-width:500px;height:260px;margin:20px auto 20px auto;overflow:hidden;border-radius:20px;box-shadow:0 8px 20px rgba(0,0,0,0.2);}
+header{width:100%;background:#FF5722;color:#fff;padding:20px 10px;text-align:center;font-weight:700;font-size:1.2rem;line-height:1.4;box-shadow:0 2px 6px rgba(0,0,0,0.2);}
+.hero-slideshow{position:relative;width:100%;max-width:500px;height:260px;margin:20px auto;overflow:hidden;border-radius:20px;box-shadow:0 8px 20px rgba(0,0,0,0.2);}
 .hero-slideshow .slide{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transform:scale(0.95);transition:0.8s all ease-in-out;display:flex;justify-content:center;align-items:center;}
 .hero-slideshow .slide.active{opacity:1;transform:scale(1);z-index:10;}
 .hero-slideshow .slide img{width:100%;height:100%;object-fit:cover;border-radius:18px;border:2px solid #FF5722;}
@@ -35,30 +22,10 @@ header{
 .hero-slideshow .dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:8px;}
 .hero-slideshow .dots .dot{width:10px;height:10px;border-radius:50%;background:rgba(0,0,0,0.3);cursor:pointer;transition:0.3s;}
 .hero-slideshow .dots .dot.active{background:#FF5722;transform:scale(1.2);}
-
-/* ================= BUTTONS ================= */
 .hero-order-btn{display:block;width:90%;max-width:400px;margin:15px auto 30px auto;padding:14px 0;background:#FF5722;color:#fff;font-weight:700;font-size:1.2rem;text-align:center;border-radius:50px;box-shadow:0 5px 15px rgba(0,0,0,0.2);transition:0.3s;}
 .hero-order-btn:hover{transform:scale(1.05);background:#E64A19;}
-
-/* ================= PRODUCT CARDS ================= */
-.product-list{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap:15px;
-}
-.product-card{
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  background:#FFD1DC;
-  border-left:4px solid #FF5722;
-  padding:16px;
-  border-radius:18px;
-  color:#000;
-  transition:transform 0.2s;
-  cursor:pointer;
-}
+.product-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;}
+.product-card{position:relative;display:flex;flex-direction:column;align-items:center;background:#FFD1DC;border-left:4px solid #FF5722;padding:16px;border-radius:18px;color:#000;transition:transform 0.2s;cursor:pointer;}
 .product-card:hover{transform:scale(1.03);}
 .product-card img{width:100%;height:auto;object-fit:cover;border-radius:15px;}
 .p-info{flex:1;width:100%;display:flex;flex-direction:column;gap:6px;margin-top:10px;}
@@ -75,77 +42,25 @@ header{
 .qty-spinner button:hover{background:#E64A19;}
 .qty-spinner input{width:50px;text-align:center;border-radius:8px;border:1px solid #FF5722;padding:4px;background:#fff;color:#000;}
 .qty-spinner input:disabled{background:#FFE4E1;color:#555;}
-
-/* ================= FORM ================= */
 form{max-width:550px;margin:15px auto;background:#FFE4E1;padding:20px;border-radius:18px;}
 form label{color:#000;font-weight:600;display:block;margin-top:10px;}
 form input, form textarea, form select{width:100%;padding:12px;margin-top:5px;border-radius:10px;border:1px solid #FF5722;background:#fff;color:#000;font-size:1rem;}
 form input::placeholder,form textarea::placeholder{color:#888;}
 form button{background:#FF5722;color:#fff;border:none;border-radius:12px;width:100%;padding:14px;margin-top:15px;font-weight:700;cursor:pointer;}
 form button:hover{background:#E64A19;}
-
-/* ================= PRICE BOX ================= */
 .price-box{background:#FFCCBC;color:#000;border-radius:15px;text-align:center;padding:12px;margin-top:15px;}
 .price-box table{width:100%;border-collapse:collapse;}
 .price-box td{padding:6px;font-weight:600;}
 .price-box tr:last-child td{font-weight:700;color:#E64A19;font-size:1.1rem;}
-
-/* ================= FOOTER ================= */
 footer{background:#FF5722;color:#fff;text-align:center;padding:15px;margin-top:25px;font-size:0.9rem;font-family:'Amiri', serif;}
 footer a{color:#fff;text-decoration:none;}
-
-/* ================= FLOATING CHAT BUTTONS ================= */
-.chat-buttons{
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  z-index: 9999;
-}
-.chat-btn{
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  font-size: 28px;
-  text-decoration: none;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  transition: transform 0.3s, box-shadow 0.3s;
-  animation: float 2s ease-in-out infinite;
-}
-.chat-btn:hover{
-  transform: scale(1.15);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
-}
+.chat-buttons{position: fixed;bottom: 20px;right: 20px;display: flex;flex-direction: column;gap: 12px;z-index: 9999;}
+.chat-btn{width: 60px;height: 60px;border-radius: 50%;display: flex;justify-content: center;align-items: center;color: #fff;font-size: 28px;text-decoration: none;box-shadow: 0 4px 12px rgba(0,0,0,0.3);transition: transform 0.3s, box-shadow 0.3s;animation: float 2s ease-in-out infinite;}
+.chat-btn:hover{transform: scale(1.15);box-shadow: 0 6px 16px rgba(0,0,0,0.4);}
 .chat-btn.whatsapp{background:#25D366;}
 .chat-btn.messenger{background:#0084FF;}
-@keyframes float{
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-  100% { transform: translateY(0); }
-}
-
-/* ================= MOBILE FRIENDLY ================= */
-@media(max-width:600px){
-  body{font-size:0.95rem;}
-  h2{font-size:1.2rem;margin-bottom:12px;}
-  .hero-slideshow{width:95%;height:200px;margin-top:20px;}
-  .hero-slideshow .slide span{font-size:0.9rem;padding:5px 10px;}
-  .hero-order-btn{font-size:1.1rem;padding:12px 0;}
-  .product-card{padding:12px;}
-  .p-info h4{font-size:0.95rem;}
-  .p-info p{font-size:0.9rem;}
-  form{padding:15px;}
-  form input, form textarea, form select{padding:10px;font-size:0.95rem;}
-  form button{padding:12px;font-size:1rem;}
-  .price-box{padding:10px;}
-  .chat-btn{width:50px;height:50px;font-size:24px;}
-}
+@keyframes float{0% { transform: translateY(0); }50% { transform: translateY(-6px); }100% { transform: translateY(0); }}
+@media(max-width:600px){body{font-size:0.95rem;}h2{font-size:1.2rem;margin-bottom:12px;}.hero-slideshow{width:95%;height:200px;margin-top:20px;}.hero-slideshow .slide span{font-size:0.9rem;padding:5px 10px;}.hero-order-btn{font-size:1.1rem;padding:12px 0;}.product-card{padding:12px;}.p-info h4{font-size:0.95rem;}.p-info p{font-size:0.9rem;}form{padding:15px;}form input, form textarea, form select{padding:10px;font-size:0.95rem;}form button{padding:12px;font-size:1rem;}.price-box{padding:10px;}.chat-btn{width:50px;height:50px;font-size:24px;}}
 </style>
 </head>
 <body>
@@ -202,15 +117,15 @@ footer a{color:#fff;text-decoration:none;}
 
 <div class="section" id="order">
   <h2>অর্ডার ফর্ম</h2>
-  <form>
+  <form id="orderForm">
     <label>নাম:</label>
-    <input type="text" placeholder="আপনার নাম লিখুন" required>
+    <input type="text" name="name" placeholder="আপনার নাম লিখুন" required>
     <label>মোবাইল নম্বর:</label>
-    <input type="tel" placeholder="01XXXXXXXXX" pattern="01[3-9][0-9]{8}" required>
+    <input type="tel" name="phone" placeholder="01XXXXXXXXX" pattern="01[3-9][0-9]{8}" required>
     <label>ঠিকানা:</label>
-    <textarea rows="3" placeholder="আপনার পূর্ণ ঠিকানা লিখুন" required></textarea>
+    <textarea name="address" rows="3" placeholder="আপনার পূর্ণ ঠিকানা লিখুন" required></textarea>
     <label>আপনার এলাকা:</label>
-    <select id="area" required>
+    <select name="area" required>
       <option value="">-- এলাকা নির্বাচন করুন --</option>
       <option value="dhaka">ঢাকার ভিতরে</option>
       <option value="outside">ঢাকার বাইরে</option>
@@ -230,14 +145,13 @@ footer a{color:#fff;text-decoration:none;}
 
 <footer>© 2025 Salaah for peace | সর্বস্বত্ব সংরক্ষিত</footer>
 
-<!-- ================= FLOATING CHAT BUTTONS ================= -->
 <div class="chat-buttons">
   <a href="https://wa.me/8801753146192" target="_blank" class="chat-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
   <a href="https://m.me/salaahforpeace" target="_blank" class="chat-btn messenger"><i class="fab fa-facebook-messenger"></i></a>
 </div>
 
 <script>
-// ================= SLIDESHOW =================
+// ------------------- Slideshow -------------------
 const slides=document.querySelectorAll(".hero-slideshow .slide");
 const dots=document.querySelectorAll(".hero-slideshow .dot");
 let currentSlide=0;
@@ -247,12 +161,12 @@ dots.forEach(dot=>dot.addEventListener("click",()=>{currentSlide=parseInt(dot.da
 function resetInterval(){clearInterval(slideInterval);slideInterval=setInterval(()=>{currentSlide=(currentSlide+1)%slides.length;showSlide(currentSlide);},3000);}
 showSlide(currentSlide);
 
-// ================= PRICE CALCULATION =================
+// ------------------- Price Calculation -------------------
 const prices={combo:590,special:750};
 const deliveryChargeElem=document.getElementById('delivery-charge');
 const totalPriceElem=document.getElementById('total-price');
-const areaSelect=document.getElementById('area');
 const selectedItemsElem=document.getElementById('selected-items');
+const areaSelect=document.querySelector('select[name="area"]');
 
 function updateTotal(){
   let subtotal=0;
@@ -271,10 +185,10 @@ function updateTotal(){
   else if(areaSelect.value==='outside') charge=100;
   deliveryChargeElem.innerText=charge?charge+' টাকা':'-';
   totalPriceElem.innerText=charge?`✅ মোট: ${subtotal+charge} টাকা`:``;
-  selectedItemsElem.innerHTML = items.length?'<strong>Selected Items:</strong><br>'+items.join('<br>'):'';
+  selectedItemsElem.innerHTML = items.length?'<strong>Selected Items:</strong><br>'+items.join('<br>'):''; 
 }
 
-// ================= PRODUCT SELECTION =================
+// ------------------- Product Selection -------------------
 document.querySelectorAll('.product-card').forEach(card=>{
   card.addEventListener('click',(e)=>{
     if(e.target.closest('.qty-spinner')) return;
@@ -286,7 +200,7 @@ document.querySelectorAll('.product-card').forEach(card=>{
   });
 });
 
-// ================= QUANTITY BUTTONS =================
+// ------------------- Quantity Buttons -------------------
 document.querySelectorAll('.inc,.dec').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const id=btn.dataset.id;
@@ -300,9 +214,52 @@ document.querySelectorAll('.inc,.dec').forEach(btn=>{
   });
 });
 
-// ================= AREA CHANGE =================
+// ------------------- Area Change -------------------
 areaSelect.addEventListener('change',updateTotal);
-</script>
 
+// ------------------- Form Submission to Google Sheets -------------------
+const form=document.getElementById('orderForm');
+form.addEventListener('submit',function(e){
+  e.preventDefault();
+  const formData=new FormData(form);
+  const data={};
+  formData.forEach((v,k)=>{data[k]=v});
+  // Add selected items & qty
+  let items=[],qtys=[];
+  document.querySelectorAll('.toggle-select.active').forEach(btn=>{
+    const id=btn.dataset.id;
+    const nameText=document.querySelector(`.product-card[data-id='${id}'] .p-info h4`).innerText;
+    const qty=document.querySelector(`.qty[data-id='${id}']`).value;
+    items.push(nameText);
+    qtys.push(qty);
+  });
+  data.items=items;
+  data.qty=qtys;
+  data.total=totalPriceElem.innerText.replace('✅ মোট: ','').replace(' টাকা','');
+
+  fetch("https://script.google.com/macros/s/AKfycbwXSd-DQ1ppJoFuOP9X9OxJ5b4z2EM13JH0QdN7OP_j1PMF7Vu-8jwC2ldeIzbPzJCy/exec",{
+    method:"POST",
+    body:JSON.stringify(data),
+    headers:{"Content-Type":"application/json"}
+  })
+  .then(res=>res.json())
+  .then(r=>{
+    if(r.status==="success"){
+      alert("আপনার অর্ডার জমা হয়েছে!");
+      form.reset();
+      document.querySelectorAll('.toggle-select.active').forEach(btn=>{
+        btn.classList.remove('active');
+        document.querySelector(`.qty[data-id='${btn.dataset.id}']`).disabled=true;
+      });
+      selectedItemsElem.innerHTML='';
+      deliveryChargeElem.innerText='-';
+      totalPriceElem.innerText='';
+    } else {
+      alert("দুঃখিত! সমস্যা হয়েছে: "+r.message);
+    }
+  })
+  .catch(err=>alert("দুঃখিত! অর্ডার জমা দিতে সমস্যা হয়েছে।"));
+});
+</script>
 </body>
 </html>
