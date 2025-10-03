@@ -7,12 +7,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-/* ------------------- Styles ------------------- */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Poppins',sans-serif;background:#FFC0CB;color:#000;scroll-behavior:smooth;}
 h2{margin-bottom:15px;text-align:center;font-weight:700;color:#000;font-family:'Amiri', serif;}
 .section{padding:20px 15px;}
 a{text-decoration:none;}
+header{width:100%;background:#FF5722;color:#fff;padding:20px 10px;text-align:center;font-weight:700;font-size:1.2rem;line-height:1.4;box-shadow:0 2px 6px rgba(0,0,0,0.2);}
 .hero-slideshow{position:relative;width:100%;max-width:500px;height:260px;margin:20px auto;overflow:hidden;border-radius:20px;box-shadow:0 8px 20px rgba(0,0,0,0.2);}
 .hero-slideshow .slide{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transform:scale(0.95);transition:0.8s all ease-in-out;display:flex;justify-content:center;align-items:center;}
 .hero-slideshow .slide.active{opacity:1;transform:scale(1);z-index:10;}
@@ -64,96 +64,212 @@ footer a{color:#fff;text-decoration:none;}
 </head>
 <body>
 
-<!-- Hero Slideshow -->
 <div class="hero-slideshow">
-  <div class="slide active">
-    <img src="https://i.ibb.co/2hgMZsB/attor1.jpg" alt="Attar Combo 1">
-    <span>প্রিমিয়াম আতর কালেকশন</span>
-  </div>
-  <div class="slide">
-    <img src="https://i.ibb.co/FzH4TtD/attor2.jpg" alt="Attar Combo 2">
-    <span>দুইটি বেস্ট কম্বো</span>
-  </div>
-  <div class="dots"></div>
+  <div class="slide active"><img src="photo22.jpg" alt="১২ পিস হালাল আতর কম্বো"><span>✨ ১২ পিস হালাল আতর কম্বো</span></div>
+  <div class="slide"><img src="photo11.jpg" alt="১২ পিস স্পেশাল আতর কম্বো"><span>🌿 ১২ পিস স্পেশাল আতর কম্বো</span></div>
+  <div class="dots"><span class="dot active" data-index="0"></span><span class="dot" data-index="1"></span></div>
 </div>
 
-<a href="#orderForm" class="hero-order-btn">👉 এখনই অর্ডার করুন</a>
+<a href="#order" class="hero-order-btn">এখনই অর্ডার করুন</a>
 
-<!-- Product Section -->
-<section class="section">
-  <h2>✨ আমাদের সেরা আতর কম্বো ✨</h2>
+<div class="section">
+  <h2>🛍️ প্রোডাক্ট নির্বাচন করুন</h2>
   <div class="product-list">
-    <div class="product-card">
-      <span class="badge">Best Seller</span>
-      <img src="https://i.ibb.co/2hgMZsB/attor1.jpg" alt="Attar 1">
+    <div class="product-card" data-id="combo">
+      <div class="badge">-25%</div>
+      <img src="photo22.jpg" alt="১২ পিস হালাল আতর কম্বো">
       <div class="p-info">
-        <h4>কম্বো প্যাক ১</h4>
-        <p>💎 প্রিমিয়াম কালেকশন</p>
-        <p class="description">২টি দারুন ঘ্রাণের আতর, প্রতিদিনের ব্যবহার ও উপহারের জন্য পারফেক্ট।</p>
+        <h4>✨ ১২ পিস হালাল আতর কম্বো প্যাক (৩ মি.লি. বোতল)</h4>
+        <p><del>৭৯০ টাকা</del> 💰 ৫৯০ টাকা</p>
+        <p class="description">ম্যাগনেট, কাঁচা বেলি, শাহী দরবার, বকুল ফুল, রজনীগন্ধা, গুলে লালা</p>
+        <div class="select-qty">
+          <button type="button" class="toggle-select" data-id="combo"></button>
+          <div class="qty-spinner">
+            <button type="button" class="dec" data-id="combo">−</button>
+            <input type="number" class="qty" data-id="combo" value="1" min="1" max="50" disabled>
+            <button type="button" class="inc" data-id="combo">+</button>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="product-card">
-      <span class="badge">New</span>
-      <img src="https://i.ibb.co/FzH4TtD/attor2.jpg" alt="Attar 2">
+    <div class="product-card" data-id="special">
+      <div class="badge">Hot Deal</div>
+      <img src="photo11.jpg" alt="১২ পিস স্পেশাল আতর কম্বো">
       <div class="p-info">
-        <h4>কম্বো প্যাক ২</h4>
-        <p>🌸 ফ্রেশ কালেকশন</p>
-        <p class="description">প্রিমিয়াম ও লং লাস্টিং ঘ্রাণের বিশেষ আতর কম্বো।</p>
+        <h4>🌿 ১২ পিস স্পেশাল আতর কম্বো প্যাক (৩ মি.লি. বোতল)</h4>
+        <p><del>৯৯৯ টাকা</del> 💰 ৭৫০ টাকা</p>
+        <p class="description">সালমা, ফেরদৌস, সিলভার, রজনীগন্ধা, শাহী দরবার, বকুল ফুল</p>
+        <div class="select-qty">
+          <button type="button" class="toggle-select" data-id="special"></button>
+          <div class="qty-spinner">
+            <button type="button" class="dec" data-id="special">−</button>
+            <input type="number" class="qty" data-id="special" value="1" min="1" max="50" disabled>
+            <button type="button" class="inc" data-id="special">+</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</section>
-
-<!-- Price Table -->
-<div class="price-box">
-  <table>
-    <tr><td>কম্বো প্যাক ১</td><td>৳650</td></tr>
-    <tr><td>কম্বো প্যাক ২</td><td>৳750</td></tr>
-    <tr><td>🚚 ক্যাশ অন ডেলিভারি</td><td>✔️</td></tr>
-    <tr><td colspan="2">🔥 বিশেষ অফার চলছে</td></tr>
-  </table>
 </div>
 
-<!-- Order Form -->
-<form id="orderForm" action="https://docs.google.com/forms/d/e/1FAIpQLSdqcCiH53Ng-w2ml1a_nh0e4svXoMHo1aDKX7TzP5VPXBlFQw/formResponse" method="POST" target="_blank">
-  <h2>📝 অর্ডার করুন</h2>
-  <label>নাম:</label>
-  <input type="text" name="entry.1111111111" placeholder="আপনার নাম লিখুন" required>
-  
-  <label>মোবাইল নাম্বার:</label>
-  <input type="tel" name="entry.2222222222" placeholder="01XXXXXXXXX" required>
-  
-  <label>ঠিকানা:</label>
-  <textarea name="entry.3333333333" placeholder="আপনার সম্পূর্ণ ঠিকানা লিখুন" required></textarea>
-  
-  <label>কম্বো নির্বাচন করুন:</label>
-  <select name="entry.4444444444" required>
-    <option value="Combo 1">কম্বো প্যাক ১ - ৳650</option>
-    <option value="Combo 2">কম্বো প্যাক ২ - ৳750</option>
-  </select>
-  
-  <button type="submit">✅ কনফার্ম অর্ডার করুন</button>
-</form>
+<div class="section" id="order">
+  <h2>অর্ডার ফর্ম</h2>
+  <form id="orderForm">
+    <label>নাম:</label>
+    <input type="text" name="name" placeholder="আপনার নাম লিখুন" required>
+    <label>মোবাইল নম্বর:</label>
+    <input type="tel" name="phone" placeholder="01XXXXXXXXX" pattern="01[3-9][0-9]{8}" required>
+    <label>ঠিকানা:</label>
+    <textarea name="address" rows="3" placeholder="আপনার পূর্ণ ঠিকানা লিখুন" required></textarea>
+    <label>আপনার এলাকা:</label>
+    <select name="area" required>
+      <option value="">-- এলাকা নির্বাচন করুন --</option>
+      <option value="dhaka">ঢাকার ভিতরে</option>
+      <option value="outside">ঢাকার বাইরে</option>
+    </select>
+    <button type="submit">অর্ডার কনফার্ম করুন</button>
+  </form>
 
-<footer>
-  <p>📞 অর্ডার বা জানতে কল করুন: <a href="tel:01XXXXXXXXX">01XXXXXXXXX</a></p>
-  <p>© 2025 Attar Shop | All Rights Reserved</p>
-</footer>
+  <div class="price-box">
+    <h3>💰 অর্ডার সারাংশ</h3>
+    <table>
+      <tr><td>🚚 ডেলিভারি চার্জ:</td><td id="delivery-charge">-</td></tr>
+      <tr><td colspan="2" id="total-price"></td></tr>
+    </table>
+    <div id="selected-items" style="text-align:left;margin-top:10px;"></div>
+  </div>
+</div>
 
-<!-- Floating Chat Buttons -->
+<footer>© 2025 Salaah for peace | সর্বস্বত্ব সংরক্ষিত</footer>
+
 <div class="chat-buttons">
-  <a href="https://wa.me/8801XXXXXXXXX" target="_blank" class="chat-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
-  <a href="https://m.me/yourpage" target="_blank" class="chat-btn messenger"><i class="fab fa-facebook-messenger"></i></a>
+  <a href="https://wa.me/8801753146192" target="_blank" class="chat-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+  <a href="https://m.me/salaahforpeace" target="_blank" class="chat-btn messenger"><i class="fab fa-facebook-messenger"></i></a>
 </div>
 
 <script>
-const slides=document.querySelectorAll('.hero-slideshow .slide');
-const dotsContainer=document.querySelector('.hero-slideshow .dots');
+// ------------------- Slideshow -------------------
+const slides=document.querySelectorAll(".hero-slideshow .slide");
+const dots=document.querySelectorAll(".hero-slideshow .dot");
 let currentSlide=0;
-slides.forEach((_,i)=>{const dot=document.createElement('div');dot.classList.add('dot');if(i===0)dot.classList.add('active');dot.addEventListener('click',()=>showSlide(i));dotsContainer.appendChild(dot);});
-const dots=document.querySelectorAll('.hero-slideshow .dot');
-function showSlide(n){slides[currentSlide].classList.remove('active');dots[currentSlide].classList.remove('active');currentSlide=(n+slides.length)%slides.length;slides[currentSlide].classList.add('active');dots[currentSlide].classList.add('active');}
-setInterval(()=>{showSlide(currentSlide+1);},4000);
+function showSlide(i){slides.forEach((s,x)=>s.classList.toggle("active",x===i));dots.forEach((d,x)=>d.classList.toggle("active",x===i));}
+let slideInterval=setInterval(()=>{currentSlide=(currentSlide+1)%slides.length;showSlide(currentSlide);},3000);
+dots.forEach(dot=>dot.addEventListener("click",()=>{currentSlide=parseInt(dot.dataset.index);showSlide(currentSlide);resetInterval();}));
+function resetInterval(){clearInterval(slideInterval);slideInterval=setInterval(()=>{currentSlide=(currentSlide+1)%slides.length;showSlide(currentSlide);},3000);}
+showSlide(currentSlide);
+
+// ------------------- Price Calculation -------------------
+const prices={combo:590,special:750};
+const deliveryChargeElem=document.getElementById('delivery-charge');
+const totalPriceElem=document.getElementById('total-price');
+const selectedItemsElem=document.getElementById('selected-items');
+const areaSelect=document.querySelector('select[name="area"]');
+
+function updateTotal(){
+  let subtotal=0;
+  let items=[];
+  document.querySelectorAll('.toggle-select').forEach(btn=>{
+    if(btn.classList.contains('active')){
+      const id=btn.dataset.id;
+      const qty=parseInt(document.querySelector(`.qty[data-id='${id}']`).value);
+      subtotal+=prices[id]*qty;
+      const name=document.querySelector(`.product-card[data-id='${id}'] .p-info h4`).innerText;
+      items.push(`${name} × ${qty}`);
+    }
+  });
+  let charge=0;
+  if(areaSelect.value==='dhaka') charge=50;
+  else if(areaSelect.value==='outside') charge=100;
+  deliveryChargeElem.innerText=charge?charge+' টাকা':'-';
+  totalPriceElem.innerText=charge?`✅ মোট: ${subtotal+charge} টাকা`:``;
+  selectedItemsElem.innerHTML = items.length?'<strong>Selected Items:</strong><br>'+items.join('<br>'):'';
+}
+
+// ------------------- Product Selection -------------------
+document.querySelectorAll('.product-card').forEach(card=>{
+  card.addEventListener('click',(e)=>{
+    if(e.target.closest('.qty-spinner')) return;
+    const btn=card.querySelector('.toggle-select');
+    const qtyInput=card.querySelector('.qty');
+    btn.classList.toggle('active');
+    qtyInput.disabled=!btn.classList.contains('active');
+    updateTotal();
+  });
+});
+
+// ------------------- Quantity Buttons -------------------
+document.querySelectorAll('.inc,.dec').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const id=btn.dataset.id;
+    const qtyInput=document.querySelector(`.qty[data-id='${id}']`);
+    if(qtyInput.disabled) return;
+    let val=parseInt(qtyInput.value);
+    if(btn.classList.contains('inc') && val<parseInt(qtyInput.max)) val++;
+    if(btn.classList.contains('dec') && val>parseInt(qtyInput.min)) val--;
+    qtyInput.value=val;
+    updateTotal();
+  });
+});
+
+// ------------------- Area Change -------------------
+areaSelect.addEventListener('change',updateTotal);
+
+// ------------------- Form Submission to Google Sheets -------------------
+const form=document.getElementById('orderForm');
+form.addEventListener('submit',function(e){
+  e.preventDefault();
+  
+  // Validation: at least one product selected
+  const selectedProducts=document.querySelectorAll('.toggle-select.active');
+  if(selectedProducts.length===0){
+    alert("কমপক্ষে একটি প্রোডাক্ট নির্বাচন করুন!");
+    return;
+  }
+
+  const formData=new FormData(form);
+  const data={};
+  formData.forEach((v,k)=>{data[k]=v});
+
+  // Add selected items & qty
+  let items=[],qtys=[];
+  selectedProducts.forEach(btn=>{
+    const id=btn.dataset.id;
+    const nameText=document.querySelector(`.product-card[data-id='${id}'] .p-info h4`).innerText;
+    const qty=document.querySelector(`.qty[data-id='${id}']`).value;
+    items.push(nameText);
+    qtys.push(qty);
+  });
+  data.items=items;
+  data.qty=qtys;
+  data.total=totalPriceElem.innerText.replace('✅ মোট: ','').replace(' টাকা','');
+
+  fetch("https://script.google.com/macros/s/AKfycbwXSd-DQ1ppJoFuOP9X9OxJ5b4z2EM13JH0QdN7OP_j1PMF7Vu-8jwC2ldeIzbPzJCy/exec",{
+    method:"POST",
+    body:JSON.stringify(data),
+    headers:{"Content-Type":"application/json"}
+  })
+  .then(res=>res.json())
+  .then(r=>{
+    if(r.status==="success"){
+      alert("আপনার অর্ডার জমা হয়েছে!");
+      form.reset();
+      // Reset toggles and quantities
+      document.querySelectorAll('.toggle-select.active').forEach(btn=>{
+        btn.classList.remove('active');
+      });
+      document.querySelectorAll('.qty').forEach(qty=>{
+        qty.value=1;
+        qty.disabled=true;
+      });
+      selectedItemsElem.innerHTML='';
+      deliveryChargeElem.innerText='-';
+      totalPriceElem.innerText='';
+    } else {
+      alert("দুঃখিত! সমস্যা হয়েছে: "+r.message);
+    }
+  })
+  .catch(err=>alert("দুঃখিত! অর্ডার জমা দিতে সমস্যা হয়েছে।"));
+});
 </script>
 </body>
 </html>
