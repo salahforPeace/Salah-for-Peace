@@ -23,8 +23,7 @@ header{width:100%;background:#FF5722;color:#fff;padding:20px 10px;text-align:cen
 .hero-slideshow .dots .dot.active{background:#FF5722;transform:scale(1.2);}
 .hero-order-btn{display:block;width:90%;max-width:400px;margin:15px auto 30px auto;padding:14px 0;background:#FF5722;color:#fff;font-weight:700;font-size:1.2rem;text-align:center;border-radius:50px;box-shadow:0 5px 15px rgba(0,0,0,0.2);transition:0.3s;}
 .hero-order-btn:hover{transform:scale(1.05);background:#E64A19;}
-.product-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;}
-.product-card{position:relative;display:flex;flex-direction:column;align-items:center;background:#FFD1DC;border-left:4px solid #FF5722;padding:16px;border-radius:18px;color:#000;transition:transform 0.2s;cursor:pointer;}
+.product-card{position:relative;display:flex;flex-direction:column;align-items:center;background:#FFD1DC;border-left:4px solid #FF5722;padding:16px;border-radius:18px;color:#000;transition:transform 0.2s;cursor:pointer;margin-bottom:15px;}
 .product-card:hover{transform:scale(1.03);}
 .product-card img{width:100%;height:auto;object-fit:cover;border-radius:15px;}
 .p-info{flex:1;width:100%;display:flex;flex-direction:column;gap:6px;margin-top:10px;}
@@ -70,11 +69,10 @@ footer a{color:#fff;text-decoration:none;}
   <div class="dots"><span class="dot active" data-index="0"></span><span class="dot" data-index="1"></span></div>
 </div>
 
-<a href="#order" class="hero-order-btn">এখনই অর্ডার করুন</a>
-
-<div class="section">
-  <h2>🛍️ প্রোডাক্ট নির্বাচন করুন</h2>
-  <div class="product-list">
+<div class="section" id="order">
+  <h2>অর্ডার ফর্ম & প্রোডাক্ট নির্বাচন</h2>
+  <form id="orderForm">
+    <!-- Product Cards Inside Form -->
     <div class="product-card" data-id="combo">
       <div class="badge">-25%</div>
       <img src="photo22.jpg" alt="১২ পিস হালাল আতর কম্বো">
@@ -92,6 +90,7 @@ footer a{color:#fff;text-decoration:none;}
         </div>
       </div>
     </div>
+
     <div class="product-card" data-id="special">
       <div class="badge">Hot Deal</div>
       <img src="photo11.jpg" alt="১২ পিস স্পেশাল আতর কম্বো">
@@ -109,12 +108,8 @@ footer a{color:#fff;text-decoration:none;}
         </div>
       </div>
     </div>
-  </div>
-</div>
 
-<div class="section" id="order">
-  <h2>অর্ডার ফর্ম</h2>
-  <form id="orderForm">
+    <!-- Customer Details -->
     <label>নাম:</label>
     <input type="text" name="name" placeholder="আপনার নাম লিখুন" required>
     <label>মোবাইল নম্বর:</label>
@@ -127,17 +122,19 @@ footer a{color:#fff;text-decoration:none;}
       <option value="dhaka">ঢাকার ভিতরে</option>
       <option value="outside">ঢাকার বাইরে</option>
     </select>
-    <button type="submit">অর্ডার কনফার্ম করুন</button>
-  </form>
 
-  <div class="price-box">
-    <h3>💰 অর্ডার সারাংশ</h3>
-    <table>
-      <tr><td>🚚 ডেলিভারি চার্জ:</td><td id="delivery-charge">-</td></tr>
-      <tr><td colspan="2" id="total-price"></td></tr>
-    </table>
-    <div id="selected-items" style="text-align:left;margin-top:10px;"></div>
-  </div>
+    <button type="submit">অর্ডার কনফার্ম করুন</button>
+
+    <div class="price-box">
+      <h3>💰 অর্ডার সারাংশ</h3>
+      <table>
+        <tr><td>🚚 ডেলিভারি চার্জ:</td><td id="delivery-charge">-</td></tr>
+        <tr><td colspan="2" id="total-price"></td></tr>
+      </table>
+      <div id="selected-items" style="text-align:left;margin-top:10px;"></div>
+    </div>
+
+  </form>
 </div>
 
 <footer>© 2025 Salaah for peace | সর্বস্বত্ব সংরক্ষিত</footer>
@@ -148,17 +145,16 @@ footer a{color:#fff;text-decoration:none;}
 </div>
 
 <script>
-// ------------------- Slideshow -------------------
+// Slideshow
 const slides=document.querySelectorAll(".hero-slideshow .slide");
 const dots=document.querySelectorAll(".hero-slideshow .dot");
 let currentSlide=0;
 function showSlide(i){slides.forEach((s,x)=>s.classList.toggle("active",x===i));dots.forEach((d,x)=>d.classList.toggle("active",x===i));}
 let slideInterval=setInterval(()=>{currentSlide=(currentSlide+1)%slides.length;showSlide(currentSlide);},3000);
-dots.forEach(dot=>dot.addEventListener("click",()=>{currentSlide=parseInt(dot.dataset.index);showSlide(currentSlide);resetInterval();}));
-function resetInterval(){clearInterval(slideInterval);slideInterval=setInterval(()=>{currentSlide=(currentSlide+1)%slides.length;showSlide(currentSlide);},3000);}
+dots.forEach(dot=>dot.addEventListener("click",()=>{currentSlide=parseInt(dot.dataset.index);showSlide(currentSlide);clearInterval(slideInterval);slideInterval=setInterval(()=>{currentSlide=(currentSlide+1)%slides.length;showSlide(currentSlide);},3000);}));
 showSlide(currentSlide);
 
-// ------------------- Price Calculation -------------------
+// Price Calculation
 const prices={combo:590,special:750};
 const deliveryChargeElem=document.getElementById('delivery-charge');
 const totalPriceElem=document.getElementById('total-price');
@@ -185,7 +181,7 @@ function updateTotal(){
   selectedItemsElem.innerHTML = items.length?'<strong>Selected Items:</strong><br>'+items.join('<br>'):'';
 }
 
-// ------------------- Product Selection -------------------
+// Product Selection & Quantity
 document.querySelectorAll('.product-card').forEach(card=>{
   card.addEventListener('click',(e)=>{
     if(e.target.closest('.qty-spinner')) return;
@@ -196,8 +192,6 @@ document.querySelectorAll('.product-card').forEach(card=>{
     updateTotal();
   });
 });
-
-// ------------------- Quantity Buttons -------------------
 document.querySelectorAll('.inc,.dec').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const id=btn.dataset.id;
@@ -210,29 +204,22 @@ document.querySelectorAll('.inc,.dec').forEach(btn=>{
     updateTotal();
   });
 });
-
-// ------------------- Area Change -------------------
 areaSelect.addEventListener('change',updateTotal);
 
-// ------------------- Form Submission to Google Sheets -------------------
+// Form Submit
 const form=document.getElementById('orderForm');
 form.addEventListener('submit',function(e){
   e.preventDefault();
-  
-  // Validation: at least one product selected
-  const selectedProducts=document.querySelectorAll('.toggle-select.active');
-  if(selectedProducts.length===0){
-    alert("কমপক্ষে একটি প্রোডাক্ট নির্বাচন করুন!");
+  // Check if at least one product selected
+  if(!document.querySelector('.toggle-select.active')){
+    alert("দয়া করে একটি প্রোডাক্ট নির্বাচন করুন।");
     return;
   }
-
   const formData=new FormData(form);
   const data={};
   formData.forEach((v,k)=>{data[k]=v});
-
-  // Add selected items & qty
   let items=[],qtys=[];
-  selectedProducts.forEach(btn=>{
+  document.querySelectorAll('.toggle-select.active').forEach(btn=>{
     const id=btn.dataset.id;
     const nameText=document.querySelector(`.product-card[data-id='${id}'] .p-info h4`).innerText;
     const qty=document.querySelector(`.qty[data-id='${id}']`).value;
@@ -253,14 +240,8 @@ form.addEventListener('submit',function(e){
     if(r.status==="success"){
       alert("আপনার অর্ডার জমা হয়েছে!");
       form.reset();
-      // Reset toggles and quantities
-      document.querySelectorAll('.toggle-select.active').forEach(btn=>{
-        btn.classList.remove('active');
-      });
-      document.querySelectorAll('.qty').forEach(qty=>{
-        qty.value=1;
-        qty.disabled=true;
-      });
+      document.querySelectorAll('.toggle-select.active').forEach(btn=>btn.classList.remove('active'));
+      document.querySelectorAll('.qty').forEach(qty=>{qty.value=1; qty.disabled=true;});
       selectedItemsElem.innerHTML='';
       deliveryChargeElem.innerText='-';
       totalPriceElem.innerText='';
