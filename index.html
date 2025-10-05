@@ -7,10 +7,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif;}
-body{background:#fdf6f6; color:#333;}
+body{background:#fdf6f6; color:#333; line-height:1.6;}
+
+/* Container Spacing */
+section, .slider, .products, .video-container {
+  margin: 40px auto;
+}
 
 /* Slider */
-.slider{position:relative; width:100%; max-width:1200px; margin:30px auto; overflow:hidden; border-radius:15px; border:3px solid #FFB6C1; box-shadow:0 15px 50px rgba(0,0,0,0.2);}
+.slider{
+  position:relative;
+  width:95%;
+  max-width:1100px;
+  overflow:hidden;
+  border-radius:15px;
+  border:3px solid #FFB6C1;
+  box-shadow:0 10px 35px rgba(0,0,0,0.15);
+}
 .slides{display:flex; transition:transform 0.7s ease-in-out;}
 .slides img{width:100%; flex-shrink:0; height:auto; object-fit:cover; border-radius:12px; border:2px solid #FFC0CB;}
 
@@ -20,20 +33,46 @@ body{background:#fdf6f6; color:#333;}
 .dot.active{background:#FF69B4; transform:scale(1.3);}
 
 /* Video Section */
-.video-container{width:90%; max-width:600px; margin:30px auto; position:relative; border:3px solid #FFB6C1; border-radius:15px; box-shadow:0 12px 35px rgba(255,182,193,0.5);}
+.video-container{
+  width:90%;
+  max-width:600px;
+  position:relative;
+  border:3px solid #FFB6C1;
+  border-radius:15px;
+  box-shadow:0 8px 25px rgba(255,182,193,0.5);
+}
 .video-container::before{content:""; display:block; padding-top:56.25%;}
-.video-container iframe{position:absolute; top:0; left:0; width:100%; height:100%; border:none; border-radius:12px;}
+.video-container iframe{
+  position:absolute; top:0; left:0; width:100%; height:100%;
+  border:none; border-radius:12px;
+}
 
 /* Products */
-.products{display:flex; flex-wrap:wrap; justify-content:center; gap:30px; margin:50px auto; width:90%; max-width:1200px;}
-.product{background:#ffffff; border:3px solid #FFB6C1; border-radius:25px; padding:25px; width:350px; text-align:center; box-shadow:0 12px 35px rgba(255,105,180,0.4); transition:0.3s, transform 0.3s, box-shadow 0.3s, background 0.3s;}
-.product:hover{transform: translateY(-12px); box-shadow:0 20px 50px rgba(255,182,193,0.7); background: linear-gradient(145deg,#fff0f5,#ffe4e1);}
-.product img{width:100%; border-radius:20px; margin-bottom:15px; border:2px solid #FFC0CB;}
-.product h2{font-size:22px; margin-bottom:10px; color:#FF1493;}
-.price{font-size:18px; margin-bottom:10px;}
-.price del{color:#999; margin-right:10px;}
+.products{
+  display:flex; flex-wrap:wrap; justify-content:center;
+  gap:25px; width:95%; max-width:1150px;
+}
+.product{
+  background:#fff;
+  border:3px solid #FFB6C1;
+  border-radius:25px;
+  padding:22px;
+  width:330px;
+  text-align:center;
+  box-shadow:0 8px 25px rgba(255,105,180,0.35);
+  transition:transform 0.3s, box-shadow 0.3s, background 0.3s;
+}
+.product:hover{
+  transform:translateY(-8px);
+  box-shadow:0 16px 40px rgba(255,182,193,0.6);
+  background:linear-gradient(145deg,#fff0f5,#ffe4e1);
+}
+.product img{width:100%; border-radius:20px; margin-bottom:12px; border:2px solid #FFC0CB;}
+.product h2{font-size:21px; margin-bottom:8px; color:#FF1493;}
+.price{font-size:17px; margin-bottom:8px;}
+.price del{color:#999; margin-right:8px;}
 .price span{font-weight:700; color:#FF4500;}
-.ingredients{font-size:16px; color:#555;}
+.ingredients{font-size:15px; color:#555;}
 
 /* Order Button Animation */
 @keyframes pulse {
@@ -44,38 +83,56 @@ body{background:#fdf6f6; color:#333;}
 .order-btn {
   display:block;
   width:80%;
-  max-width:400px;
-  margin:50px auto 100px auto;
-  padding:20px 0;
-  background: linear-gradient(90deg,#FF69B4,#FF4500,#FFD700);
+  max-width:380px;
+  margin:45px auto;
+  padding:16px 0;
+  background:linear-gradient(90deg,#FF69B4,#FF4500,#FFD700);
   text-align:center;
-  font-size:28px;
+  font-size:26px;
   font-weight:700;
   color:#fff;
   border-radius:30px;
   text-decoration:none;
-  box-shadow:0 12px 35px rgba(255,105,180,0.6);
-  animation: pulse 2s infinite;
-  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow:0 8px 25px rgba(255,105,180,0.6);
+  animation:pulse 2s infinite;
+  transition:transform 0.3s, box-shadow 0.3s;
 }
 .order-btn:hover {
-  transform: scale(1.12);
-  box-shadow:0 20px 50px rgba(255,105,180,0.8);
+  transform:scale(1.1);
+  box-shadow:0 0 25px #FF69B4, 0 0 45px #FFD700;
 }
 
-/* WhatsApp & Messenger buttons official look */
-.contact-btns{position:fixed; bottom:20px; right:20px; display:flex; flex-direction:column; gap:12px; z-index:999;}
-.contact-btns a{display:flex; align-items:center; justify-content:center; width:60px; height:60px; border-radius:50%; background:white; box-shadow:0 4px 15px rgba(0,0,0,0.25); transition: transform 0.3s ease, box-shadow 0.3s ease; animation: float 2.5s ease-in-out infinite;}
+/* WhatsApp & Messenger Buttons */
+.contact-btns{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  z-index:999;
+}
+.contact-btns a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:60px; height:60px;
+  border-radius:50%;
+  background:white;
+  box-shadow:0 4px 15px rgba(0,0,0,0.25);
+  transition:transform 0.3s ease, box-shadow 0.3s ease;
+  animation:float 2.5s ease-in-out infinite;
+}
 .contact-btns a svg{width:32px; height:32px;}
 .contact-btns a:hover{transform:scale(1.15); box-shadow:0 0 25px rgba(0,0,0,0.5),0 0 15px rgba(255,255,255,0.2);}
 @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
 
 /* Responsive */
 @media(max-width:768px){
-  .slider::before{ padding-top:66.66%; }
-  .video-container::before{ padding-top:66.66%; }
-  .products{ flex-direction:column; align-items:center; }
-  .contact-btns a{width:50px; height:50px;} 
+  .products{flex-direction:column; align-items:center;}
+  .product{width:90%; padding:18px;}
+  .order-btn{font-size:22px; padding:14px 0;}
+  .contact-btns a{width:50px; height:50px;}
   .contact-btns a svg{width:26px; height:26px;}
 }
 </style>
@@ -102,13 +159,13 @@ body{background:#fdf6f6; color:#333;}
 <!-- Products -->
 <div class="products">
   <div class="product">
-    <img src="photo11.jpg" alt="12 পিস হালাল আতর কম্বো প্যাক">
+    <img src="photo11.jpg" alt="১২ পিস হালাল আতর কম্বো প্যাক">
     <h2>✨ ১২ পিস হালাল আতর কম্বো প্যাক (৩ মি.লি. বোতল)</h2>
     <div class="price"><del>৭৯০ টাকা</del> <span>৫৯০ টাকা</span></div>
     <div class="ingredients">ম্যাগনেট, কাঁচা বেলি, শাহী দরবার, বকুল ফুল, রজনীগন্ধা, গুলে লালা</div>
   </div>
   <div class="product">
-    <img src="photo22.jpg" alt="12 পিস স্পেশাল আতর কম্বো প্যাক">
+    <img src="photo22.jpg" alt="১২ পিস স্পেশাল আতর কম্বো প্যাক">
     <h2>🌿 ১২ পিস স্পেশাল আতর কম্বো প্যাক (৩ মি.লি. বোতল)</h2>
     <div class="price"><del>৯৯৯ টাকা</del> <span>৭৫০ টাকা</span></div>
     <div class="ingredients">সালমা, ফেরদৌস, সিলভার, রজনীগন্ধা, শাহী দরবার, বকুল ফুল</div>
@@ -152,10 +209,15 @@ function updateSlider(){
   document.querySelectorAll('.dot').forEach(d=>d.classList.remove('active'));
   document.querySelectorAll('.dot')[currentIndex%(slideImages.length-1)].classList.add('active');
 }
-let sliderInterval=setInterval(()=>{ currentIndex++; updateSlider(); },2000);
-slides.addEventListener('transitionend',()=>{ if(currentIndex===slideImages.length-1){ slides.style.transition="none"; currentIndex=0; slides.style.transform=`translateX(0%)`; }}); 
+let sliderInterval=setInterval(()=>{ currentIndex++; updateSlider(); },3500);
+slides.addEventListener('transitionend',()=>{
+  if(currentIndex===slideImages.length-1){
+    slides.style.transition="none"; currentIndex=0;
+    slides.style.transform=`translateX(0%)`;
+  }
+}); 
 document.getElementById('slider').addEventListener('mouseover',()=>clearInterval(sliderInterval));
-document.getElementById('slider').addEventListener('mouseout',()=>sliderInterval=setInterval(()=>{ currentIndex++; updateSlider(); },2000));
+document.getElementById('slider').addEventListener('mouseout',()=>sliderInterval=setInterval(()=>{ currentIndex++; updateSlider(); },3500));
 </script>
 
 </body>
