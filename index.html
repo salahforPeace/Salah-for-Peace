@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1200">
     <title>LEAP Tarsier | Ecosystem</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@300;500;800&display=swap" rel="stylesheet">
@@ -157,10 +157,9 @@
 
         footer { padding: 40px 4%; border-top: 1px solid var(--border); text-align: center; background: rgba(0,0,0,0.5); margin-top: 50px; }
 
+        /* Mobile specific media query keeping PC style */
         @media (max-width: 850px) {
-            .nav-links { display: none; }
-            .mint-container { grid-template-columns: 1fr; }
-            .mint-visual { border-right: none; border-bottom: 1px solid var(--border); }
+            /* Note: We are keeping the PC layout by controlling the viewport width */
         }
     </style>
 </head>
@@ -174,8 +173,7 @@
             <img src="nft.jpg" class="logo-img" alt="Logo">
             <div>LEAP <span style="color: var(--secondary);">TARSIER</span></div>
         </div>
-        <div class="nav-links">
-            <a href="#nft-section">NFT</a>
+        <div class="nav-links" style="display: flex;"> <a href="#nft-section">NFT</a>
             <a href="#partners">PARTNER</a>
             <a href="#">DEXSCREENER</a> <a href="#community">COMMUNITY</a>
             <a href="#buy-section" class="nav-buy-btn">BUY TOKEN</a>
