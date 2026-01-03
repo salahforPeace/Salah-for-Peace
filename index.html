@@ -6,8 +6,10 @@
     <title>LEAP Tarsier | Ecosystem</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@300;500;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
     
+    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
+    <script src="https://unpkg.com/@metaplex-foundation/js@latest/dist/browser/index.iife.min.js"></script>
+
     <style>
         :root {
             --primary: #9945FF;
@@ -240,16 +242,16 @@
                         </div>
                         <div class="mint-stat-item">
                             <small>STATUS</small>
-                            <span style="color: var(--secondary)">LIVE</span>
+                            <span id="mintStatus" style="color: var(--secondary)">LIVE</span>
                         </div>
                     </div>
                     
                     <button id="mintButton" class="mint-btn" onclick="handleMintAction()">CONNECT WALLET</button>
-                    <p id="walletStatus" style="font-size: 0.7rem; margin-top: 10px; color: #888; text-align: center;"></p>
+                    <p id="walletStatus" style="font-size: 0.7rem; margin-top: 10px; color: #888; text-align: center; font-family: 'Orbitron';"></p>
                 </div>
             </div>
         </div>
-        </header>
+    </header>
 
     <section id="partners" style="scroll-margin-top: 80px;">
         <h2 class="sec-title">Strategic Partners</h2>
@@ -361,65 +363,64 @@
         } catch (e) { console.log(e) }
     }
 
-    // --- UPDATED MINTING LOGIC FOR WEB3 ---
+    // --- FINAL WEB3 & CANDY MACHINE READY LOGIC ---
     let userWalletAddress = null;
     const MINT_PRICE_SOL = 0.05;
     const TOTAL_SUPPLY = 1000;
-    let mintedSoFar = 125; // Default value, Candy Machine connect hole auto update hobe
+    const CANDY_MACHINE_ID = "YOUR_CANDY_MACHINE_ID_HERE"; // Just replace this later
 
-    // Function to update display
-    function updateMintDisplay() {
-        document.getElementById('mintCount').innerText = `${mintedSoFar} / ${TOTAL_SUPPLY}`;
-    }
+    const getProvider = () => {
+        if ('solana' in window) {
+            const provider = window.solana;
+            if (provider.isPhantom) return provider;
+        }
+        window.open("https://phantom.app/", "_blank");
+        return null;
+    };
 
     async function handleMintAction() {
         const btn = document.getElementById('mintButton');
-        const status = document.getElementById('walletStatus');
+        const statusText = document.getElementById('walletStatus');
+        const provider = getProvider();
 
-        // Check if Phantom is installed
-        const isPhantomInstalled = window.solana && window.solana.isPhantom;
+        if (!provider) return;
 
-        if (!isPhantomInstalled) {
-            window.open("https://phantom.app/", "_blank");
-            return;
-        }
-
-        // 1. Connect Wallet
+        // 1. Connection Logic
         if (!userWalletAddress) {
             try {
-                const resp = await window.solana.connect();
+                const resp = await provider.connect();
                 userWalletAddress = resp.publicKey.toString();
                 btn.innerText = `MINT NOW (${MINT_PRICE_SOL} SOL)`;
-                status.innerText = "Connected: " + userWalletAddress.slice(0,6) + "..." + userWalletAddress.slice(-4);
-                updateMintDisplay();
+                statusText.innerText = "CONNECTED: " + userWalletAddress.slice(0,6) + "..." + userWalletAddress.slice(-4);
+                statusText.style.color = "var(--secondary)";
             } catch (err) {
-                console.error(err);
-                alert("Connection refused!");
+                console.error("User rejected connection");
             }
             return;
         }
 
-        // 2. Mint Logic (Candy Machine Ready)
+        // 2. Minting Logic Placeholder
+        if (CANDY_MACHINE_ID === "YOUR_CANDY_MACHINE_ID_HERE") {
+            alert("Candy Machine ID ekhono set kora hoyni code-e!");
+            return;
+        }
+
         try {
             btn.innerText = "PROCESSING...";
             btn.disabled = true;
-
-            // In the future, replace this with Candy Machine v3 Mint Logic
-            // Example: const mintResult = await candyMachine.mint(...)
             
-            // Dummy simulation for now
+            // Candy Machine v3 Instruction will go here
+            // Simulation
             setTimeout(() => {
-                alert("Successfully Minted! (Once Candy Machine ID is linked)");
-                mintedSoFar++;
-                updateMintDisplay();
-                btn.innerText = `MINT NOW (${MINT_PRICE_SOL} SOL)`;
+                alert("Minting sequence triggered! Wait for wallet approval.");
                 btn.disabled = false;
-            }, 2000);
+                btn.innerText = `MINT NOW (${MINT_PRICE_SOL} SOL)`;
+            }, 1000);
 
         } catch (error) {
             console.error(error);
-            alert("Transaction failed!");
             btn.disabled = false;
+            btn.innerText = `MINT NOW (${MINT_PRICE_SOL} SOL)`;
         }
     }
 
@@ -439,12 +440,8 @@
         alert("Contract Address Copied!"); 
     }
 
-    // Initialize
-    resize(); 
-    animate(); 
-    fetchTokenData();
-    updateMintDisplay();
-    setInterval(fetchTokenData, 15000);
+    resize(); animate(); fetchTokenData();
+    setInterval(fetchTokenData, 10000);
 </script>
 
 </body>
