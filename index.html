@@ -42,34 +42,29 @@
         }
         .nav-links a:hover { color: var(--secondary); }
 
-        /* Wallet Connect Button Styling */
-        .connect-btn {
+        .nav-wallet-btn {
             background: linear-gradient(90deg, var(--primary), #7000ff);
-            padding: 10px 22px; border-radius: 8px; color: white;
-            border: 1px solid rgba(255,255,255,0.2); cursor: pointer;
-            font-family: 'Orbitron'; font-size: 0.75rem; font-weight: bold;
-            transition: 0.3s;
+            padding: 10px 20px; border-radius: 8px; color: white; border: 1px solid rgba(255,255,255,0.2);
+            cursor: pointer; font-family: 'Orbitron'; font-size: 0.75rem; font-weight: 800; transition: 0.3s;
         }
-        .connect-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(153, 69, 255, 0.4); }
-        .connected-state { background: var(--secondary) !important; color: black !important; }
+        .nav-wallet-btn.connected { background: var(--secondary); color: black; }
 
-        /* --- HEADER & HERO --- */
+        /* --- HERO SECTION --- */
         header { padding: 80px 4% 60px; max-width: 1600px; margin: 0 auto; text-align: left; }
-        .solana-tag { font-size: 0.7rem; color: var(--secondary); font-family: 'Orbitron'; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; opacity: 0.9; }
+        .solana-tag { font-size: 0.7rem; color: var(--secondary); font-family: 'Orbitron'; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; }
         .headline { font-family: 'Orbitron'; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 50px; }
         .grad-text { background: linear-gradient(90deg, #fff, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        /* Token Info Card */
         .hero-action-card {
             background: var(--glass); border: 2px solid var(--border); border-radius: 24px; padding: 40px;
             display: flex; flex-direction: column; align-items: center; max-width: 550px; margin: 0 auto;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
         .stats-display { display: flex; gap: 20px; width: 100%; margin-bottom: 30px; }
         .stat-box { flex: 1; padding: 20px; background: rgba(255,255,255,0.03); border-radius: 16px; border: 1px solid var(--border); text-align: center; }
-        .stat-box b { font-size: 1.2rem; color: var(--secondary); font-family: 'Orbitron'; display: block; }
+        .stat-box span { display: block; font-family: 'Orbitron'; font-size: 0.6rem; color: #888; margin-bottom: 8px; }
+        .stat-box b { font-size: 1.1rem; color: var(--secondary); font-family: 'Orbitron'; display: block; }
 
-        /* --- NFT MINT SECTION --- */
+        /* --- MINT SECTION --- */
         .mint-container {
             max-width: 900px; margin: 40px auto 0; background: var(--glass); border: 2px solid var(--border);
             border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: 1fr 1.2fr; transition: 0.4s;
@@ -77,31 +72,40 @@
         .mint-visual { padding: 30px; background: rgba(255,255,255,0.02); display: flex; align-items: center; border-right: 1px solid var(--border); }
         .mint-img { width: 100%; border-radius: 15px; border: 1px solid var(--primary); }
         .mint-info { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
-        .mint-info h3 { font-family: 'Orbitron'; color: var(--secondary); margin-bottom: 15px; }
+        .mint-info h3 { font-family: 'Orbitron'; color: var(--secondary); margin-bottom: 15px; font-size: 1.5rem; }
 
         .mint-dashboard { background: rgba(0,0,0,0.3); border: 1px solid var(--border); padding: 20px; border-radius: 15px; margin-top: 20px; }
         .mint-stats { display: flex; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
-        
-        /* The Actual Mint Button */
+        .mint-stat-item { text-align: center; }
+        .mint-stat-item small { display: block; font-size: 0.65rem; color: #888; font-family: 'Orbitron'; margin-bottom: 5px; }
+        .mint-stat-item span { font-weight: 800; font-family: 'Orbitron'; }
+
         .mint-btn {
             width: 100%; padding: 18px; border: none; border-radius: 10px;
             background: #333; color: #777; font-family: 'Orbitron'; font-weight: 900;
             cursor: not-allowed; transition: 0.3s; font-size: 1rem;
         }
-        .mint-btn.active {
-            background: linear-gradient(90deg, var(--secondary), #00d1d1);
-            color: #000; cursor: pointer;
+        .mint-btn.active { background: linear-gradient(90deg, var(--secondary), #00d1d1); color: #000; cursor: pointer; }
+        .mint-btn.active:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(20, 241, 149, 0.4); }
+
+        /* --- PARTNERS & COMMUNITY --- */
+        section { padding: 80px 4%; max-width: 1600px; margin: 0 auto; }
+        .sec-title { font-family: 'Orbitron'; font-size: 2rem; margin-bottom: 40px; text-align: center; }
+        .partner-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .partner-card { background: #0a0a0a; border: 1px solid var(--border); border-radius: 16px; height: 120px; display: flex; justify-content: center; align-items: center; transition: 0.3s; }
+        .partner-card:hover { border-color: var(--secondary); transform: translateY(-5px); }
+        .partner-card img { width: 110px; filter: grayscale(1); opacity: 0.6; transition: 0.3s; }
+        .partner-card:hover img { filter: grayscale(0); opacity: 1; }
+
+        .community-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .com-card {
+            background: #0a0a0a; border: 1px solid var(--border); border-radius: 20px; padding: 40px; 
+            text-align: center; text-decoration: none; color: white; transition: 0.4s; display: flex; flex-direction: column; align-items: center;
         }
-        .mint-btn.active:hover { transform: scale(1.02); filter: brightness(1.1); }
+        .com-card:hover { border-color: var(--primary); transform: translateY(-8px); }
+        .com-card i { font-size: 2.5rem; color: var(--secondary); margin-bottom: 15px; }
 
-        /* Partner & Community (Same as before) */
-        .partner-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; margin-top: 50px;}
-        .partner-card { background: #0a0a0a; border: 1px solid var(--border); border-radius: 16px; height: 100px; display: flex; justify-content: center; align-items: center; }
-        .community-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 50px;}
-        .com-card { background: #0a0a0a; border: 1px solid var(--border); border-radius: 20px; padding: 40px; text-align: center; text-decoration: none; color: white; transition: 0.4s; }
-        .com-card:hover { border-color: var(--primary); transform: translateY(-5px); }
-
-        footer { padding: 40px; text-align: center; border-top: 1px solid var(--border); margin-top: 50px; }
+        footer { padding: 40px; text-align: center; border-top: 1px solid var(--border); background: rgba(0,0,0,0.5); font-size: 0.8rem; font-family: Orbitron; color: #444; }
 
         @media (max-width: 850px) {
             .nav-links { display: none; }
@@ -124,128 +128,139 @@
             <a href="#nft-section">NFT</a>
             <a href="#partners">PARTNER</a>
             <a href="#community">COMMUNITY</a>
-            <button id="walletBtn" class="connect-btn" onclick="connectWallet()">CONNECT WALLET</button>
+            <button id="walletBtn" class="nav-wallet-btn" onclick="connectWallet()">CONNECT WALLET</button>
         </div>
     </nav>
 
     <header>
-        <p class="solana-tag">Powered by Solana Blockchain</p>
-        <h1 class="headline">Tarsier <br> <span class="grad-text">NFT Ecosystem</span></h1>
+        <p class="solana-tag">Official Tarsier Ecosystem</p>
+        <h1 class="headline">Evolution of <br> <span class="grad-text">Digital Assets.</span></h1>
         
         <div class="hero-action-card">
             <div class="stats-display">
                 <div class="stat-box"><span>LIVE PRICE</span><b id="livePrice">$0.000000</b></div>
-                <div class="stat-box"><span>MARKET CAP</span><b id="liveMcap">...</b></div>
+                <div class="stat-box"><span>MARKET CAP</span><b id="liveMcap">LOADING...</b></div>
             </div>
-            <a href="https://pump.fun/coin/a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump" target="_blank" style="width: 100%; text-decoration: none; background: var(--primary); color: white; padding: 15px; border-radius: 10px; text-align: center; font-family: Orbitron; font-weight: 800;">BUY ON PUMP.FUN</a>
+            <a href="https://pump.fun/coin/a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump" target="_blank" style="width: 100%; text-decoration: none; background: var(--primary); color: white; padding: 18px; border-radius: 12px; text-align: center; font-family: Orbitron; font-weight: 900; letter-spacing: 1px;">BUY TOKEN</a>
         </div>
 
-        <div id="nft-section" class="mint-container">
-            <div class="mint-visual"><img src="nft.jpg" class="mint-img" alt="NFT"></div>
+        <div id="nft-section" class="mint-container" style="scroll-margin-top: 100px;">
+            <div class="mint-visual"><img src="nft.jpg" class="mint-img" alt="NFT Preview"></div>
             <div class="mint-info">
-                <h3>MINT YOUR TARSIER</h3>
-                <p id="mintStatusDesc">Please connect your wallet to start minting.</p>
+                <h3>MINT TARSIER NFT</h3>
+                <p id="mintStatusDesc">Connect your wallet to unlock minting.</p>
                 <div class="mint-dashboard">
                     <div class="mint-stats">
                         <div class="mint-stat-item"><small>PRICE</small><span>0.05 SOL</span></div>
-                        <div class="mint-stat-item"><small>SUPPLY</small><span>0 / 1000</span></div>
+                        <div class="mint-stat-item"><small>SUPPLY</small><span id="mintCount">0 / 1000</span></div>
                     </div>
-                    <button id="mintButton" class="mint-btn" onclick="processMint()">MINT LOCKED</button>
+                    <button id="mintButton" class="mint-btn" onclick="executeMint()" disabled>MINT LOCKED</button>
                 </div>
             </div>
         </div>
     </header>
 
-    <section id="partners"><div class="partner-grid"><div class="partner-card"><img src="https://cryptologos.cc/logos/solana-sol-logo.png" width="100"></div><div class="partner-card"><img src="https://cryptologos.cc/logos/raydium-ray-logo.png" width="100"></div></div></section>
-    
-    <section id="community"><div class="community-grid"><a href="https://t.me/tarsierleapg" target="_blank" class="com-card"><i class="fa-brands fa-telegram" style="font-size: 2rem;"></i><h3>Telegram</h3></a><a href="https://x.com/LPTAR_Official" target="_blank" class="com-card"><i class="fa-brands fa-x-twitter" style="font-size: 2rem;"></i><h3>Twitter</h3></a></div></section>
+    <section id="partners">
+        <h2 class="sec-title">Strategic Partners</h2>
+        <div class="partner-grid">
+            <div class="partner-card"><img src="https://cryptologos.cc/logos/solana-sol-logo.png"></div>
+            <div class="partner-card"><img src="https://cryptologos.cc/logos/raydium-ray-logo.png"></div>
+            <div class="partner-card"><img src="https://cryptologos.cc/logos/orca-orca-logo.png"></div>
+            <div class="partner-card"><img src="https://cryptologos.cc/logos/jupiter-ag-jup-logo.png"></div>
+        </div>
+    </section>
 
-    <footer>© 2026 LEAP TARSIER • ALL RIGHTS RESERVED</footer>
+    <section id="community">
+        <div class="community-grid">
+            <a href="https://t.me/tarsierleapg" target="_blank" class="com-card"><i class="fa-brands fa-telegram"></i><h3>Telegram</h3></a>
+            <a href="https://x.com/LPTAR_Official" target="_blank" class="com-card"><i class="fa-brands fa-x-twitter"></i><h3>Twitter</h3></a>
+        </div>
+    </section>
+
+    <footer>© 2026 LEAP TARSIER • BUILT ON SOLANA</footer>
 </div>
 
 <script>
-    // --- GLOBAL VARIABLES ---
-    let walletAddress = null;
+    // --- CORE VARIABLES ---
+    let userAddress = null;
     const MINT_PRICE = 0.05;
-    const CANDY_MACHINE_ID = "YOUR_ID_HERE"; // Replace later
+    const CANDY_ID = "YOUR_ID_HERE";
 
-    // --- WALLET CONNECTION ---
+    // --- WALLET LOGIC ---
     async function connectWallet() {
         const provider = window.solana;
-        const btn = document.getElementById('walletBtn');
-        const mBtn = document.getElementById('mintButton');
-        const mDesc = document.getElementById('mintStatusDesc');
-
-        if (provider) {
-            try {
-                const resp = await provider.connect();
-                walletAddress = resp.publicKey.toString();
-                
-                // Update Nav Button
-                btn.innerText = walletAddress.slice(0,4) + "..." + walletAddress.slice(-4);
-                btn.classList.add('connected-state');
-
-                // Unlock Mint Button
-                mBtn.classList.add('active');
-                mBtn.innerText = `MINT NOW (${MINT_PRICE} SOL)`;
-                mBtn.disabled = false;
-                mDesc.innerText = "Wallet connected! You are eligible to mint.";
-                mDesc.style.color = "var(--secondary)";
-
-            } catch (err) { console.error("User rejected", err); }
-        } else {
-            window.open("https://phantom.app/", "_blank");
-        }
-    }
-
-    // --- MINTING PROCESS ---
-    async function processMint() {
-        if (!walletAddress) return;
-        const mBtn = document.getElementById('mintButton');
+        if (!provider) return window.open("https://phantom.app/", "_blank");
 
         try {
-            mBtn.innerText = "WAITING FOR APPROVAL...";
-            mBtn.disabled = true;
+            const resp = await provider.connect();
+            userAddress = resp.publicKey.toString();
+            
+            // Update Nav Button
+            const navBtn = document.getElementById('walletBtn');
+            navBtn.innerText = userAddress.slice(0,4) + "..." + userAddress.slice(-4);
+            navBtn.classList.add('connected');
 
-            // Transaction simulation (Real logic will come from Candy Machine ID)
-            setTimeout(() => {
-                alert("Transaction Sent! Approval requested in your wallet.");
-                mBtn.innerText = `MINT NOW (${MINT_PRICE} SOL)`;
-                mBtn.disabled = false;
-            }, 2000);
-
-        } catch (e) {
-            alert("Transaction Failed!");
+            // Unlock Mint Button
+            const mBtn = document.getElementById('mintButton');
+            mBtn.classList.add('active');
             mBtn.disabled = false;
-        }
+            mBtn.innerText = `MINT NOW (${MINT_PRICE} SOL)`;
+            document.getElementById('mintStatusDesc').innerText = "Wallet Connected! Proceed to mint.";
+            document.getElementById('mintStatusDesc').style.color = "var(--secondary)";
+
+        } catch (err) { console.error(err); }
     }
 
-    // --- BACKGROUND PARTICLES ---
+    async function executeMint() {
+        if(!userAddress) return;
+        const mBtn = document.getElementById('mintButton');
+        mBtn.innerText = "WAITING FOR APPROVAL...";
+        mBtn.disabled = true;
+
+        // Mint Simulation
+        setTimeout(() => {
+            alert("Approval requested in your Phantom wallet!");
+            mBtn.innerText = `MINT NOW (${MINT_PRICE} SOL)`;
+            mBtn.disabled = false;
+        }, 2000);
+    }
+
+    // --- PARTICLE ENGINE ---
     const canvas = document.getElementById('proCanvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
     function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
     window.addEventListener('resize', resize);
-    class Particle {
-        constructor() { this.x = Math.random()*canvas.width; this.y = Math.random()*canvas.height; this.vX = Math.random()-0.5; this.vY = Math.random()-0.5; }
-        draw() { ctx.fillStyle = '#9945FF'; ctx.beginPath(); ctx.arc(this.x, this.y, 1.5, 0, Math.PI*2); ctx.fill(); this.x+=this.vX; this.y+=this.vY; }
+    class P {
+        constructor() { this.x = Math.random()*canvas.width; this.y = Math.random()*canvas.height; this.vX = (Math.random()-0.5)*0.8; this.vY = (Math.random()-0.5)*0.8; }
+        update() { 
+            this.x+=this.vX; this.y+=this.vY; 
+            if(this.x<0||this.x>canvas.width) this.vX*=-1; if(this.y<0||this.y>canvas.height) this.vY*=-1;
+        }
+        draw() {
+            ctx.fillStyle = '#9945FF'; ctx.beginPath(); ctx.arc(this.x, this.y, 1.2, 0, Math.PI*2); ctx.fill();
+        }
     }
-    function init() { resize(); for(let i=0; i<100; i++) particles.push(new Particle()); }
-    function anim() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p => p.draw()); requestAnimationFrame(anim); }
+    function init() { resize(); particles=[]; for(let i=0; i<80; i++) particles.push(new P()); }
+    function anim() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        particles.forEach(p => { p.update(); p.draw(); });
+        requestAnimationFrame(anim);
+    }
     init(); anim();
 
-    // --- DEX DATA ---
-    async function fetchDex() {
+    // --- PRICE FETCH ---
+    async function fetchStats() {
         try {
-            const res = await fetch("https://api.dexscreener.com/latest/dex/tokens/a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump");
-            const d = await res.json();
+            const r = await fetch("https://api.dexscreener.com/latest/dex/tokens/a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump");
+            const d = await r.json();
             if(d.pairs) {
                 document.getElementById('livePrice').innerText = "$" + parseFloat(d.pairs[0].priceUsd).toFixed(10);
                 document.getElementById('liveMcap').innerText = "$" + Math.round(d.pairs[0].fdv).toLocaleString();
             }
         } catch(e) {}
     }
-    fetchDex(); setInterval(fetchDex, 15000);
+    fetchStats(); setInterval(fetchStats, 20000);
 </script>
 
 </body>
