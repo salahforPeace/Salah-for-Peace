@@ -1,145 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Solana NFT Mint | Devnet</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Professional Solana NFT Mint</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Solana & Metaplex -->
-  <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.js"></script>
-  <script src="https://unpkg.com/@metaplex-foundation/js@latest/dist/index.umd.js"></script>
+<!-- Solana -->
+<script src="https://unpkg.com/@solana/web3.js@1.95.3/lib/index.iife.js"></script>
 
-  <style>
-    body {
-      margin: 0;
-      background: #0b0b0b;
-      font-family: Arial, sans-serif;
-      color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+<!-- Wallet Adapter (PRO) -->
+<script src="https://unpkg.com/@solana/wallet-adapter-base@0.9.23/lib/index.iife.js"></script>
+<script src="https://unpkg.com/@solana/wallet-adapter-wallets@0.19.23/lib/index.iife.js"></script>
+<script src="https://unpkg.com/@solana/wallet-adapter-ui@0.9.23/lib/index.iife.js"></script>
 
-    .box {
-      background: #151515;
-      padding: 30px;
-      border-radius: 12px;
-      text-align: center;
-      width: 90%;
-      max-width: 420px;
-    }
+<!-- Metaplex -->
+<script src="https://unpkg.com/@metaplex-foundation/js@0.20.1/dist/index.umd.js"></script>
 
-    h1 {
-      margin-bottom: 20px;
-    }
+<link rel="stylesheet"
+ href="https://unpkg.com/@solana/wallet-adapter-ui@0.9.23/styles.css"/>
 
-    button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 10px;
-      border-radius: 8px;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-      background: #7c3aed;
-      color: white;
-    }
-
-    button:disabled {
-      background: #555;
-      cursor: not-allowed;
-    }
-
-    p {
-      margin-top: 12px;
-      word-break: break-all;
-    }
-  </style>
+<style>
+body{
+  background:#0b0b0b;
+  color:#fff;
+  font-family:Arial;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+.box{
+  background:#151515;
+  padding:30px;
+  border-radius:12px;
+  width:90%;
+  max-width:420px;
+  text-align:center;
+}
+button{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border:none;
+  border-radius:8px;
+  background:#7c3aed;
+  color:#fff;
+  font-size:16px;
+}
+</style>
 </head>
 
 <body>
 
 <div class="box">
-  <h1>🚀 NFT Mint (Devnet)</h1>
+  <h2>🚀 NFT Mint (Devnet)</h2>
 
-  <button id="connectWallet">🔌 Connect Wallet</button>
-  <p id="wallet"></p>
+  <div id="wallet-button"></div>
 
-  <button id="mintBtn" disabled>🎨 Mint NFT</button>
-
+  <button onclick="mintNFT()">Mint NFT</button>
   <p id="status"></p>
 </div>
 
 <script>
-  const { Connection, clusterApiUrl, PublicKey } = solanaWeb3;
-  const { Metaplex, walletAdapterIdentity } = metaplex;
+const { Connection, clusterApiUrl, PublicKey } = solanaWeb3;
+const { Metaplex, walletAdapterIdentity } = metaplex;
+const { PhantomWalletAdapter, SolflareWalletAdapter } =
+      solanaWalletAdapterWallets;
 
-  // 🔑 DEVNET Candy Machine ID
-  const CANDY_MACHINE_ID = new PublicKey(
-    "6Eqhz5ZC1ENXTfBDgkSEyyC6DTASvXz8DR7iNRQwxf8N"
-  );
+// DEVNET
+const connection = new Connection(clusterApiUrl("devnet"));
 
-  // 🌐 DEVNET connection
-  const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+// Candy Machine ID
+const CANDY_MACHINE_ID = new PublicKey(
+ "6Eqhz5ZC1ENXTfBDgkSEyyC6DTASvXz8DR7iNRQwxf8N"
+);
 
-  let wallet = null;
-  let metaplex = null;
+// Wallet Adapter
+const wallet = new solanaWalletAdapterWallets.PhantomWalletAdapter();
 
-  const connectBtn = document.getElementById("connectWallet");
-  const mintBtn = document.getElementById("mintBtn");
-  const walletText = document.getElementById("wallet");
-  const statusText = document.getElementById("status");
+const walletButton =
+ new solanaWalletAdapterUi.WalletMultiButton({
+   wallets: [wallet]
+ });
 
-  // 🔌 Connect Wallet
-  connectBtn.onclick = async () => {
-    try {
-      if (!window.solana) {
-        alert("Please install Phantom / Solflare wallet");
-        return;
-      }
+document
+  .getElementById("wallet-button")
+  .appendChild(walletButton);
 
-      wallet = window.solana;
-      await wallet.connect();
+let metaplex;
 
-      walletText.innerText =
-        "Wallet: " + wallet.publicKey.toString();
+wallet.on("connect", () => {
+  metaplex = Metaplex.make(connection)
+    .use(walletAdapterIdentity(wallet));
 
-      metaplex = Metaplex.make(connection)
-        .use(walletAdapterIdentity(wallet));
+  document.getElementById("status").innerText =
+    "✅ Wallet connected";
+});
 
-      mintBtn.disabled = false;
-      statusText.innerText = "✅ Wallet connected";
-    } catch (err) {
-      console.error(err);
-      statusText.innerText = "❌ Wallet connect failed";
-    }
-  };
+async function mintNFT(){
+  if(!metaplex){
+    document.getElementById("status").innerText =
+      "❌ Connect wallet first";
+    return;
+  }
 
-  // 🎨 Mint NFT
-  mintBtn.onclick = async () => {
-    try {
-      statusText.innerText = "⏳ Minting NFT...";
+  try{
+    document.getElementById("status").innerText = "⏳ Minting...";
 
-      const candyMachine =
-        await metaplex.candyMachines().findByAddress({
-          address: CANDY_MACHINE_ID,
-        });
+    const cm = await metaplex
+      .candyMachines()
+      .findByAddress({ address: CANDY_MACHINE_ID });
 
-      const { nft } =
-        await metaplex.candyMachines().mint({
-          candyMachine,
-        });
+    const { nft } = await metaplex
+      .candyMachines()
+      .mint({ candyMachine: cm });
 
-      statusText.innerText =
-        "✅ Mint Success!\nNFT Address:\n" +
-        nft.address.toString();
-    } catch (err) {
-      console.error(err);
-      statusText.innerText =
-        "❌ Mint failed (Check devnet SOL / guards)";
-    }
-  };
+    document.getElementById("status").innerText =
+      "✅ Minted: " + nft.address.toString();
+
+  }catch(e){
+    document.getElementById("status").innerText =
+      "❌ Mint failed (guards / SOL)";
+  }
+}
 </script>
 
 </body>
