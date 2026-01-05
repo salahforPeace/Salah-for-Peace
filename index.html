@@ -8,7 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@300;500;800&display=swap" rel="stylesheet">
     
     <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
-    <script src="https://unpkg.com/@metaplex-foundation/js@latest/dist/browser/index.iife.min.js"></script>
+    <script src="https://unpkg.com/@metaplex-foundation/umi-bundle-defaults@latest/dist/browser/index.iife.min.js"></script>
+    <script src="https://unpkg.com/@metaplex-foundation/mpl-candy-machine@latest/dist/browser/index.iife.min.js"></script>
 
     <style>
         :root {
@@ -20,82 +21,50 @@
             --border: rgba(255, 255, 255, 0.15);
         }
 
+        /* --- আপনার সব CSS আগের মতোই রাখা হয়েছে --- */
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         body { background: var(--dark); color: white; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
-
         #proCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.6; }
         .wrapper { position: relative; z-index: 10; }
-
-        nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 4%; background: rgba(0,0,0,0.9); backdrop-filter: blur(20px);
-            position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border);
-        }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 4%; background: rgba(0,0,0,0.9); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border); }
         .logo-box { display: flex; align-items: center; gap: 12px; font-family: 'Orbitron'; font-weight: 900; }
         .logo-img { width: 35px; height: 35px; border-radius: 8px; border: 1px solid var(--primary); }
-
         .nav-links { display: flex; gap: 25px; align-items: center; }
-        .nav-links a { 
-            text-decoration: none; color: #bbb; font-size: 0.75rem; font-weight: 800; 
-            font-family: 'Orbitron'; transition: 0.3s; letter-spacing: 1px; cursor: pointer;
-        }
+        .nav-links a { text-decoration: none; color: #bbb; font-size: 0.75rem; font-weight: 800; font-family: 'Orbitron'; transition: 0.3s; letter-spacing: 1px; cursor: pointer; }
         .nav-links a:hover { color: var(--secondary); }
-
-        .nav-buy-btn {
-            background: linear-gradient(90deg, var(--primary), #7000ff);
-            padding: 8px 18px; border-radius: 8px; color: white !important;
-            border: 1px solid rgba(255,255,255,0.2);
-            animation: pulseBtn 2s infinite;
-        }
-        @keyframes pulseBtn {
-            0% { box-shadow: 0 0 0 0 rgba(153, 69, 255, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(153, 69, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(153, 69, 255, 0); }
-        }
-
+        .nav-buy-btn { background: linear-gradient(90deg, var(--primary), #7000ff); padding: 8px 18px; border-radius: 8px; color: white !important; border: 1px solid rgba(255,255,255,0.2); animation: pulseBtn 2s infinite; }
+        @keyframes pulseBtn { 0% { box-shadow: 0 0 0 0 rgba(153, 69, 255, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(153, 69, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(153, 69, 255, 0); } }
         header { padding: 80px 4% 60px; max-width: 1600px; margin: 0 auto; text-align: left; }
         .solana-tag { font-size: 0.7rem; color: var(--secondary); font-family: 'Orbitron'; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; opacity: 0.9; }
         .headline { font-family: 'Orbitron'; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 50px; }
         .grad-text { background: linear-gradient(90deg, #fff, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-        .hero-action-card {
-            background: var(--glass); border: 2px solid var(--border); border-radius: 24px; padding: 40px;
-            display: flex; flex-direction: column; align-items: center; max-width: 550px; margin: 0 auto;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+        .hero-action-card { background: var(--glass); border: 2px solid var(--border); border-radius: 24px; padding: 40px; display: flex; flex-direction: column; align-items: center; max-width: 550px; margin: 0 auto; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .hero-action-card:hover { transform: scale(1.02); border-color: var(--primary); }
-
         .stats-display { display: flex; gap: 20px; width: 100%; margin-bottom: 30px; }
         .stat-box { flex: 1; padding: 20px; background: rgba(255,255,255,0.03); border-radius: 16px; border: 1px solid var(--border); text-align: center; }
         .stat-box span { display: block; font-family: 'Orbitron'; font-size: 0.7rem; color: #888; letter-spacing: 1px; margin-bottom: 8px; }
         .stat-box b { font-size: 1.2rem; color: var(--secondary); font-family: 'Orbitron'; display: block; }
-
         .live-dot { height: 8px; width: 8px; background-color: #ff4b4b; border-radius: 50%; display: inline-block; margin-left: 5px; animation: tipTip 1s infinite; }
-
-        .btn-buy-hero {
-            background: linear-gradient(135deg, var(--primary), #7000ff); color: white; width: 100%; padding: 22px; border-radius: 14px;
-            font-family: 'Orbitron'; font-weight: 900; font-size: 1.2rem; text-decoration: none; text-align: center; transition: 0.4s; animation: tapMe 2s infinite ease-in-out;
-        }
+        .btn-buy-hero { background: linear-gradient(135deg, var(--primary), #7000ff); color: white; width: 100%; padding: 22px; border-radius: 14px; font-family: 'Orbitron'; font-weight: 900; font-size: 1.2rem; text-decoration: none; text-align: center; transition: 0.4s; animation: tapMe 2s infinite ease-in-out; }
         @keyframes tapMe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 15px 35px rgba(153, 69, 255, 0.6); } }
-
         .ca-box-hero { margin-top: 25px; padding: 12px 20px; background: rgba(255,255,255,0.05); border-radius: 10px; border: 1px dotted var(--border); font-family: monospace; color: var(--secondary); font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 12px; }
 
+        /* --- NFT Section --- */
         .mint-container { max-width: 900px; margin: 40px auto 0; background: var(--glass); border: 2px solid var(--border); border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: 1fr 1.2fr; transition: 0.4s; }
         .mint-container:hover { border-color: var(--secondary); transform: translateY(-5px); }
         .mint-visual { padding: 30px; background: rgba(255,255,255,0.02); display: flex; align-items: center; border-right: 1px solid var(--border); }
         .mint-img { width: 100%; border-radius: 15px; border: 1px solid var(--primary); }
         .mint-info { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
         .mint-info h3 { font-family: 'Orbitron'; color: var(--secondary); margin-bottom: 15px; font-size: 1.5rem; }
-        
         .mint-dashboard { background: rgba(0,0,0,0.3); border: 1px solid var(--border); padding: 20px; border-radius: 15px; margin-top: 20px; }
         .mint-stats { display: flex; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
         .mint-stat-item { text-align: center; }
         .mint-stat-item small { display: block; font-size: 0.65rem; color: #888; font-family: 'Orbitron'; margin-bottom: 5px; }
         .mint-stat-item span { font-weight: 800; font-family: 'Orbitron'; color: #fff; }
-
         .mint-btn { width: 100%; padding: 15px; border: none; border-radius: 10px; background: linear-gradient(90deg, var(--secondary), #00d1d1); color: #000; font-family: 'Orbitron'; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 1rem; }
-        .mint-btn:disabled { background: #555; cursor: not-allowed; }
+        .mint-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
+        /* --- Sections & Partners --- */
         section { padding: 80px 4%; max-width: 1600px; margin: 0 auto; }
         .sec-title { font-family: 'Orbitron'; font-size: 2.2rem; margin-bottom: 50px; text-align: center; }
         .partner-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; }
@@ -103,18 +72,14 @@
         .partner-card:hover { transform: translateY(-5px); border-color: var(--secondary); }
         .partner-card img { width: 110px; filter: grayscale(1) opacity(0.7); transition: 0.4s; }
         .partner-card:hover img { filter: grayscale(0) opacity(1); }
-
         .community-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .com-card { background: #0a0a0a; border: 1px solid var(--border); border-radius: 20px; padding: 40px; text-align: center; text-decoration: none; color: white; transition: 0.4s; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .com-card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 15px 30px rgba(153, 69, 255, 0.15); }
         .com-card i { font-size: 2.5rem; color: var(--secondary); margin-bottom: 15px; }
-
         .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(12px); opacity: 0; transition: opacity 0.3s ease; }
         .popup-overlay.active { display: flex; opacity: 1; }
         .popup-content { background: #0f0f0f; padding: 40px; border-radius: 24px; border: 1px solid var(--primary); max-width: 500px; text-align: center; transform: scale(0.8); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
-        
         footer { padding: 40px 4%; border-top: 1px solid var(--border); text-align: center; background: rgba(0,0,0,0.5); margin-top: 50px; }
-
         @media (max-width: 850px) { .nav-links { display: none; } .mint-container { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -168,11 +133,11 @@
                 <p>Join the LEAP Tarsier elite. 1,000 unique collectibles on Solana.</p>
                 <div class="mint-dashboard">
                     <div class="mint-stats">
-                        <div class="mint-stat-item"><small>PRICE</small><span>0.1 SOL</span></div>
-                        <div class="mint-stat-item"><small>SUPPLY</small><span id="mintCount">0 / 1000</span></div>
+                        <div class="mint-stat-item"><small>PRICE</small><span>0.05 SOL</span></div>
+                        <div class="mint-stat-item"><small>SUPPLY</small><span id="mintCount">-- / --</span></div>
                         <div class="mint-stat-item"><small>STATUS</small><span id="mintStatus" style="color: var(--secondary)">LIVE</span></div>
                     </div>
-                    <button id="mintButton" class="mint-btn">CONNECT WALLET</button>
+                    <button id="mintButton" class="mint-btn" onclick="handleMintAction()">CONNECT WALLET</button>
                     <p id="walletStatus" style="font-size: 0.7rem; margin-top: 10px; color: #888; text-align: center; font-family: 'Orbitron';"></p>
                 </div>
             </div>
@@ -219,82 +184,81 @@
 </div>
 
 <script>
-    // --- CANDY MACHINE CONFIGURATION ---
+    // --- মেইন কনফিগারেশন ---
     const CANDY_MACHINE_ID = "6Eqhz5ZC1ENXTfBDgkSEyyC6DTASvXz8DR7iNRQwxf8N";
-    const NETWORK = "devnet";
-    const RPC_ENDPOINT = "https://api.devnet.solana.com";
+    const DEVNET_RPC = "https://api.devnet.solana.com";
 
-    let walletAddress = null;
+    // Metaplex Umi Initialize
+    const { createUmi } = window['@metaplex-foundation/umi-bundle-defaults'];
+    const { mplCandyMachine, fetchCandyMachine, mintV2 } = window['@metaplex-foundation/mpl-candy-machine'];
+    const { publicKey, generateSigner } = window['@metaplex-foundation/umi'];
 
-    // --- MINTING LOGIC ---
-    async function initMint() {
-        const { Connection, PublicKey } = solanaWeb3;
-        const { Metaplex, walletAdapterIdentity } = window.metaplex;
-        
-        const connection = new Connection(RPC_ENDPOINT);
-        const mx = Metaplex.make(connection);
+    const umi = createUmi(DEVNET_RPC).use(mplCandyMachine());
 
-        const mintBtn = document.getElementById('mintButton');
-        const walletStatus = document.getElementById('walletStatus');
-        const mintCountLabel = document.getElementById('mintCount');
-
-        // Fetch Mint Stats
+    // ১. ক্যান্ডি মেশিন থেকে লাইভ ডেটা লোড (Supply counter)
+    async function loadMintStats() {
         try {
-            const candyMachine = await mx.candyMachines().findByAddress({ address: new PublicKey(CANDY_MACHINE_ID) });
-            const minted = candyMachine.itemsMinted.toString();
-            const total = candyMachine.itemsAvailable.toString();
-            mintCountLabel.innerText = `${minted} / ${total}`;
-        } catch (e) { console.log("Stats error:", e); }
-
-        // Connect Wallet Function
-        async function connect() {
-            if (window.solana) {
-                try {
-                    const resp = await window.solana.connect();
-                    walletAddress = resp.publicKey.toString();
-                    walletStatus.innerText = `Connected: ${walletAddress.slice(0,4)}...${walletAddress.slice(-4)}`;
-                    mintBtn.innerText = "MINT NFT";
-                } catch (err) { console.error(err); }
-            } else {
-                alert("Phantom Wallet not found! Please install it.");
-                window.open("https://phantom.app/", "_blank");
-            }
+            const cmAddress = publicKey(CANDY_MACHINE_ID);
+            const candyMachine = await fetchCandyMachine(umi, cmAddress);
+            document.getElementById('mintCount').innerText = `${candyMachine.itemsRedeemed} / ${candyMachine.data.itemsAvailable}`;
+        } catch (e) {
+            console.error("CM Load Error:", e);
+            document.getElementById('mintCount').innerText = "LIVE";
         }
-
-        // Mint Function
-        async function mint() {
-            if (!walletAddress) return connect();
-            
-            mintBtn.innerText = "MINTING...";
-            mintBtn.disabled = true;
-
-            try {
-                mx.use(walletAdapterIdentity(window.solana));
-                const candyMachine = await mx.candyMachines().findByAddress({ address: new PublicKey(CANDY_MACHINE_ID) });
-                
-                const { nft } = await mx.candyMachines().mint({
-                    candyMachine,
-                    collectionUpdateAuthority: candyMachine.authorityAddress,
-                });
-
-                alert("Success! NFT Minted: " + nft.name);
-                location.reload(); // Refresh to update count
-            } catch (err) {
-                console.error(err);
-                alert("Mint failed! Make sure you have enough Devnet SOL.");
-            } finally {
-                mintBtn.innerText = "MINT NFT";
-                mintBtn.disabled = false;
-            }
-        }
-
-        mintBtn.onclick = () => {
-            if (!walletAddress) connect();
-            else mint();
-        };
     }
 
-    // --- ADVANCED NAVIGATION ---
+    // ২. প্রফেশনাল মিন্টিং ও ওয়ালেট কানেকশন
+    async function handleMintAction() {
+        const btn = document.getElementById('mintButton');
+        const status = document.getElementById('walletStatus');
+
+        // ওয়ালেট চেক
+        if (!window.solana) {
+            alert("Solana wallet not found! Please use Phantom or Solflare browser.");
+            return;
+        }
+
+        try {
+            // ওয়ালেট কানেক্ট
+            const wallet = await window.solana.connect();
+            const userPubKey = wallet.publicKey.toString();
+            status.innerText = "Connected: " + userPubKey.slice(0, 6) + "..." + userPubKey.slice(-4);
+            
+            // যদি বাটন টেক্সট কানেক্ট থাকে, তবে মিন্ট অপশন দিবে
+            if (btn.innerText === "CONNECT WALLET") {
+                btn.innerText = "MINT NOW (0.05 SOL)";
+                return;
+            }
+
+            // মিন্টিং শুরু
+            btn.disabled = true;
+            btn.innerText = "MINTING...";
+
+            const cmAddress = publicKey(CANDY_MACHINE_ID);
+            const candyMachine = await fetchCandyMachine(umi, cmAddress);
+            const nftMint = generateSigner(umi);
+
+            // ট্রানজাকশন পাঠানো
+            await mintV2(umi, {
+                candyMachine: candyMachine.publicKey,
+                nftMint,
+                collectionMint: candyMachine.collectionMint,
+                collectionUpdateAuthority: candyMachine.authority,
+            }).sendAndConfirm(umi);
+
+            alert("Mint Successful! 🎉 Check your wallet.");
+            btn.innerText = "MINT AGAIN";
+            loadMintStats(); // কাউন্টার আপডেট
+        } catch (err) {
+            console.error("Minting Error:", err);
+            alert("Transaction Failed! Check Devnet SOL balance.");
+            btn.innerText = "RETRY MINT";
+        } finally {
+            btn.disabled = false;
+        }
+    }
+
+    // --- অন্যান্য সব ফাংশন আপনার কোড থেকে হুবহু রাখা হয়েছে ---
     function navigateSection(id, urlLabel) {
         const element = document.getElementById(id);
         if (element) {
@@ -302,16 +266,16 @@
             const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
             const offsetPosition = elementPosition - offset;
             window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-            if (history.pushState) { history.pushState(null, null, urlLabel); }
+            if (history.pushState) history.pushState(null, null, urlLabel);
         }
     }
 
     document.querySelector('.logo-box').addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        if (history.pushState) { history.pushState(null, null, window.location.origin + window.location.pathname); }
+        if (history.pushState) history.pushState(null, null, window.location.origin + window.location.pathname);
     });
 
-    // --- PARTICLE BACKGROUND ---
+    // Particle Background
     const canvas = document.getElementById('proCanvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -329,8 +293,7 @@
         }
         update() {
             if (mouse.x !== null) {
-                let dx = mouse.x - this.x;
-                let dy = mouse.y - this.y;
+                let dx = mouse.x - this.x; let dy = mouse.y - this.y;
                 let dist = Math.sqrt(dx*dx + dy*dy);
                 if (dist < mouse.radius) { this.x -= dx/25; this.y -= dy/25; }
             }
@@ -340,22 +303,16 @@
         }
         draw() { ctx.fillStyle = '#9945FF'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
     }
-    function init() {
-        particles = [];
-        let count = (canvas.width * canvas.height) / 4000; 
-        for (let i = 0; i < count; i++) { particles.push(new Particle()); }
-    }
+    function init() { particles = []; let count = (canvas.width * canvas.height) / 4000; for (let i = 0; i < count; i++) { particles.push(new Particle()); } }
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (let i = 0; i < particles.length; i++) {
             particles[i].update(); particles[i].draw();
             for (let j = i; j < particles.length; j++) {
-                let dx = particles[i].x - particles[j].x;
-                let dy = particles[i].y - particles[j].y;
+                let dx = particles[i].x - particles[j].x; let dy = particles[i].y - particles[j].y;
                 let dist = Math.sqrt(dx*dx + dy*dy);
                 if (dist < 170) {
-                    ctx.beginPath();
-                    ctx.strokeStyle = `rgba(20, 241, 149, ${0.8 - dist/170})`;
+                    ctx.beginPath(); ctx.strokeStyle = `rgba(20, 241, 149, ${0.8 - dist/170})`;
                     ctx.lineWidth = 1; ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
                 }
@@ -387,11 +344,7 @@
 
     function copyCA() { navigator.clipboard.writeText("a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump"); alert("Contract Address Copied!"); }
 
-    // Initialize All
-    resize(); 
-    animate(); 
-    fetchTokenData();
-    initMint(); // Start Minting Logic
+    resize(); animate(); fetchTokenData(); loadMintStats();
     setInterval(fetchTokenData, 10000);
 </script>
 
