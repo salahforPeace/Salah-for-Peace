@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LEAP Tarsier | Ecosystem</title>
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@300;500;800&display=swap" rel="stylesheet">
     
@@ -32,7 +31,7 @@
             padding: 15px 4%; background: rgba(0,0,0,0.9); backdrop-filter: blur(20px);
             position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border);
         }
-        .logo-box { display: flex; align-items: center; gap: 12px; font-family: 'Orbitron'; font-weight: 900; cursor: pointer;}
+        .logo-box { display: flex; align-items: center; gap: 12px; font-family: 'Orbitron'; font-weight: 900; }
         .logo-img { width: 35px; height: 35px; border-radius: 8px; border: 1px solid var(--primary); }
 
         .nav-links { display: flex; gap: 25px; align-items: center; }
@@ -48,6 +47,11 @@
             border: 1px solid rgba(255,255,255,0.2);
             animation: pulseBtn 2s infinite;
         }
+        @keyframes pulseBtn {
+            0% { box-shadow: 0 0 0 0 rgba(153, 69, 255, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(153, 69, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(153, 69, 255, 0); }
+        }
 
         header { padding: 80px 4% 60px; max-width: 1600px; margin: 0 auto; text-align: left; }
         .solana-tag { font-size: 0.7rem; color: var(--secondary); font-family: 'Orbitron'; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; opacity: 0.9; }
@@ -57,26 +61,59 @@
         .hero-action-card {
             background: var(--glass); border: 2px solid var(--border); border-radius: 24px; padding: 40px;
             display: flex; flex-direction: column; align-items: center; max-width: 550px; margin: 0 auto;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+        .hero-action-card:hover { transform: scale(1.02); border-color: var(--primary); }
 
         .stats-display { display: flex; gap: 20px; width: 100%; margin-bottom: 30px; }
         .stat-box { flex: 1; padding: 20px; background: rgba(255,255,255,0.03); border-radius: 16px; border: 1px solid var(--border); text-align: center; }
+        .stat-box span { display: block; font-family: 'Orbitron'; font-size: 0.7rem; color: #888; letter-spacing: 1px; margin-bottom: 8px; }
         .stat-box b { font-size: 1.2rem; color: var(--secondary); font-family: 'Orbitron'; display: block; }
+
+        .live-dot { height: 8px; width: 8px; background-color: #ff4b4b; border-radius: 50%; display: inline-block; margin-left: 5px; animation: tipTip 1s infinite; }
 
         .btn-buy-hero {
             background: linear-gradient(135deg, var(--primary), #7000ff); color: white; width: 100%; padding: 22px; border-radius: 14px;
-            font-family: 'Orbitron'; font-weight: 900; font-size: 1.2rem; text-decoration: none; text-align: center; transition: 0.4s;
+            font-family: 'Orbitron'; font-weight: 900; font-size: 1.2rem; text-decoration: none; text-align: center; transition: 0.4s; animation: tapMe 2s infinite ease-in-out;
         }
+        @keyframes tapMe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 15px 35px rgba(153, 69, 255, 0.6); } }
 
-        .mint-container { max-width: 900px; margin: 40px auto 0; background: var(--glass); border: 2px solid var(--border); border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: 1fr 1.2fr; }
+        .ca-box-hero { margin-top: 25px; padding: 12px 20px; background: rgba(255,255,255,0.05); border-radius: 10px; border: 1px dotted var(--border); font-family: monospace; color: var(--secondary); font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 12px; }
+
+        .mint-container { max-width: 900px; margin: 40px auto 0; background: var(--glass); border: 2px solid var(--border); border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: 1fr 1.2fr; transition: 0.4s; }
+        .mint-container:hover { border-color: var(--secondary); transform: translateY(-5px); }
+        .mint-visual { padding: 30px; background: rgba(255,255,255,0.02); display: flex; align-items: center; border-right: 1px solid var(--border); }
+        .mint-img { width: 100%; border-radius: 15px; border: 1px solid var(--primary); }
         .mint-info { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
-        .mint-btn { width: 100%; padding: 15px; border: none; border-radius: 10px; background: linear-gradient(90deg, var(--secondary), #00d1d1); color: #000; font-family: 'Orbitron'; font-weight: 900; cursor: pointer; font-size: 1rem; }
+        .mint-info h3 { font-family: 'Orbitron'; color: var(--secondary); margin-bottom: 15px; font-size: 1.5rem; }
         
-        /* Popup & Utility */
+        .mint-dashboard { background: rgba(0,0,0,0.3); border: 1px solid var(--border); padding: 20px; border-radius: 15px; margin-top: 20px; }
+        .mint-stats { display: flex; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
+        .mint-stat-item { text-align: center; }
+        .mint-stat-item small { display: block; font-size: 0.65rem; color: #888; font-family: 'Orbitron'; margin-bottom: 5px; }
+        .mint-stat-item span { font-weight: 800; font-family: 'Orbitron'; color: #fff; }
+
+        .mint-btn { width: 100%; padding: 15px; border: none; border-radius: 10px; background: linear-gradient(90deg, var(--secondary), #00d1d1); color: #000; font-family: 'Orbitron'; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 1rem; }
+        .mint-btn:disabled { background: #555; cursor: not-allowed; }
+
+        section { padding: 80px 4%; max-width: 1600px; margin: 0 auto; }
+        .sec-title { font-family: 'Orbitron'; font-size: 2.2rem; margin-bottom: 50px; text-align: center; }
+        .partner-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; }
+        .partner-card { background: #0a0a0a; border: 1px solid var(--border); border-radius: 16px; height: 120px; display: flex; justify-content: center; align-items: center; transition: 0.4s; text-decoration: none; }
+        .partner-card:hover { transform: translateY(-5px); border-color: var(--secondary); }
+        .partner-card img { width: 110px; filter: grayscale(1) opacity(0.7); transition: 0.4s; }
+        .partner-card:hover img { filter: grayscale(0) opacity(1); }
+
+        .community-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .com-card { background: #0a0a0a; border: 1px solid var(--border); border-radius: 20px; padding: 40px; text-align: center; text-decoration: none; color: white; transition: 0.4s; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .com-card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 15px 30px rgba(153, 69, 255, 0.15); }
+        .com-card i { font-size: 2.5rem; color: var(--secondary); margin-bottom: 15px; }
+
         .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(12px); opacity: 0; transition: opacity 0.3s ease; }
         .popup-overlay.active { display: flex; opacity: 1; }
-        .popup-content { background: #0f0f0f; padding: 40px; border-radius: 24px; border: 1px solid var(--primary); max-width: 500px; text-align: center; }
+        .popup-content { background: #0f0f0f; padding: 40px; border-radius: 24px; border: 1px solid var(--primary); max-width: 500px; text-align: center; transform: scale(0.8); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        
+        footer { padding: 40px 4%; border-top: 1px solid var(--border); text-align: center; background: rgba(0,0,0,0.5); margin-top: 50px; }
 
         @media (max-width: 850px) { .nav-links { display: none; } .mint-container { grid-template-columns: 1fr; } }
     </style>
@@ -87,144 +124,275 @@
 
 <div class="wrapper">
     <nav>
-        <div class="logo-box" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <div class="logo-box" style="cursor: pointer;">
             <img src="nft.jpg" class="logo-img" alt="Logo">
             <div>LEAP <span style="color: var(--secondary);">TARSIER</span></div>
         </div>
         <div class="nav-links">
-            <a onclick="document.getElementById('nft-section').scrollIntoView()">MINT NFT</a>
+            <a onclick="navigateSection('nft-section', 'mint-nft')">MINT NFT</a>
+            <a onclick="navigateSection('partners', 'partners')">PARTNERS</a>
             <a href="https://dexscreener.com/solana/a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump" target="_blank">DEXSCREENER</a> 
-            <a onclick="document.getElementById('buy-section').scrollIntoView()" class="nav-buy-btn">BUY TOKEN</a>
+            <a onclick="navigateSection('community', 'community')">COMMUNITY</a>
+            <a onclick="navigateSection('buy-section', 'buy-token')" class="nav-buy-btn">BUY TOKEN</a>
         </div>
     </nav>
 
     <header>
-        <p class="solana-tag">Powered by Solana Blockchain</p>
+        <p class="solana-tag">This project is built on the Solana blockchain</p>
         <h1 class="headline">The Ultimate Unity of <br> <span class="grad-text">NFTs & Community.</span></h1>
         
         <div id="buy-section" class="hero-action-card">
             <div class="stats-display">
-                <div class="stat-box"><span>PRICE</span><b id="livePrice">$0.00...</b></div>
-                <div class="stat-box"><span>MARKET CAP</span><b id="liveMcap">LOADING...</b></div>
+                <div class="stat-box">
+                    <span>LIVE PRICE <div class="live-dot"></div></span>
+                    <b id="livePrice">$0.0000000000</b>
+                </div>
+                <div class="stat-box">
+                    <span>MARKET CAP</span>
+                    <b id="liveMcap">LOADING...</b>
+                </div>
             </div>
             <a href="https://pump.fun/coin/a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump" target="_blank" class="btn-buy-hero">BUY ON PUMP.FUN</a>
-            <p id="ca-text" style="margin-top:15px; font-size:0.7rem; color:var(--secondary); cursor:pointer" onclick="copyCA()">CA: a3W4q...wppump <i class="fa-regular fa-copy"></i></p>
+            <div class="ca-box-hero" onclick="copyCA()">
+                <span id="caFull">CA: a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump</span>
+                <i class="fa-regular fa-copy"></i>
+            </div>
         </div>
 
         <div id="nft-section" class="mint-container">
-            <div style="padding:30px;"><img src="nft.jpg" style="width:100%; border-radius:15px; border:1px solid var(--primary)"></div>
+            <div class="mint-visual">
+                <img src="nft.jpg" class="mint-img" alt="NFT Preview">
+            </div>
             <div class="mint-info">
                 <h3>MINT YOUR TARSIER</h3>
-                <p style="margin-bottom:20px; font-size:0.9rem; color:#aaa">0.05 SOL • 1,000 Total Supply</p>
-                <button id="mintButton" class="mint-btn" onclick="handleWalletAction()">CONNECT WALLET</button>
-                <p id="statusLabel" style="font-size: 0.7rem; margin-top: 10px; color: var(--secondary); text-align: center; font-family: 'Orbitron';"></p>
+                <p>Join the LEAP Tarsier elite. 1,000 unique collectibles on Solana.</p>
+                <div class="mint-dashboard">
+                    <div class="mint-stats">
+                        <div class="mint-stat-item"><small>PRICE</small><span>0.1 SOL</span></div>
+                        <div class="mint-stat-item"><small>SUPPLY</small><span id="mintCount">0 / 1000</span></div>
+                        <div class="mint-stat-item"><small>STATUS</small><span id="mintStatus" style="color: var(--secondary)">LIVE</span></div>
+                    </div>
+                    <button id="mintButton" class="mint-btn">CONNECT WALLET</button>
+                    <p id="walletStatus" style="font-size: 0.7rem; margin-top: 10px; color: #888; text-align: center; font-family: 'Orbitron';"></p>
+                </div>
             </div>
         </div>
     </header>
+
+    <section id="partners">
+        <h2 class="sec-title">Strategic Partners</h2>
+        <div class="partner-grid">
+            <a href="https://solana.com" target="_blank" class="partner-card"><img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="Solana"></a>
+            <a href="https://raydium.io" target="_blank" class="partner-card"><img src="https://cryptologos.cc/logos/raydium-ray-logo.png" alt="Raydium"></a>
+            <a href="https://www.orca.so" target="_blank" class="partner-card"><img src="https://cryptologos.cc/logos/orca-orca-logo.png" alt="Orca"></a>
+            <a href="https://jup.ag" target="_blank" class="partner-card"><img src="https://cryptologos.cc/logos/jupiter-ag-jup-logo.png" alt="Jupiter"></a>
+            <a href="https://dexscreener.com" target="_blank" class="partner-card"><img src="https://dexscreener.com/favicon.png" alt="Dexscreener" style="width: 50px;"></a>
+            <a href="https://pump.fun" target="_blank" class="partner-card"><img src="https://pump.fun/logo.png" alt="Pump.fun" style="width: 60px;"></a>
+        </div>
+    </section>
+
+    <section id="community">
+        <div class="community-grid">
+            <a href="https://x.com/LPTAR_Official" target="_blank" class="com-card">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" style="color: var(--secondary); margin-bottom: 15px;">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                </svg>
+                <h3>Twitter</h3>
+            </a>
+            <a href="https://t.me/tarsierleapg" target="_blank" class="com-card"><i class="fa-brands fa-telegram"></i><h3>Telegram</h3></a>
+            <div class="com-card" style="cursor:pointer;" onclick="togglePopup(true)"><i class="fa-solid fa-file-contract"></i><h3>Whitepaper</h3></div>
+        </div>
+    </section>
+
+    <footer>
+        <p style="color: #444; font-size: 0.75rem; letter-spacing: 2px;">© 2026 LEAP TARSIER • BUILT ON SOLANA</p>
+    </footer>
+</div>
+
+<div class="popup-overlay" id="wpPopup" onclick="togglePopup(false)">
+    <div class="popup-content" onclick="event.stopPropagation()">
+        <i class="fa-solid fa-scroll" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+        <h2 style="font-family: Orbitron; margin-bottom: 15px; color: #fff;">WHITEPAPER</h2>
+        <p style="color: #aaa; line-height: 1.7; font-size: 0.95rem;">Tarsier Ecosystem bridges the gap between NFT holders and DeFi rewards. Holders receive 20% of platform transaction fees and exclusive voting rights in the DAO.</p>
+        <button onclick="togglePopup(false)" style="margin-top: 30px; padding: 12px 40px; background: var(--primary); border: none; color: white; border-radius: 10px; font-weight: 800; cursor: pointer; font-family: Orbitron;">CLOSE</button>
+    </div>
 </div>
 
 <script>
-    // --- CONFIGURATION ---
-    const CANDY_MACHINE_ID = "YOUR_CANDY_MACHINE_ID_HERE"; // আপনার ক্যান্ডি মেশিন আইডি এখানে দিন
-    const RPC_URL = "https://api.mainnet-beta.solana.com";
-    const TOKEN_CA = "a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump";
+    // --- CANDY MACHINE CONFIGURATION ---
+    const CANDY_MACHINE_ID = "6Eqhz5ZC1ENXTfBDgkSEyyC6DTASvXz8DR7iNRQwxf8N";
+    const NETWORK = "devnet";
+    const RPC_ENDPOINT = "https://api.devnet.solana.com";
 
     let walletAddress = null;
-    const connection = new solanaWeb3.Connection(RPC_URL);
 
-    // --- WALLET LOGIC ---
-    async function handleWalletAction() {
-        const btn = document.getElementById('mintButton');
-        const status = document.getElementById('statusLabel');
+    // --- MINTING LOGIC ---
+    async function initMint() {
+        const { Connection, PublicKey } = solanaWeb3;
+        const { Metaplex, walletAdapterIdentity } = window.metaplex;
+        
+        const connection = new Connection(RPC_ENDPOINT);
+        const mx = Metaplex.make(connection);
 
-        // Check for Mobile or Desktop Wallet
-        const provider = window.phantom?.solana || window.solana;
+        const mintBtn = document.getElementById('mintButton');
+        const walletStatus = document.getElementById('walletStatus');
+        const mintCountLabel = document.getElementById('mintCount');
 
-        if (!provider) {
-            if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                // Deep link for Phantom Mobile
-                window.location.href = `https://phantom.app/ul/browse/${window.location.host}`;
+        // Fetch Mint Stats
+        try {
+            const candyMachine = await mx.candyMachines().findByAddress({ address: new PublicKey(CANDY_MACHINE_ID) });
+            const minted = candyMachine.itemsMinted.toString();
+            const total = candyMachine.itemsAvailable.toString();
+            mintCountLabel.innerText = `${minted} / ${total}`;
+        } catch (e) { console.log("Stats error:", e); }
+
+        // Connect Wallet Function
+        async function connect() {
+            if (window.solana) {
+                try {
+                    const resp = await window.solana.connect();
+                    walletAddress = resp.publicKey.toString();
+                    walletStatus.innerText = `Connected: ${walletAddress.slice(0,4)}...${walletAddress.slice(-4)}`;
+                    mintBtn.innerText = "MINT NFT";
+                } catch (err) { console.error(err); }
             } else {
-                alert("Please install Phantom Wallet extension!");
+                alert("Phantom Wallet not found! Please install it.");
                 window.open("https://phantom.app/", "_blank");
             }
-            return;
         }
 
-        try {
-            const resp = await provider.connect();
-            walletAddress = resp.publicKey.toString();
-            btn.innerText = "MINT TARSIER (0.05 SOL)";
-            status.innerText = "Wallet Connected: " + walletAddress.slice(0, 6) + "...";
+        // Mint Function
+        async function mint() {
+            if (!walletAddress) return connect();
             
-            // Switch button to Minting function
-            btn.onclick = performMint;
-        } catch (err) {
-            console.error(err);
-            status.innerText = "Connection Failed";
+            mintBtn.innerText = "MINTING...";
+            mintBtn.disabled = true;
+
+            try {
+                mx.use(walletAdapterIdentity(window.solana));
+                const candyMachine = await mx.candyMachines().findByAddress({ address: new PublicKey(CANDY_MACHINE_ID) });
+                
+                const { nft } = await mx.candyMachines().mint({
+                    candyMachine,
+                    collectionUpdateAuthority: candyMachine.authorityAddress,
+                });
+
+                alert("Success! NFT Minted: " + nft.name);
+                location.reload(); // Refresh to update count
+            } catch (err) {
+                console.error(err);
+                alert("Mint failed! Make sure you have enough Devnet SOL.");
+            } finally {
+                mintBtn.innerText = "MINT NFT";
+                mintBtn.disabled = false;
+            }
+        }
+
+        mintBtn.onclick = () => {
+            if (!walletAddress) connect();
+            else mint();
+        };
+    }
+
+    // --- ADVANCED NAVIGATION ---
+    function navigateSection(id, urlLabel) {
+        const element = document.getElementById(id);
+        if (element) {
+            const offset = 80;
+            const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = elementPosition - offset;
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+            if (history.pushState) { history.pushState(null, null, urlLabel); }
         }
     }
 
-    async function performMint() {
-        const status = document.getElementById('statusLabel');
-        status.innerText = "Processing Mint... Please wait.";
-        
-        try {
-            // Metaplex initialized for Candy Machine V3
-            const metaplex = new window.metaplex.Metaplex(connection);
-            metaplex.use(window.metaplex.walletAdapterIdentity(window.solana));
+    document.querySelector('.logo-box').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (history.pushState) { history.pushState(null, null, window.location.origin + window.location.pathname); }
+    });
 
-            // Note: This requires the full Metaplex SDK logic. 
-            // For a simple web page, most developers use a 'Mint Link' from Launchpads
-            // OR a simple transaction for Beta launches:
-            
-            const transaction = new solanaWeb3.Transaction().add(
-                solanaWeb3.SystemProgram.transfer({
-                    fromPubkey: window.solana.publicKey,
-                    toPubkey: new solanaWeb3.PublicKey("YOUR_RECEIVE_WALLET_HERE"), // আপনার টাকা পাওয়ার ওয়ালেট
-                    lamports: 0.05 * solanaWeb3.LAMPORTS_PER_SOL,
-                })
-            );
-
-            const { signature } = await window.solana.signAndSendTransaction(transaction);
-            await connection.confirmTransaction(signature);
-            
-            status.innerText = "Mint Successful! Transaction: " + signature.slice(0,8);
-            alert("Success! Your Tarsier is being sent to your wallet.");
-        } catch (err) {
-            console.error(err);
-            status.innerText = "Minting Failed or Cancelled.";
+    // --- PARTICLE BACKGROUND ---
+    const canvas = document.getElementById('proCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const mouse = { x: null, y: null, radius: 150 };
+    window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
+    window.addEventListener('resize', resize);
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); }
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 1;
+            this.vx = (Math.random() - 0.5) * 1.5;
+            this.vy = (Math.random() - 0.5) * 1.5;
         }
+        update() {
+            if (mouse.x !== null) {
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < mouse.radius) { this.x -= dx/25; this.y -= dy/25; }
+            }
+            this.x += this.vx; this.y += this.vy;
+            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+        }
+        draw() { ctx.fillStyle = '#9945FF'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+    }
+    function init() {
+        particles = [];
+        let count = (canvas.width * canvas.height) / 4000; 
+        for (let i = 0; i < count; i++) { particles.push(new Particle()); }
+    }
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update(); particles[i].draw();
+            for (let j = i; j < particles.length; j++) {
+                let dx = particles[i].x - particles[j].x;
+                let dy = particles[i].y - particles[j].y;
+                let dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < 170) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = `rgba(20, 241, 149, ${0.8 - dist/170})`;
+                    ctx.lineWidth = 1; ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(animate);
     }
 
-    // --- PRICE FETCHING ---
-    async function fetchPrice() {
+    async function fetchTokenData() {
+        const ca = "a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump";
         try {
-            const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${TOKEN_CA}`);
+            const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${ca}`);
             const data = await res.json();
             if (data.pairs) {
                 const p = data.pairs[0];
-                document.getElementById('livePrice').innerText = `$${parseFloat(p.priceUsd).toFixed(8)}`;
-                document.getElementById('liveMcap').innerText = `$${(p.fdv / 1000).toFixed(2)}K`;
+                document.getElementById('livePrice').innerText = `$${parseFloat(p.priceUsd).toFixed(10)}`;
+                let mcap = p.fdv;
+                let formattedMcap = mcap >= 1000000 ? `$${(mcap / 1000000).toFixed(2)}M` : mcap >= 1000 ? `$${(mcap / 1000).toFixed(2)}K` : `$${mcap.toFixed(2)}`;
+                document.getElementById('liveMcap').innerText = formattedMcap;
             }
-        } catch (e) { console.log("Price fetch error"); }
+        } catch (e) { console.log(e) }
     }
 
-    // --- CANVAS ANIMATION ---
-    const canvas = document.getElementById('proCanvas');
-    const ctx = canvas.getContext('2d');
-    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    window.addEventListener('resize', resize);
-    resize();
-    // (Add your particle animation code here to keep it clean)
-
-    function copyCA() {
-        navigator.clipboard.writeText(TOKEN_CA);
-        alert("CA Copied!");
+    function togglePopup(show) {
+        const overlay = document.getElementById('wpPopup');
+        if (show) { overlay.style.display = 'flex'; setTimeout(() => overlay.classList.add('active'), 10); } 
+        else { overlay.classList.remove('active'); setTimeout(() => overlay.style.display = 'none', 300); }
     }
 
-    setInterval(fetchPrice, 10000);
-    fetchPrice();
+    function copyCA() { navigator.clipboard.writeText("a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump"); alert("Contract Address Copied!"); }
+
+    // Initialize All
+    resize(); 
+    animate(); 
+    fetchTokenData();
+    initMint(); // Start Minting Logic
+    setInterval(fetchTokenData, 10000);
 </script>
 
 </body>
