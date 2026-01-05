@@ -1,128 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Professional Solana NFT Mint</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEAP Tarsier | Ecosystem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@300;500;800&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
+    <script src="https://unpkg.com/@metaplex-foundation/umi-bundle-defaults@latest/dist/browser/index.iife.min.js"></script>
+    <script src="https://unpkg.com/@metaplex-foundation/mpl-candy-machine@latest/dist/browser/index.iife.min.js"></script>
 
-<!-- Solana -->
-<script src="https://unpkg.com/@solana/web3.js@1.95.3/lib/index.iife.js"></script>
+    <style>
+        :root {
+            --primary: #9945FF;
+            --secondary: #14F195;
+            --accent: #00E5FF;
+            --dark: #000000;
+            --glass: rgba(15, 15, 15, 0.98);
+            --border: rgba(255, 255, 255, 0.15);
+        }
 
-<!-- Wallet Adapter (PRO) -->
-<script src="https://unpkg.com/@solana/wallet-adapter-base@0.9.23/lib/index.iife.js"></script>
-<script src="https://unpkg.com/@solana/wallet-adapter-wallets@0.19.23/lib/index.iife.js"></script>
-<script src="https://unpkg.com/@solana/wallet-adapter-ui@0.9.23/lib/index.iife.js"></script>
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { background: var(--dark); color: white; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
 
-<!-- Metaplex -->
-<script src="https://unpkg.com/@metaplex-foundation/js@0.20.1/dist/index.umd.js"></script>
+        #proCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.6; }
+        .wrapper { position: relative; z-index: 10; }
 
-<link rel="stylesheet"
- href="https://unpkg.com/@solana/wallet-adapter-ui@0.9.23/styles.css"/>
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 4%; background: rgba(0,0,0,0.9); backdrop-filter: blur(20px);
+            position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border);
+        }
+        .logo-box { display: flex; align-items: center; gap: 12px; font-family: 'Orbitron'; font-weight: 900; }
+        .logo-img { width: 35px; height: 35px; border-radius: 8px; border: 1px solid var(--primary); }
 
-<style>
-body{
-  background:#0b0b0b;
-  color:#fff;
-  font-family:Arial;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-}
-.box{
-  background:#151515;
-  padding:30px;
-  border-radius:12px;
-  width:90%;
-  max-width:420px;
-  text-align:center;
-}
-button{
-  width:100%;
-  padding:12px;
-  margin-top:10px;
-  border:none;
-  border-radius:8px;
-  background:#7c3aed;
-  color:#fff;
-  font-size:16px;
-}
-</style>
+        .nav-links { display: flex; gap: 25px; align-items: center; }
+        .nav-links a { text-decoration: none; color: #bbb; font-size: 0.75rem; font-weight: 800; font-family: 'Orbitron'; transition: 0.3s; letter-spacing: 1px; cursor: pointer; }
+        .nav-links a:hover { color: var(--secondary); }
+        .nav-buy-btn { background: linear-gradient(90deg, var(--primary), #7000ff); padding: 8px 18px; border-radius: 8px; color: white !important; border: 1px solid rgba(255,255,255,0.2); animation: pulseBtn 2s infinite; }
+
+        header { padding: 80px 4% 60px; max-width: 1600px; margin: 0 auto; text-align: left; }
+        .solana-tag { font-size: 0.7rem; color: var(--secondary); font-family: 'Orbitron'; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; opacity: 0.9; }
+        .headline { font-family: 'Orbitron'; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 50px; }
+        .grad-text { background: linear-gradient(90deg, #fff, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .hero-action-card { background: var(--glass); border: 2px solid var(--border); border-radius: 24px; padding: 40px; display: flex; flex-direction: column; align-items: center; max-width: 550px; margin: 0 auto; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
+        .stats-display { display: flex; gap: 20px; width: 100%; margin-bottom: 30px; }
+        .stat-box { flex: 1; padding: 20px; background: rgba(255,255,255,0.03); border-radius: 16px; border: 1px solid var(--border); text-align: center; }
+        .stat-box b { font-size: 1.2rem; color: var(--secondary); font-family: 'Orbitron'; display: block; }
+
+        .mint-container { max-width: 900px; margin: 40px auto 0; background: var(--glass); border: 2px solid var(--border); border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: 1fr 1.2fr; }
+        .mint-visual { padding: 30px; background: rgba(255,255,255,0.02); display: flex; align-items: center; border-right: 1px solid var(--border); }
+        .mint-img { width: 100%; border-radius: 15px; border: 1px solid var(--primary); }
+        .mint-info { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+        .mint-info h3 { font-family: 'Orbitron'; color: var(--secondary); margin-bottom: 15px; font-size: 1.5rem; }
+        .mint-dashboard { background: rgba(0,0,0,0.3); border: 1px solid var(--border); padding: 20px; border-radius: 15px; margin-top: 20px; }
+        .mint-stats { display: flex; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
+        .mint-btn { width: 100%; padding: 15px; border: none; border-radius: 10px; background: linear-gradient(90deg, var(--secondary), #00d1d1); color: #000; font-family: 'Orbitron'; font-weight: 900; cursor: pointer; transition: 0.3s; }
+        
+        section { padding: 80px 4%; max-width: 1600px; margin: 0 auto; }
+        .sec-title { font-family: 'Orbitron'; font-size: 2.2rem; margin-bottom: 50px; text-align: center; }
+        .partner-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; }
+        .partner-card { background: #0a0a0a; border: 1px solid var(--border); border-radius: 16px; height: 120px; display: flex; justify-content: center; align-items: center; }
+        .partner-card img { width: 110px; filter: grayscale(1) opacity(0.7); }
+
+        .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(12px); opacity: 0; transition: opacity 0.3s ease; }
+        .popup-overlay.active { display: flex; opacity: 1; }
+        .popup-content { background: #0f0f0f; padding: 40px; border-radius: 24px; border: 1px solid var(--primary); max-width: 500px; text-align: center; }
+
+        footer { padding: 40px 4%; border-top: 1px solid var(--border); text-align: center; background: rgba(0,0,0,0.5); margin-top: 50px; }
+        @media (max-width: 850px) { .nav-links { display: none; } .mint-container { grid-template-columns: 1fr; } }
+    </style>
 </head>
-
 <body>
 
-<div class="box">
-  <h2>🚀 NFT Mint (Devnet)</h2>
+<canvas id="proCanvas"></canvas>
 
-  <div id="wallet-button"></div>
+<div class="wrapper">
+    <nav>
+        <div class="logo-box">
+            <img src="nft.jpg" class="logo-img" alt="Logo">
+            <div>LEAP <span style="color: var(--secondary);">TARSIER</span></div>
+        </div>
+        <div class="nav-links">
+            <a onclick="navigateSection('nft-section')">MINT NFT</a>
+            <a onclick="navigateSection('partners')">PARTNERS</a>
+            <a href="https://dexscreener.com/solana/a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump" target="_blank">DEXSCREENER</a> 
+            <a onclick="navigateSection('community')">COMMUNITY</a>
+            <a onclick="navigateSection('buy-section')" class="nav-buy-btn">BUY TOKEN</a>
+        </div>
+    </nav>
 
-  <button onclick="mintNFT()">Mint NFT</button>
-  <p id="status"></p>
+    <header>
+        <p class="solana-tag">Built on Solana Blockchain</p>
+        <h1 class="headline">The Ultimate Unity of <br> <span class="grad-text">NFTs & Community.</span></h1>
+        
+        <div id="buy-section" class="hero-action-card">
+            <div class="stats-display">
+                <div class="stat-box"><span>LIVE PRICE</span><b id="livePrice">$0.00...</b></div>
+                <div class="stat-box"><span>MARKET CAP</span><b id="liveMcap">LOADING...</b></div>
+            </div>
+            <a href="https://pump.fun/coin/a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump" target="_blank" class="nav-buy-btn" style="width: 100%; text-align: center; padding: 20px; font-family: Orbitron;">BUY ON PUMP.FUN</a>
+        </div>
+
+        <div id="nft-section" class="mint-container">
+            <div class="mint-visual"><img src="nft.jpg" class="mint-img" alt="NFT"></div>
+            <div class="mint-info">
+                <h3>MINT YOUR TARSIER</h3>
+                <div class="mint-dashboard">
+                    <div class="mint-stats">
+                        <div class="mint-stat-item"><small>PRICE</small><span>0.05 SOL</span></div>
+                        <div class="mint-stat-item"><small>SUPPLY</small><span id="mintCount">--/1000</span></div>
+                    </div>
+                    <button id="mintButton" class="mint-btn" onclick="connectAndMint()">CONNECT WALLET</button>
+                    <p id="walletStatus" style="font-size: 0.7rem; margin-top: 10px; color: #888; text-align: center; font-family: Orbitron;"></p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="partners">
+        <h2 class="sec-title">Strategic Partners</h2>
+        <div class="partner-grid">
+            <div class="partner-card"><img src="https://cryptologos.cc/logos/solana-sol-logo.png"></div>
+            <div class="partner-card"><img src="https://cryptologos.cc/logos/raydium-ray-logo.png"></div>
+        </div>
+    </section>
+
+    <section id="community">
+        <div style="display: flex; gap: 20px; justify-content: center;">
+            <a href="https://x.com/LPTAR_Official" target="_blank" class="nav-buy-btn">TWITTER</a>
+            <a href="https://t.me/tarsierleapg" target="_blank" class="nav-buy-btn">TELEGRAM</a>
+        </div>
+    </section>
 </div>
 
 <script>
-const { Connection, clusterApiUrl, PublicKey } = solanaWeb3;
-const { Metaplex, walletAdapterIdentity } = metaplex;
-const { PhantomWalletAdapter, SolflareWalletAdapter } =
-      solanaWalletAdapterWallets;
+    // --- 1. PARTICLE BG (অক্ষুণ্ণ রাখা হয়েছে) ---
+    const canvas = document.getElementById('proCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); }
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.vx = (Math.random() - 0.5);
+            this.vy = (Math.random() - 0.5);
+        }
+        update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > canvas.width) this.vx *= -1; if (this.y < 0 || this.y > canvas.height) this.vy *= -1; }
+        draw() { ctx.fillStyle = '#9945FF'; ctx.beginPath(); ctx.arc(this.x, this.y, 2, 0, Math.PI * 2); ctx.fill(); }
+    }
+    function init() { particles = []; for (let i = 0; i < 100; i++) particles.push(new Particle()); }
+    function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+    window.addEventListener('resize', resize);
+    resize(); animate();
 
-// DEVNET
-const connection = new Connection(clusterApiUrl("devnet"));
+    // --- 2. SOLANA MINTING LOGIC (মেইন ফিক্স) ---
+    const CM_ID = "6Eqhz5ZC1ENXTfBDgkSEyyC6DTASvXz8DR7iNRQwxf8N";
+    
+    async function connectAndMint() {
+        const btn = document.getElementById('mintButton');
+        const status = document.getElementById('walletStatus');
 
-// Candy Machine ID
-const CANDY_MACHINE_ID = new PublicKey(
- "6Eqhz5ZC1ENXTfBDgkSEyyC6DTASvXz8DR7iNRQwxf8N"
-);
+        // চেক ওয়ালেট
+        const getProvider = () => {
+            if ('solana' in window) {
+                const provider = window.solana;
+                if (provider.isPhantom) return provider;
+            }
+            window.open('https://phantom.app/', '_blank');
+        };
 
-// Wallet Adapter
-const wallet = new solanaWalletAdapterWallets.PhantomWalletAdapter();
+        const provider = getProvider();
 
-const walletButton =
- new solanaWalletAdapterUi.WalletMultiButton({
-   wallets: [wallet]
- });
+        try {
+            // কানেক্ট ওয়ালেট
+            const resp = await provider.connect();
+            const walletAddr = resp.publicKey.toString();
+            status.innerText = "Connected: " + walletAddr.slice(0, 4) + "..." + walletAddr.slice(-4);
+            
+            if(btn.innerText === "CONNECT WALLET") {
+                btn.innerText = "MINT NFT (0.05 SOL)";
+                return;
+            }
 
-document
-  .getElementById("wallet-button")
-  .appendChild(walletButton);
+            // মিন্টিং প্রসেস
+            btn.innerText = "PROCESSING...";
+            btn.disabled = true;
 
-let metaplex;
+            // Metaplex Umi সেটআপ
+            const { createUmi } = window['@metaplex-foundation/umi-bundle-defaults'];
+            const { mplCandyMachine, fetchCandyMachine, mintV2 } = window['@metaplex-foundation/mpl-candy-machine'];
+            const { publicKey, generateSigner } = window['@metaplex-foundation/umi'];
 
-wallet.on("connect", () => {
-  metaplex = Metaplex.make(connection)
-    .use(walletAdapterIdentity(wallet));
+            const umi = createUmi("https://api.devnet.solana.com").use(mplCandyMachine());
+            
+            // ওয়ালেটকে Umi-র সাথে সিঙ্ক করা
+            umi.use({
+                install(umi) { umi.identity = { publicKey: publicKey(walletAddr), signTransaction: provider.signTransaction, signAllTransactions: provider.signAllTransactions }; }
+            });
 
-  document.getElementById("status").innerText =
-    "✅ Wallet connected";
-});
+            const candyMachine = await fetchCandyMachine(umi, publicKey(CM_ID));
+            const nftMint = generateSigner(umi);
 
-async function mintNFT(){
-  if(!metaplex){
-    document.getElementById("status").innerText =
-      "❌ Connect wallet first";
-    return;
-  }
+            await mintV2(umi, {
+                candyMachine: candyMachine.publicKey,
+                nftMint,
+                collectionMint: candyMachine.collectionMint,
+                collectionUpdateAuthority: candyMachine.authority,
+            }).sendAndConfirm(umi);
 
-  try{
-    document.getElementById("status").innerText = "⏳ Minting...";
+            alert("Success! NFT Minted 🎉");
+            btn.innerText = "MINT AGAIN";
+        } catch (err) {
+            console.error(err);
+            alert("Connection/Minting Failed!");
+            btn.innerText = "RETRY";
+        } finally {
+            btn.disabled = false;
+        }
+    }
 
-    const cm = await metaplex
-      .candyMachines()
-      .findByAddress({ address: CANDY_MACHINE_ID });
-
-    const { nft } = await metaplex
-      .candyMachines()
-      .mint({ candyMachine: cm });
-
-    document.getElementById("status").innerText =
-      "✅ Minted: " + nft.address.toString();
-
-  }catch(e){
-    document.getElementById("status").innerText =
-      "❌ Mint failed (guards / SOL)";
-  }
-}
+    // --- 3. UTILS ---
+    function navigateSection(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
+    
+    async function fetchPrice() {
+        try {
+            const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump`);
+            const data = await res.json();
+            if (data.pairs) {
+                document.getElementById('livePrice').innerText = "$" + parseFloat(data.pairs[0].priceUsd).toFixed(10);
+                document.getElementById('liveMcap').innerText = "$" + (data.pairs[0].fdv / 1000).toFixed(2) + "K";
+            }
+        } catch (e) {}
+    }
+    fetchPrice(); setInterval(fetchPrice, 10000);
 </script>
 
 </body>
