@@ -31,7 +31,7 @@
             padding: 15px 4%; background: rgba(0,0,0,0.9); backdrop-filter: blur(20px);
             position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border);
         }
-        .logo-box { display: flex; align-items: center; gap: 12px; font-family: 'Orbitron'; font-weight: 900; }
+        .logo-box { display: flex; align-items: center; gap: 12px; font-family: 'Orbitron'; font-weight: 900; cursor: pointer; }
         .logo-img { width: 35px; height: 35px; border-radius: 8px; border: 1px solid var(--primary); }
 
         .nav-links { display: flex; gap: 25px; align-items: center; }
@@ -167,7 +167,7 @@
                 <p>Join the LEAP Tarsier elite. 1,000 unique collectibles on Solana.</p>
                 <div class="mint-dashboard">
                     <div class="mint-stats">
-                        <div class="mint-stat-item"><small>PRICE</small><span>0.1 SOL</span></div>
+                        <div class="mint-stat-item"><small>PRICE</small><span>0.05 SOL</span></div>
                         <div class="mint-stat-item"><small>SUPPLY</small><span id="mintCount">0 / 1000</span></div>
                         <div class="mint-stat-item"><small>STATUS</small><span id="mintStatus" style="color: var(--secondary)">LIVE</span></div>
                     </div>
@@ -218,58 +218,45 @@
 </div>
 
 <script>
-    // --- ক্যান্ডি মেশিন কনফিগারেশন ---
-    const CANDY_MACHINE_ID = "6Eqhz5ZC1ENXTfBDgkSEyyC6DTASvXz8DR7iNRQwxf8N";
-    const RPC_URL = "https://api.devnet.solana.com";
+    // --- 1. SOLANA MINTING CONFIGURATION ---
+    const CANDY_MACHINE_ID = "6Eqhz5ZC1ENXTfBDgkSEyyC6DTASvXz8DR7iNRQwxf8N"; 
+    const RPC_URL = "https://api.devnet.solana.com"; // Use 'mainnet-beta' for real launch
 
-    // সোলানা লাইব্রেরি সেটআপ
     const connection = new solanaWeb3.Connection(RPC_URL);
     const mx = metaplex.Metaplex.make(connection);
 
-    // লাইভ সাপ্লাই আপডেট করা
-    async function updateSupply() {
-        try {
-            const cmPubKey = new solanaWeb3.PublicKey(CANDY_MACHINE_ID);
-            const candyMachine = await mx.candyMachines().findByAddress({ address: cmPubKey });
-            document.getElementById('mintCount').innerText = `${candyMachine.itemsMinted} / ${candyMachine.itemsAvailable}`;
-        } catch (e) { console.log("Stats error"); }
-    }
-    updateSupply();
+    let walletProvider = null;
 
-    // আপনার অরিজিনাল handleMintAction ফাংশনটি এখন কার্যকরী করা হলো
+    // --- 2. MINT ACTION HANDLER ---
     async function handleMintAction() {
         const btn = document.getElementById('mintButton');
         const status = document.getElementById('walletStatus');
-        const provider = window.solana;
 
-        // মোবাইল রিডাইরেক্ট সাপোর্ট
-        if (!provider) {
-            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-            if (isMobile) {
-                const url = window.location.href.replace(/^https?:\/\//, '');
-                window.location.href = `https://phantom.app/ul/browse/${url}?ref=${window.location.origin}`;
-            } else {
-                alert("Phantom Wallet not found!");
-            }
+        // Check if Phantom is installed
+        if (!window.solana || !window.solana.isPhantom) {
+            alert("Please install Phantom Wallet!");
+            window.open("https://phantom.app/", "_blank");
             return;
         }
 
         try {
-            // ১. ওয়ালেট কানেক্ট
-            const response = await provider.connect();
-            status.innerText = "CONNECTED: " + response.publicKey.toString().slice(0,6) + "...";
-            status.style.color = "#14F195";
-
-            if (btn.innerText === "CONNECT WALLET") {
-                btn.innerText = "MINT NFT (0.1 SOL)";
+            // Connect Wallet
+            if (!walletProvider) {
+                const response = await window.solana.connect();
+                walletProvider = window.solana;
+                status.innerText = `Connected: ${response.publicKey.toString().slice(0,6)}...`;
+                status.style.color = "var(--secondary)";
+                btn.innerText = "MINT NFT (0.05 SOL)";
                 return;
             }
 
-            // ২. আসল মিন্টিং প্রসেস
+            // Processing Mint
             btn.innerText = "MINTING...";
             btn.disabled = true;
 
-            mx.use(metaplex.walletAdapterIdentity(provider));
+            // Setup Metaplex with Wallet
+            mx.use(metaplex.walletAdapterIdentity(walletProvider));
+
             const candyMachine = await mx.candyMachines().findByAddress({ 
                 address: new solanaWeb3.PublicKey(CANDY_MACHINE_ID) 
             });
@@ -279,18 +266,29 @@
                 collectionUpdateAuthority: candyMachine.authorityAddress,
             });
 
-            alert("Success! NFT Minted: " + nft.name);
-            location.reload();
+            alert(`Success! Minted: ${nft.name}`);
+            btn.innerText = "MINT SUCCESSFUL";
+            updateMintStats();
 
         } catch (err) {
-            console.error(err);
-            alert("Mint Failed! Check Devnet SOL balance.");
-            btn.innerText = "MINT NFT (0.1 SOL)";
+            console.error("Minting failed", err);
+            alert("Transaction failed! Make sure you have enough SOL.");
+            btn.innerText = "MINT NFT (0.05 SOL)";
             btn.disabled = false;
         }
     }
 
-    // --- আপনার দেওয়া বাকি সব কোড নিচে হুবহু আছে ---
+    // Update Supply Counts
+    async function updateMintStats() {
+        try {
+            const cmPubKey = new solanaWeb3.PublicKey(CANDY_MACHINE_ID);
+            const candyMachine = await mx.candyMachines().findByAddress({ address: cmPubKey });
+            document.getElementById('mintCount').innerText = `${candyMachine.itemsMinted} / ${candyMachine.itemsAvailable}`;
+        } catch (e) { console.log("Stats fetch failed"); }
+    }
+    updateMintStats();
+
+    // --- 3. UI NAVIGATION & LOGO ---
     function navigateSection(id, urlLabel) {
         const element = document.getElementById(id);
         if (element) {
@@ -302,6 +300,12 @@
         }
     }
 
+    document.querySelector('.logo-box').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (history.pushState) { history.pushState(null, null, "/"); }
+    });
+
+    // --- 4. PARTICLE BACKGROUND ---
     const canvas = document.getElementById('proCanvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -354,6 +358,7 @@
         requestAnimationFrame(animate);
     }
 
+    // --- 5. DATA FETCHING ---
     async function fetchTokenData() {
         const ca = "a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump";
         try {
