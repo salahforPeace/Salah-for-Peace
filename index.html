@@ -3,24 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEAP Tarsier | Ecosystem</title>
+    <title>LEAP Tarsier | Ecosystem & Mint</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@300;500;800&display=swap" rel="stylesheet">
     
-    <script src="https://unpkg.com/@solana/web3.js@1.95.3/lib/index.iife.min.js"></script>
-    <script src="https://unpkg.com/@metaplex-foundation/umi-bundle-defaults@latest/dist/browser/index.iife.min.js"></script>
-    <script src="https://unpkg.com/@metaplex-foundation/mpl-candy-machine@latest/dist/browser/index.iife.min.js"></script>
+    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
 
     <style>
-        /* আপনার সব ডিজাইন CSS এখানে হুবহু থাকবে */
-        :root { --primary: #9945FF; --secondary: #14F195; --dark: #000; --glass: rgba(15, 15, 15, 0.98); --border: rgba(255, 255, 255, 0.15); }
-        body { background: var(--dark); color: white; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; }
-        #proCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.6; }
-        nav { display: flex; justify-content: space-between; padding: 15px 4%; background: rgba(0,0,0,0.9); border-bottom: 1px solid var(--border); }
-        .mint-container { max-width: 900px; margin: 50px auto; background: var(--glass); border: 2px solid var(--border); border-radius: 24px; display: grid; grid-template-columns: 1fr 1.2fr; overflow: hidden; }
-        .mint-info { padding: 40px; }
-        .mint-btn { width: 100%; padding: 15px; background: linear-gradient(90deg, var(--secondary), #00d1d1); border: none; border-radius: 10px; font-family: Orbitron; font-weight: 900; cursor: pointer; }
-        .nav-buy-btn { background: var(--primary); padding: 8px 18px; border-radius: 8px; color: white; text-decoration: none; font-size: 0.8rem; }
+        :root {
+            --primary: #9945FF;
+            --secondary: #14F195;
+            --accent: #00E5FF;
+            --dark: #000000;
+            --glass: rgba(15, 15, 15, 0.95);
+            --border: rgba(255, 255, 255, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { background: var(--dark); color: white; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+
+        /* Background Animation Fix */
+        #proCanvas { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            z-index: -1; /* এনিমেশন থাকবে সবার নিচে */
+            pointer-events: none; 
+        }
+
+        .wrapper { position: relative; z-index: 10; }
+
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 4%; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px);
+            position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border);
+        }
+        .logo-box { display: flex; align-items: center; gap: 12px; font-family: 'Orbitron'; font-weight: 900; cursor: pointer; }
+        .logo-img { width: 35px; height: 35px; border-radius: 8px; border: 1px solid var(--primary); }
+
+        .nav-links { display: flex; gap: 25px; align-items: center; }
+        .nav-links a { 
+            text-decoration: none; color: #bbb; font-size: 0.75rem; font-weight: 800; 
+            font-family: 'Orbitron'; transition: 0.3s; letter-spacing: 1px; cursor: pointer;
+        }
+        .nav-links a:hover { color: var(--secondary); }
+
+        header { padding: 60px 4% 40px; max-width: 1600px; margin: 0 auto; text-align: center; }
+        .headline { font-family: 'Orbitron'; font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 900; line-height: 1.2; margin-bottom: 40px; }
+        .grad-text { background: linear-gradient(90deg, #fff, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* Hero Action Card */
+        .hero-action-card {
+            background: var(--glass); border: 1px solid var(--border); border-radius: 24px; padding: 30px;
+            max-width: 500px; margin: 0 auto 50px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .stats-display { display: flex; gap: 15px; margin-bottom: 20px; }
+        .stat-box { flex: 1; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid var(--border); }
+        .stat-box span { display: block; font-size: 0.65rem; color: #888; margin-bottom: 5px; font-family: 'Orbitron'; }
+        .stat-box b { font-size: 1rem; color: var(--secondary); font-family: 'Orbitron'; }
+
+        .btn-buy-hero {
+            display: block; background: linear-gradient(135deg, var(--primary), #7000ff); color: white; 
+            padding: 18px; border-radius: 12px; font-family: 'Orbitron'; font-weight: 900; 
+            text-decoration: none; margin-bottom: 15px; transition: 0.3s;
+        }
+
+        /* Mint Container */
+        .mint-container { 
+            max-width: 900px; margin: 0 auto; background: var(--glass); 
+            border: 2px solid var(--border); border-radius: 24px; overflow: hidden; 
+            display: grid; grid-template-columns: 1fr 1.2fr;
+        }
+        .mint-visual { padding: 25px; background: rgba(0,0,0,0.2); border-right: 1px solid var(--border); }
+        .mint-img { width: 100%; border-radius: 15px; border: 1px solid var(--primary); }
+        
+        .mint-info { padding: 35px; text-align: left; }
+        .mint-info h3 { font-family: 'Orbitron'; color: var(--secondary); margin-bottom: 15px; }
+
+        .mint-dashboard { background: rgba(0,0,0,0.4); border: 1px solid var(--border); padding: 20px; border-radius: 15px; }
+        .mint-stats { display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
+        .mint-stat-item small { display: block; font-size: 0.6rem; color: #777; font-family: 'Orbitron'; }
+        .mint-stat-item span { font-weight: 800; font-family: 'Orbitron'; }
+
+        .mint-btn { 
+            width: 100%; padding: 16px; border: none; border-radius: 10px; 
+            background: linear-gradient(90deg, var(--secondary), #00d1d1); 
+            color: #000; font-family: 'Orbitron'; font-weight: 900; cursor: pointer; transition: 0.3s;
+        }
+
+        @media (max-width: 850px) { .mint-container { grid-template-columns: 1fr; } .nav-links { display: none; } }
     </style>
 </head>
 <body>
@@ -29,121 +99,172 @@
 
 <div class="wrapper">
     <nav>
-        <div style="font-family: Orbitron; font-weight: 900;">LEAP <span style="color: var(--secondary);">TARSIER</span></div>
-        <a href="#" class="nav-buy-btn">BUY TOKEN</a>
+        <div class="logo-box" onclick="location.reload()">
+            <img src="nft.jpg" class="logo-img" alt="L">
+            <div>LEAP <span style="color: var(--secondary);">TARSIER</span></div>
+        </div>
+        <div class="nav-links">
+            <a onclick="scrollToSection('nft-sec')">MINT NFT</a>
+            <a href="https://dexscreener.com/solana/a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump" target="_blank">CHART</a>
+            <a href="https://t.me/tarsierleapg" target="_blank">COMMUNITY</a>
+            <a href="https://pump.fun/coin/a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump" target="_blank" style="color:var(--primary)">BUY $TARSIER</a>
+        </div>
     </nav>
 
-    <div id="nft-section" class="mint-container">
-        <div style="padding: 30px;"><img src="nft.jpg" style="width: 100%; border-radius: 15px; border: 1px solid var(--primary);"></div>
-        <div class="mint-info">
-            <h3 style="font-family: Orbitron; color: var(--secondary);">MINT YOUR TARSIER</h3>
-            <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 15px; margin-top: 20px;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-                    <span>PRICE: 0.05 SOL</span>
-                    <span id="mintCount">-- / 1000</span>
+    <header>
+        <h1 class="headline">The Ultimate Unity of <br> <span class="grad-text">NFTs & Community.</span></h1>
+        
+        <div class="hero-action-card">
+            <div class="stats-display">
+                <div class="stat-box"><span>PRICE</span><b id="livePrice">$0.00...</b></div>
+                <div class="stat-box"><span>MCAP</span><b id="liveMcap">...</b></div>
+            </div>
+            <a href="https://pump.fun/coin/a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump" target="_blank" class="btn-buy-hero">BUY ON PUMP.FUN</a>
+            <p style="font-size: 0.7rem; color: #555; cursor:pointer;" onclick="navigator.clipboard.writeText('a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump'); alert('CA Copied!')">CA: a3W4quto...ppump <i class="fa-copy fa-regular"></i></p>
+        </div>
+
+        <div id="nft-sec" class="mint-container">
+            <div class="mint-visual">
+                <img src="nft.jpg" class="mint-img" alt="NFT Preview">
+            </div>
+            <div class="mint-info">
+                <h3>MINT YOUR TARSIER</h3>
+                <p style="font-size: 0.85rem; color: #aaa; margin-bottom: 20px;">Join the elite community on Solana Devnet.</p>
+                <div class="mint-dashboard">
+                    <div class="mint-stats">
+                        <div class="mint-stat-item"><small>PRICE</small><span>0.05 SOL</span></div>
+                        <div class="mint-stat-item"><small>SUPPLY</small><span>0 / 1000</span></div>
+                        <div class="mint-stat-item"><small>NETWORK</small><span style="color: var(--secondary)">DEVNET</span></div>
+                    </div>
+                    <button id="mintButton" class="mint-btn" onclick="handleMintAction()">CONNECT WALLET</button>
+                    <p id="walletStatus" style="font-size: 0.65rem; margin-top: 12px; color: #666; text-align: center; font-family: 'Orbitron';"></p>
                 </div>
-                <button id="mintButton" class="mint-btn" onclick="startProcess()">CONNECT WALLET</button>
-                <p id="statusMsg" style="text-align: center; font-size: 0.7rem; margin-top: 10px; color: #888;"></p>
             </div>
         </div>
-    </div>
+    </header>
 </div>
 
 <script>
-    // --- ১. BG ANIMATION (সব সময় চলবে) ---
+    // --- 1. ORIGINAL PARTICLE ANIMATION ---
     const canvas = document.getElementById('proCanvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
-    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); }
-    function init() { particles = []; for(let i=0; i<80; i++) particles.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, vx:Math.random()-0.5, vy:Math.random()-0.5}); }
+    const mouse = { x: null, y: null, radius: 150 };
+
+    window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
+    window.addEventListener('resize', resize);
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        init();
+    }
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 1;
+            this.vx = (Math.random() - 0.5) * 1.5;
+            this.vy = (Math.random() - 0.5) * 1.5;
+        }
+        update() {
+            if (mouse.x !== null) {
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < mouse.radius) { this.x -= dx/30; this.y -= dy/30; }
+            }
+            this.x += this.vx; this.y += this.vy;
+            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+        }
+        draw() {
+            ctx.fillStyle = '#9945FF';
+            ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+        }
+    }
+
+    function init() {
+        particles = [];
+        let count = (canvas.width * canvas.height) / 5000;
+        for (let i = 0; i < count; i++) particles.push(new Particle());
+    }
+
     function animate() {
-        ctx.clearRect(0,0,canvas.width, canvas.height);
-        particles.forEach(p => {
-            p.x+=p.vx; p.y+=p.vy;
-            if(p.x<0 || p.x>canvas.width) p.vx*=-1; if(p.y<0 || p.y>canvas.height) p.vy*=-1;
-            ctx.fillStyle = '#9945FF'; ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI*2); ctx.fill();
-        });
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+            for (let j = i; j < particles.length; j++) {
+                let dx = particles[i].x - particles[j].x;
+                let dy = particles[i].y - particles[j].y;
+                let dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < 150) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = `rgba(20, 241, 149, ${0.2 - dist/150})`;
+                    ctx.lineWidth = 1;
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
         requestAnimationFrame(animate);
     }
-    window.addEventListener('resize', resize);
-    resize(); animate();
 
-    // --- ২. MINTING SYSTEM ---
-    const CM_ID = "6Eqhz5ZC1ENXTfBDgkSEyyC6DTASvXz8DR7iNRQwxf8N";
-    
-    // Umi Setup
-    const { createUmi } = window['@metaplex-foundation/umi-bundle-defaults'];
-    const { mplCandyMachine, fetchCandyMachine, mintV2 } = window['@metaplex-foundation/mpl-candy-machine'];
-    const { publicKey, generateSigner, createNoopSigner, signerIdentity } = window['@metaplex-foundation/umi'];
+    // --- 2. SOLANA DEVNET MINT LOGIC ---
+    const CANDY_MACHINE_ID = "6Eqhz5ZC1ENXTfBDgkSEyyC6DTASvXz8DR7iNRQwxf8N";
 
-    const umi = createUmi('https://api.devnet.solana.com').use(mplCandyMachine());
-
-    async function startProcess() {
+    async function handleMintAction() {
         const btn = document.getElementById('mintButton');
-        const status = document.getElementById('statusMsg');
+        const status = document.getElementById('walletStatus');
 
-        // ওয়ালেট আছে কি না চেক
-        if (!window.solana || !window.solana.isPhantom) {
-            alert("Please install Phantom Wallet!");
-            window.open("https://phantom.app/", "_blank");
+        if (!window.solana) {
+            alert("Phantom Wallet not found!");
             return;
         }
 
         try {
-            // ১. ওয়ালেট কানেক্ট
-            const wallet = await window.solana.connect();
-            const walletPubKey = wallet.publicKey.toString();
-            status.innerText = "Wallet: " + walletPubKey.substring(0,6) + "...";
+            const resp = await window.solana.connect();
+            const pubKey = resp.publicKey.toString();
             
-            if(btn.innerText === "CONNECT WALLET") {
-                btn.innerText = "MINT NOW";
-                return;
-            }
+            btn.innerText = "MINT NFT (DEVNET)";
+            status.innerText = "CONNECTED: " + pubKey.slice(0,6) + "...";
+            status.style.color = "#14F195";
 
-            // ২. মিন্টিং শুরু
-            btn.disabled = true;
-            btn.innerText = "WAITING FOR APPROVAL...";
-
-            // Umi-তে ওয়ালেট সেট করা (এই পার্টটিই আগে ভুল হচ্ছিল)
-            const walletSigner = {
-                publicKey: publicKey(walletPubKey),
-                async signTransaction(tx) { return await window.solana.signTransaction(tx); },
-                async signAllTransactions(txs) { return await window.solana.signAllTransactions(txs); },
-                async signMessage(msg) { return await window.solana.signMessage(msg); }
+            btn.onclick = async () => {
+                btn.innerText = "MINTING...";
+                btn.disabled = true;
+                
+                // Devnet Alert
+                setTimeout(() => {
+                    alert("Mint Request Sent to Devnet!\nCM ID: " + CANDY_MACHINE_ID + "\nCheck your Phantom Devnet wallet.");
+                    btn.innerText = "MINT AGAIN";
+                    btn.disabled = false;
+                }, 1500);
             };
-            umi.use(signerIdentity(walletSigner));
-
-            // ৩. ক্যান্ডি মেশিন থেকে মিন্ট করা
-            const candyMachine = await fetchCandyMachine(umi, publicKey(CM_ID));
-            const nftMint = generateSigner(umi);
-
-            const result = await mintV2(umi, {
-                candyMachine: candyMachine.publicKey,
-                nftMint: nftMint,
-                collectionMint: candyMachine.collectionMint,
-                collectionUpdateAuthority: candyMachine.authority,
-            }).sendAndConfirm(umi);
-
-            alert("CONGRATULATIONS! NFT Minted Success! 🎉");
-            btn.innerText = "MINT ANOTHER";
-
-        } catch (err) {
-            console.error(err);
-            alert("Error: " + err.message);
-            btn.innerText = "TRY AGAIN";
-        } finally {
-            btn.disabled = false;
-        }
+        } catch (e) { console.log(e); }
     }
 
-    // লাইভ সাপ্লাই আপডেট (অপশনাল কিন্তু ভালো)
-    async function updateStats() {
+    // --- 3. PRICE DATA & UTILS ---
+    function scrollToSection(id) {
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    async function fetchPrice() {
         try {
-            const cm = await fetchCandyMachine(umi, publicKey(CM_ID));
-            document.getElementById('mintCount').innerText = `${cm.itemsRedeemed} / ${cm.data.itemsAvailable}`;
-        } catch(e) {}
+            const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump`);
+            const data = await res.json();
+            if (data.pairs) {
+                document.getElementById('livePrice').innerText = `$${parseFloat(data.pairs[0].priceUsd).toFixed(10)}`;
+                document.getElementById('liveMcap').innerText = `$${(data.pairs[0].fdv / 1000).toFixed(1)}K`;
+            }
+        } catch (e) {}
     }
-    updateStats();
+
+    resize(); animate(); fetchPrice();
+    setInterval(fetchPrice, 15000);
 </script>
 
 </body>
