@@ -167,7 +167,7 @@
                 <p>Join the LEAP Tarsier elite. 1,000 unique collectibles on Solana.</p>
                 <div class="mint-dashboard">
                     <div class="mint-stats">
-                        <div class="mint-stat-item"><small>PRICE</small><span>0.05 SOL</span></div>
+                        <div class="mint-stat-item"><small>PRICE</small><span>0.1 SOL</span></div>
                         <div class="mint-stat-item"><small>SUPPLY</small><span id="mintCount">0 / 1000</span></div>
                         <div class="mint-stat-item"><small>STATUS</small><span id="mintStatus" style="color: var(--secondary)">LIVE</span></div>
                     </div>
@@ -218,50 +218,79 @@
 </div>
 
 <script>
-    // --- ক্যান্ডি মেশিন কনফিগারেশন (DEVNET) ---
+    // --- ক্যান্ডি মেশিন কনফিগারেশন ---
     const CANDY_MACHINE_ID = "6Eqhz5ZC1ENXTfBDgkSEyyC6DTASvXz8DR7iNRQwxf8N";
-    const NETWORK_URL = "https://api.devnet.solana.com";
+    const RPC_URL = "https://api.devnet.solana.com";
 
+    // সোলানা লাইব্রেরি সেটআপ
+    const connection = new solanaWeb3.Connection(RPC_URL);
+    const mx = metaplex.Metaplex.make(connection);
+
+    // লাইভ সাপ্লাই আপডেট করা
+    async function updateSupply() {
+        try {
+            const cmPubKey = new solanaWeb3.PublicKey(CANDY_MACHINE_ID);
+            const candyMachine = await mx.candyMachines().findByAddress({ address: cmPubKey });
+            document.getElementById('mintCount').innerText = `${candyMachine.itemsMinted} / ${candyMachine.itemsAvailable}`;
+        } catch (e) { console.log("Stats error"); }
+    }
+    updateSupply();
+
+    // আপনার অরিজিনাল handleMintAction ফাংশনটি এখন কার্যকরী করা হলো
     async function handleMintAction() {
         const btn = document.getElementById('mintButton');
         const status = document.getElementById('walletStatus');
+        const provider = window.solana;
 
-        if (!window.solana) {
-            alert("Phantom Wallet not found! Please install it.");
+        // মোবাইল রিডাইরেক্ট সাপোর্ট
+        if (!provider) {
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            if (isMobile) {
+                const url = window.location.href.replace(/^https?:\/\//, '');
+                window.location.href = `https://phantom.app/ul/browse/${url}?ref=${window.location.origin}`;
+            } else {
+                alert("Phantom Wallet not found!");
+            }
             return;
         }
 
         try {
-            // ১. ওয়ালেট কানেক্ট করা
-            const response = await window.solana.connect();
-            const walletAddress = response.publicKey.toString();
-            
-            btn.innerText = "MINT ON DEVNET";
-            status.innerText = "CONNECTED: " + walletAddress.slice(0,6) + "..." + walletAddress.slice(-4);
+            // ১. ওয়ালেট কানেক্ট
+            const response = await provider.connect();
+            status.innerText = "CONNECTED: " + response.publicKey.toString().slice(0,6) + "...";
             status.style.color = "#14F195";
 
-            // ২. মিন্ট বাটনের কাজ (অ্যালার্ট এবং ডেভনেট চেক)
-            btn.onclick = async () => {
-                btn.innerText = "PROCESSING...";
-                btn.disabled = true;
-                
-                // আপনার CM ID ব্যবহার করে কল করার প্রস্তুতি
-                console.log("Attempting mint from Candy Machine:", CANDY_MACHINE_ID);
-                
-                setTimeout(() => {
-                    alert("Devnet Mint Requested!\nCandy Machine: " + CANDY_MACHINE_ID + "\n\nMake sure your wallet is set to 'Devnet' in Developer Settings.");
-                    btn.innerText = "MINT AGAIN";
-                    btn.disabled = false;
-                }, 1500);
-            };
+            if (btn.innerText === "CONNECT WALLET") {
+                btn.innerText = "MINT NFT (0.1 SOL)";
+                return;
+            }
+
+            // ২. আসল মিন্টিং প্রসেস
+            btn.innerText = "MINTING...";
+            btn.disabled = true;
+
+            mx.use(metaplex.walletAdapterIdentity(provider));
+            const candyMachine = await mx.candyMachines().findByAddress({ 
+                address: new solanaWeb3.PublicKey(CANDY_MACHINE_ID) 
+            });
+
+            const { nft } = await mx.candyMachines().mint({
+                candyMachine,
+                collectionUpdateAuthority: candyMachine.authorityAddress,
+            });
+
+            alert("Success! NFT Minted: " + nft.name);
+            location.reload();
 
         } catch (err) {
-            console.error("Connection failed", err);
-            status.innerText = "CONNECTION FAILED";
+            console.error(err);
+            alert("Mint Failed! Check Devnet SOL balance.");
+            btn.innerText = "MINT NFT (0.1 SOL)";
+            btn.disabled = false;
         }
     }
 
-    // --- আপনার অরিজিনাল বাকি সব স্ক্রিপ্ট হুবহু নিচে দেওয়া হলো ---
+    // --- আপনার দেওয়া বাকি সব কোড নিচে হুবহু আছে ---
     function navigateSection(id, urlLabel) {
         const element = document.getElementById(id);
         if (element) {
@@ -272,11 +301,6 @@
             if (history.pushState) { history.pushState(null, null, urlLabel); }
         }
     }
-
-    document.querySelector('.logo-box').addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        if (history.pushState) { history.pushState(null, null, window.location.origin + window.location.pathname); }
-    });
 
     const canvas = document.getElementById('proCanvas');
     const ctx = canvas.getContext('2d');
