@@ -31,9 +31,6 @@
         .logo-box { display: flex; align-items: center; gap: 12px; font-family: 'Orbitron'; font-weight: 900; }
         .logo-img { width: 35px; height: 35px; border-radius: 8px; border: 1px solid var(--primary); }
 
-        /* Mobile Menu Toggle Styling */
-        .mobile-toggle { display: none; font-size: 1.5rem; color: white; cursor: pointer; }
-
         .nav-links { display: flex; gap: 25px; align-items: center; }
         .nav-links a { 
             text-decoration: none; color: #bbb; font-size: 0.75rem; font-weight: 800; 
@@ -47,27 +44,6 @@
             border: 1px solid rgba(255,255,255,0.2);
             animation: pulseBtn 2s infinite;
         }
-
-        /* --- Added Responsive CSS --- */
-        @media (max-width: 991px) {
-            .mobile-toggle { display: block; }
-            .nav-links {
-                display: none; flex-direction: column; position: absolute;
-                top: 100%; left: 0; width: 100%; background: rgba(0,0,0,0.95);
-                padding: 40px 20px; gap: 20px; text-align: center; border-bottom: 1px solid var(--border);
-            }
-            .nav-links.active { display: flex; }
-            
-            /* Responsive Grid Adjustments */
-            .mint-container { grid-template-columns: 1fr; margin-top: 30px; }
-            .mint-visual { border-right: none; border-bottom: 1px solid var(--border); padding: 20px; }
-            .utility-grid { grid-template-columns: 1fr; }
-            .community-bar { flex-direction: column; border-radius: 30px; gap: 20px; padding: 30px; }
-            .divider { display: none; }
-            .headline { font-size: 2.5rem; text-align: center; margin-bottom: 30px; }
-            header { text-align: center; }
-        }
-
         @keyframes pulseBtn {
             0% { box-shadow: 0 0 0 0 rgba(153, 69, 255, 0.7); }
             70% { box-shadow: 0 0 0 10px rgba(153, 69, 255, 0); }
@@ -75,7 +51,17 @@
         }
 
         header { padding: 80px 4% 60px; max-width: 1600px; margin: 0 auto; text-align: left; }
-        .solana-tag { font-size: 0.7rem; color: var(--secondary); font-family: 'Orbitron'; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; opacity: 0.9; }
+        
+        .solana-tag { 
+            font-size: 0.7rem; 
+            color: var(--secondary); 
+            font-family: 'Orbitron'; 
+            letter-spacing: 2px; 
+            margin-bottom: 10px; 
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
         .headline { font-family: 'Orbitron'; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 50px; }
         .grad-text { background: linear-gradient(90deg, #fff, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
@@ -97,7 +83,10 @@
         .stat-box span { display: block; font-family: 'Orbitron'; font-size: 0.7rem; color: #888; letter-spacing: 1px; margin-bottom: 8px; }
         .stat-box b { font-size: 1.2rem; color: var(--secondary); font-family: 'Orbitron'; display: block; }
 
-        .live-dot { height: 8px; width: 8px; background-color: #ff4b4b; border-radius: 50%; display: inline-block; margin-left: 5px; animation: tipTip 1s infinite; }
+        .live-dot {
+            height: 8px; width: 8px; background-color: #ff4b4b; border-radius: 50%;
+            display: inline-block; margin-left: 5px; animation: tipTip 1s infinite;
+        }
         @keyframes tipTip { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
 
         .btn-buy-hero {
@@ -115,57 +104,220 @@
             cursor: pointer; display: flex; align-items: center; gap: 12px;
         }
 
+        /* --- NFT SECTION STYLES --- */
         .mint-container {
             max-width: 950px; margin: 60px auto 0;
             background: var(--glass); border: 2px solid var(--border);
             border-radius: 24px; overflow: visible;
             display: grid; grid-template-columns: 1fr 1.2fr;
-            transition: 0.4s; perspective: 1000px;
+            transition: 0.4s;
+            perspective: 1000px;
         }
-        .mint-visual { padding: 40px; display: flex; align-items: center; justify-content: center; border-right: 1px solid var(--border); }
-        .nft-3d-card { width: 100%; border-radius: 20px; transition: transform 0.1s ease-out; transform-style: preserve-3d; cursor: crosshair; }
-        .mint-img { width: 100%; border-radius: 20px; border: 2px solid var(--primary); box-shadow: 0 15px 35px rgba(153, 69, 255, 0.3); pointer-events: none; }
+        
+        .mint-visual { 
+            padding: 40px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            border-right: 1px solid var(--border); 
+        }
+
+        .nft-3d-card {
+            width: 100%;
+            border-radius: 20px;
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
+            cursor: crosshair;
+        }
+
+        .mint-img { 
+            width: 100%; 
+            border-radius: 20px; 
+            border: 2px solid var(--primary);
+            box-shadow: 0 15px 35px rgba(153, 69, 255, 0.3);
+            pointer-events: none;
+        }
+
         .mint-info { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
         .mint-info h3 { font-family: 'Orbitron'; color: var(--secondary); margin-bottom: 15px; font-size: 1.8rem; }
+        
         .mint-btn-animated {
-            margin-top: 25px; display: block; text-align: center; padding: 20px; background: linear-gradient(90deg, var(--secondary), #00e5ff);
-            color: #000; font-family: 'Orbitron'; font-weight: 900; text-decoration: none; border-radius: 12px; font-size: 1.3rem;
-            letter-spacing: 2px; transition: 0.3s; border: none; box-shadow: 0 0 20px rgba(20, 241, 149, 0.3); animation: mintPulse 2s infinite;
+            margin-top: 25px;
+            display: block;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(90deg, var(--secondary), #00e5ff);
+            color: #000;
+            font-family: 'Orbitron';
+            font-weight: 900;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            border: none;
+            box-shadow: 0 0 20px rgba(20, 241, 149, 0.3);
+            animation: mintPulse 2s infinite;
         }
-        @keyframes mintPulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(20, 241, 149, 0.7); } 50% { transform: scale(1.02); box-shadow: 0 0 25px rgba(20, 241, 149, 0.5); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(20, 241, 149, 0); } }
 
-        .utility-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 40px; }
-        .utility-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(15px); border: 1px solid var(--border); padding: 40px 30px; border-radius: 24px; text-align: center; transition: 0.4s; }
-        .utility-card:hover { background: rgba(153, 69, 255, 0.1); border-color: var(--primary); transform: translateY(-10px); }
-        .utility-card i { font-size: 2.5rem; color: var(--secondary); margin-bottom: 20px; display: block; }
-        .utility-card h4 { font-family: 'Orbitron'; font-size: 1.2rem; margin-bottom: 15px; color: #fff; }
-        .utility-card p { font-size: 0.95rem; color: #eee; line-height: 1.6; }
+        @keyframes mintPulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(20, 241, 149, 0.7); }
+            50% { transform: scale(1.02); box-shadow: 0 0 25px rgba(20, 241, 149, 0.5); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(20, 241, 149, 0); }
+        }
+
+        .mint-btn-animated:hover {
+            filter: brightness(1.1);
+            letter-spacing: 4px;
+            transform: translateY(-3px);
+        }
+
+        /* --- UTILITY SECTION STYLES --- */
+        .utility-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .utility-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            padding: 40px 30px;
+            border-radius: 24px;
+            text-align: center;
+            transition: 0.4s;
+        }
+        .utility-card:hover {
+            background: rgba(153, 69, 255, 0.1);
+            border-color: var(--primary);
+            transform: translateY(-10px);
+        }
+        .utility-card i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            display: block;
+        }
+        .utility-card h4 {
+            font-family: 'Orbitron';
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        .utility-card p {
+            font-size: 0.95rem;
+            color: #eee;
+            line-height: 1.6;
+        }
 
         section { padding: 80px 4%; max-width: 1600px; margin: 0 auto; }
         .sec-title { font-family: 'Orbitron'; font-size: 2.2rem; margin-bottom: 50px; text-align: center; }
-        .partner-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 25px; }
-        .partner-card { background: #0a0a0a; border: 1px solid var(--border); border-radius: 16px; height: 120px; display: flex; justify-content: center; align-items: center; transition: 0.4s; }
-        .partner-card img { width: 110px; filter: grayscale(1) opacity(0.7); }
+        .partner-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; }
+        .partner-card {
+            background: #0a0a0a; border: 1px solid var(--border); border-radius: 16px;
+            height: 120px; display: flex; justify-content: center; align-items: center; transition: 0.4s;
+        }
         .partner-card:hover { transform: translateY(-5px); border-color: var(--secondary); }
+        .partner-card img { width: 110px; filter: grayscale(1) opacity(0.7); }
         .partner-card:hover img { filter: grayscale(0) opacity(1); }
 
+        /* --- GLOSSY COMMUNITY SECTION --- */
+        #community { padding: 60px 4%; }
         .community-bar {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
-            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 100px; padding: 20px 50px;
-            display: flex; justify-content: space-around; align-items: center; max-width: 900px; margin: 0 auto;
-            backdrop-filter: blur(15px); box-shadow: 0 10px 40px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 100px;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.05);
         }
-        .com-link { text-decoration: none; color: #fff; font-family: 'Orbitron'; font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 12px; transition: 0.4s; opacity: 0.7; letter-spacing: 1.5px; }
-        .com-link:hover { opacity: 1; color: var(--secondary); transform: translateY(-3px); text-shadow: 0 0 10px var(--secondary); }
-        .whitepaper-btn { font-size: 1.1rem; background: rgba(153, 69, 255, 0.1); padding: 12px 25px; border-radius: 50px; border: 1px solid var(--primary); opacity: 1; box-shadow: 0 0 15px rgba(153, 69, 255, 0.2); }
-        .whitepaper-btn:hover { background: var(--primary); color: white; box-shadow: 0 0 25px var(--primary); }
+        .com-link {
+            text-decoration: none;
+            color: #fff;
+            font-family: 'Orbitron';
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.4s;
+            opacity: 0.7;
+            letter-spacing: 1.5px;
+        }
+        .com-link:hover {
+            opacity: 1;
+            color: var(--secondary);
+            transform: translateY(-3px);
+            text-shadow: 0 0 10px var(--secondary);
+        }
+        
+        /* HIGHLIGHTED WHITEPAPER */
+        .whitepaper-btn {
+            font-size: 1.1rem;
+            background: rgba(153, 69, 255, 0.1);
+            padding: 12px 25px;
+            border-radius: 50px;
+            border: 1px solid var(--primary);
+            opacity: 1;
+            box-shadow: 0 0 15px rgba(153, 69, 255, 0.2);
+        }
+        .whitepaper-btn:hover {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 0 25px var(--primary);
+        }
+
+        .com-link i, .com-link svg { font-size: 1.4rem; }
         .divider { width: 1px; height: 30px; background: rgba(255,255,255,0.2); }
 
-        .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(12px); opacity: 0; transition: opacity 0.3s ease; }
+        .popup-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.92); display: none; justify-content: center;
+            align-items: center; z-index: 2000; backdrop-filter: blur(12px);
+            opacity: 0; transition: opacity 0.3s ease;
+        }
         .popup-overlay.active { display: flex; opacity: 1; }
-        .popup-content { background: #0f0f0f; padding: 40px; border-radius: 24px; border: 1px solid var(--primary); max-width: 500px; text-align: center; transform: scale(0.8); transition: transform 0.3s; }
+        .popup-content { background: #0f0f0f; padding: 40px; border-radius: 24px; border: 1px solid var(--primary); max-width: 500px; text-align: center; transform: scale(0.8); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .popup-overlay.active .popup-content { transform: scale(1); }
+
         footer { padding: 40px 4%; border-top: 1px solid var(--border); text-align: center; background: rgba(0,0,0,0.5); margin-top: 50px; }
+
+        /* ---------------------------------------------------- */
+        /* YEKHANE AMI NOTUN ADD KORECHI (MOBILE OPTIMIZATION) */
+        /* ---------------------------------------------------- */
+        @media (max-width: 768px) {
+            nav { padding: 10px 5%; }
+            .nav-links { display: none !important; } /* Mobile-e menu links crowded lage tai hide kora bhalo */
+            
+            header { padding: 40px 5%; text-align: center; }
+            .headline { font-size: 2.2rem; }
+
+            .hero-action-card { padding: 25px; }
+            .stats-display { flex-direction: column; }
+            .ca-box-hero { font-size: 0.7rem; word-break: break-all; }
+
+            .mint-container { grid-template-columns: 1fr; }
+            .mint-visual { border-right: none; border-bottom: 1px solid var(--border); }
+            
+            .utility-grid { grid-template-columns: 1fr; }
+            
+            .community-bar { 
+                flex-direction: column; 
+                border-radius: 20px; 
+                gap: 20px; 
+                padding: 30px 20px; 
+            }
+            .divider { display: none; }
+            .partner-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
     </style>
 </head>
 <body>
@@ -178,22 +330,18 @@
             <img src="nft.jpg" class="logo-img" alt="Logo">
             <div>PUMP <span style="color: var(--secondary);">PASS</span></div>
         </div>
-
-        <div class="mobile-toggle" onclick="toggleMenu()">
-            <i class="fa-solid fa-bars"></i>
-        </div>
-
-        <div class="nav-links" id="navLinks"> 
-            <a href="#nft-section" onclick="toggleMenu()">NFT</a>
-            <a href="#partners" onclick="toggleMenu()">PARTNER</a>
-            <a href="#" onclick="toggleMenu()">DEXSCREENER</a> 
-            <a href="#community" onclick="toggleMenu()">COMMUNITY</a>
-            <a href="#buy-section" class="nav-buy-btn" onclick="toggleMenu()">BUY $PASS</a>
+        <div class="nav-links"> 
+            <a href="#nft-section">NFT</a>
+            <a href="#partners">PARTNER</a>
+            <a href="#">DEXSCREENER</a> 
+            <a href="#community">COMMUNITY</a>
+            <a href="#buy-section" class="nav-buy-btn">BUY $PASS</a>
         </div>
     </nav>
 
     <header>
         <p class="solana-tag">This project is built on Solana blockchain</p>
+        
         <h1 class="headline">The next generation of, <br> <span class="grad-text">Meme utility & Nfts.</span></h1>
         
         <div id="buy-section" class="hero-action-card" style="scroll-margin-top: 100px;">
@@ -223,6 +371,7 @@
             <div class="mint-info">
                 <h3>UNLOCK YOUR PASS</h3>
                 <p>Join the Pump Pass elite. Holding a $PASS NFT grants you exclusive access to our community rewards, DAO governance, and future alpha drops.</p>
+                
                 <a href="https://your-mint-link.com" target="_blank" class="mint-btn-animated">
                     <i class="fa-solid fa-wand-magic-sparkles"></i> MINT PASS NOW
                 </a>
@@ -269,16 +418,22 @@
     <section id="community" style="scroll-margin-top: 80px;">
         <div class="community-bar">
             <a href="https://x.com/LPTAR_Official" target="_blank" class="com-link">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                </svg>
                 TWITTER
             </a>
             <div class="divider"></div>
+            
             <div class="com-link whitepaper-btn" style="cursor:pointer;" onclick="togglePopup(true)">
-                <i class="fa-solid fa-file-lines"></i> WHITEPAPER
+                <i class="fa-solid fa-file-lines"></i>
+                WHITEPAPER
             </div>
+
             <div class="divider"></div>
             <a href="https://t.me/tarsierleapg" target="_blank" class="com-link">
-                <i class="fa-brands fa-telegram"></i> TELEGRAM
+                <i class="fa-brands fa-telegram"></i>
+                TELEGRAM
             </a>
         </div>
     </section>
@@ -288,25 +443,7 @@
     </footer>
 </div>
 
-<div class="popup-overlay" id="wpPopup" onclick="togglePopup(false)">
-    <div class="popup-content" onclick="event.stopPropagation()">
-        <i class="fa-solid fa-scroll" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
-        <h2 style="font-family: Orbitron; margin-bottom: 15px; color: #fff;">WHITEPAPER</h2>
-        <p style="color: #aaa; line-height: 1.7; font-size: 0.95rem;">Pump Pass Ecosystem bridges the gap between NFT holders and DeFi rewards. Holders receive a share of platform transaction fees and exclusive voting rights in the DAO. $PASS is more than a token—it's your membership to the future of Solana NFTs.</p>
-        <button onclick="togglePopup(false)" style="margin-top: 30px; padding: 12px 40px; background: var(--primary); border: none; color: white; border-radius: 10px; font-weight: 800; cursor: pointer; font-family: Orbitron;">CLOSE</button>
-    </div>
-</div>
-
 <script>
-    // Mobile Menu Logic
-    function toggleMenu() {
-        const navLinks = document.getElementById('navLinks');
-        if (window.innerWidth <= 991) {
-            navLinks.classList.toggle('active');
-        }
-    }
-
-    // Original 3D NFT Card Logic
     const card = document.getElementById('nftCard');
     const container = document.getElementById('nft-section');
     container.addEventListener('mousemove', (e) => {
@@ -314,13 +451,12 @@
         let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
         card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
     });
-    container.addEventListener('mouseenter', () => { card.style.transition = 'none'; });
-    container.addEventListener('mouseleave', () => {
+    container.addEventListener('mouseenter', (e) => { card.style.transition = 'none'; });
+    container.addEventListener('mouseleave', (e) => {
         card.style.transition = 'all 0.5s ease';
         card.style.transform = `rotateY(0deg) rotateX(0deg)`;
     });
 
-    // Original Particles Canvas Logic
     const canvas = document.getElementById('proCanvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -328,7 +464,6 @@
     window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
     window.addEventListener('resize', resize);
     function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); }
-    
     class Particle {
         constructor() {
             this.x = Math.random() * canvas.width;
@@ -350,13 +485,11 @@
         }
         draw() { ctx.fillStyle = '#9945FF'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
     }
-
     function init() {
         particles = [];
         let count = (canvas.width * canvas.height) / 4000; 
         for (let i = 0; i < count; i++) { particles.push(new Particle()); }
     }
-
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (let i = 0; i < particles.length; i++) {
@@ -376,7 +509,6 @@
         requestAnimationFrame(animate);
     }
 
-    // Original API and Utility Functions
     async function fetchTokenData() {
         const ca = "a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump";
         try {
