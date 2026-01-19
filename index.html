@@ -44,7 +44,7 @@
             100% { box-shadow: 0 0 0 0 rgba(153, 69, 255, 0); }
         }
         header { padding: 80px 4% 60px; max-width: 1600px; margin: 0 auto; text-align: left; }
-    
+   
         .solana-tag {
             font-size: 0.6rem;
             color: var(--secondary);
@@ -101,7 +101,7 @@
             transition: 0.4s;
             perspective: 1000px;
         }
-    
+   
         .mint-visual {
             padding: 40px;
             display: flex;
@@ -125,7 +125,7 @@
         }
         .mint-info { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
         .mint-info h3 { font-family: 'Orbitron'; color: var(--secondary); margin-bottom: 15px; font-size: 1.8rem; }
-    
+   
         .mint-btn-animated {
             margin-top: 25px;
             display: block;
@@ -339,10 +339,10 @@
     </nav>
     <header>
         <p class="solana-tag">This project is built on the Solana blockchain</p>
-    
+   
         <h1 class="headline">The next generation of, <br> <span class="grad-text">Meme utility & Nfts.</span></h1>
-    
-        <div id="buy-section" class="hero-action-card" style="scroll-margin-top: 100px;">
+   
+        <div id="buy-section" class="hero-action-card" style="scroll-margin-top: 90px;">
             <div class="stats-display">
                 <div class="stat-box">
                     <span>LIVE PRICE <div class="live-dot"></div></span>
@@ -353,28 +353,28 @@
                     <b id="liveMcap">LOADING...</b>
                 </div>
             </div>
-            <a href="https://pump.fun/coin/a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump" target="_blank" class="btn-buy-hero">BUY $PASS NOW</a>
+            <a href="LINK SOON" target="_blank" class="btn-buy-hero">BUY $PASS SOON..</a>
             <div class="ca-box-hero" onclick="copyCA()">
-                <span id="caFull">CA: a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump</span>
+                <span id="caDisplay">CA: soon</span>
                 <i class="fa-regular fa-copy"></i>
             </div>
         </div>
-        <div id="nft-section" class="mint-container" style="scroll-margin-top: 120px;">
+        <div id="nft-section" class="mint-container" style="scroll-margin-top: 100px;">
             <div class="mint-visual">
                 <div class="nft-3d-card" id="nftCard">
                     <img src="nft.jpg" class="mint-img" alt="NFT Preview">
                 </div>
             </div>
             <div class="mint-info">
-                <h3>UNLOCK YOUR PASS</h3>
-                <p>Join the Pump Pass elite. Holding a $PASS NFT grants you exclusive access to our community rewards, DAO governance, and future alpha drops.</p>
-            
+                <h3>Mint your pass</h3>
+                <p>Holding a $PASS NFT grants you exclusive access to our community rewards.</p>
+           
                 <a href="https://your-mint-link.com" target="_blank" class="mint-btn-animated">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i> MINT PASS NOW
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> MINT SOON...
                 </a>
             </div>
         </div>
-        <div id="why-pump" style="margin-top: 100px; position: relative; scroll-margin-top: 100px;">
+        <div id="why-pump" style="margin-top: 90px; position: relative; scroll-margin-top: 90px;">
             <div style="text-align: center; margin-bottom: 60px;">
                 <h2 class="sec-title" style="margin-bottom: 15px;">Why We Created <span style="color: var(--primary);">Pump Pass</span></h2>
                 <p style="color: #888; max-width: 600px; margin: 0 auto; font-size: 0.95rem; line-height: 1.6;">
@@ -382,7 +382,7 @@
                 </p>
             </div>
             <div class="utility-grid">
-                <div class="utility-card" style="border-top: 3px solid var(--primary);">
+                <div class="utility-card" style="border-top: 3px solid var(--primary);;">
                     <div style="background: rgba(153, 69, 255, 0.1); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
                         <i class="fa-solid fa-coins" style="margin-bottom: 0;"></i>
                     </div>
@@ -413,7 +413,7 @@
             </div>
         </div>
         </header>
-    <section id="partners" style="scroll-margin-top: 80px;">
+    <section id="partners" style="scroll-margin-top: 60px;">
         <h2 class="sec-title">Strategic Partners</h2>
         <div class="partner-grid">
             <a href="https://solana.com" target="_blank" style="text-decoration: none;">
@@ -450,7 +450,7 @@
             <h2 class="sec-title" style="margin-bottom: 10px;">JOIN THE <span style="color: var(--secondary);">COMMUNITY</span></h2>
         </div>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto;">
-        
+       
             <a href="https://t.me/tarsierleapg" target="_blank" style="text-decoration: none;">
                 <div class="com-card" style="background: rgba(20, 241, 149, 0.03); border-color: rgba(20, 241, 149, 0.2); height: 100%;">
                     <div style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 20px;"><i class="fa-brands fa-telegram"></i></div>
@@ -495,6 +495,7 @@
         <button onclick="togglePopup(false)" style="margin-top: 30px; padding: 12px 40px; background: var(--primary); border: none; color: white; border-radius: 10px; font-weight: 800; cursor: pointer; font-family: Orbitron;">CLOSE</button>
     </div>
 </div>
+<span id="caFull" style="display:none;">a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump</span>
 <script>
     const card = document.getElementById('nftCard');
     const container = document.getElementById('nft-section');
@@ -560,7 +561,7 @@
         requestAnimationFrame(animate);
     }
     async function fetchTokenData() {
-        const ca = "a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump";
+        const ca = "SOON";
         try {
             const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${ca}`);
             const data = await res.json();
@@ -578,7 +579,11 @@
         if (show) { overlay.style.display = 'flex'; setTimeout(() => overlay.classList.add('active'), 10); }
         else { overlay.classList.remove('active'); setTimeout(() => overlay.style.display = 'none', 300); }
     }
-    function copyCA() { navigator.clipboard.writeText("a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump"); alert("Contract Address Copied!"); }
+    function copyCA() {
+        const fullCA = document.getElementById('caFull').textContent;
+        navigator.clipboard.writeText(fullCA);
+        alert("Contract Address Copied!");
+    }
     resize(); animate(); fetchTokenData();
     setInterval(fetchTokenData, 10000);
     // Hamburger Menu JS
@@ -595,7 +600,12 @@
             navLinks.classList.remove('active');
         });
     });
+    // CA শর্ট করে দেখানো
+    window.addEventListener('load', function() {
+        const full = document.getElementById('caFull').textContent;
+        const short = full.slice(0, 6) + '...' + full.slice(-6);
+        document.getElementById('caDisplay').textContent = 'CA: ' + short;
+    });
 </script>
 </body>
 </html>
-
