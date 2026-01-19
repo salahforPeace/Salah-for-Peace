@@ -38,9 +38,6 @@
         }
         .nav-links a:hover { color: var(--secondary); }
 
-        /* Mobile Menu Toggle Bar */
-        .mobile-menu-btn { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
-
         .nav-buy-btn {
             background: linear-gradient(90deg, var(--primary), #7000ff);
             padding: 8px 18px; border-radius: 8px; color: white !important;
@@ -105,7 +102,6 @@
             border-radius: 10px; border: 1px dotted var(--border);
             font-family: monospace; color: var(--secondary); font-size: 0.9rem; 
             cursor: pointer; display: flex; align-items: center; gap: 12px;
-            word-break: break-all; text-align: center;
         }
 
         .mint-container {
@@ -252,57 +248,22 @@
 
         footer { padding: 40px 4%; border-top: 1px solid var(--border); text-align: center; background: rgba(0,0,0,0.5); margin-top: 50px; }
 
-        /* ============================================================
-           MOBILE RESPONSIVE CSS (INTERNATIONAL STANDARD)
-           ============================================================ */
+        /* --- ADDED ONLY FOR MOBILE --- */
+        .mobile-toggle { display: none; cursor: pointer; color: white; font-size: 1.5rem; }
         @media screen and (max-width: 768px) {
-            nav { padding: 15px 5%; }
-            .mobile-menu-btn { display: block; }
-            
-            .nav-links {
-                display: none; 
-                flex-direction: column;
-                position: absolute;
-                top: 100%; left: 0; width: 100%;
-                background: rgba(0,0,0,0.95);
-                padding: 30px;
-                gap: 20px;
-                border-bottom: 1px solid var(--primary);
-                backdrop-filter: blur(15px);
+            .mobile-toggle { display: block; }
+            .nav-links { 
+                display: none; position: absolute; top: 100%; left: 0; width: 100%; 
+                flex-direction: column; background: rgba(0,0,0,0.95); padding: 20px; gap: 15px; border-bottom: 1px solid var(--primary);
             }
-            .nav-links.active { display: flex; }
-
-            header { padding: 60px 5% 40px; }
-            .headline { font-size: 2.2rem !important; text-align: center; margin-bottom: 30px; }
-            .solana-tag { text-align: center; font-size: 0.6rem; }
-
-            .hero-action-card { padding: 25px 20px; }
-            .stat-box b { font-size: 0.9rem; }
-            .btn-buy-hero { padding: 16px; font-size: 1rem; }
-            .ca-box-hero { font-size: 0.7rem; padding: 10px; }
-
-            .mint-container { 
-                grid-template-columns: 1fr; 
-                margin-top: 40px;
-            }
-            .mint-visual { border-right: none; border-bottom: 1px solid var(--border); padding: 30px; }
-            .mint-info { padding: 30px 20px; text-align: center; }
-            .mint-info h3 { font-size: 1.4rem; }
-            .mint-info p { font-size: 0.9rem; }
-
-            .utility-grid { grid-template-columns: 1fr; gap: 20px; }
-            .utility-card { padding: 30px 20px; }
-            .utility-card h4 { font-size: 1.1rem; }
-            .utility-card p { font-size: 0.85rem; }
-
-            .sec-title { font-size: 1.6rem; margin-bottom: 30px; }
-            .partner-grid { grid-template-columns: repeat(2, 1fr); }
-            .partner-card { height: 90px; }
-            .partner-card img { width: 80px; }
-            
-            section { padding: 60px 5%; }
+            .nav-links.show { display: flex; }
+            .headline { font-size: 1.8rem !important; text-align: center; }
+            .mint-container { grid-template-columns: 1fr; }
+            .mint-visual { border-right: none; border-bottom: 1px solid var(--border); }
+            .utility-grid { grid-template-columns: 1fr; }
+            .stats-display { flex-direction: column; }
+            .ca-box-hero { font-size: 0.65rem; overflow-wrap: break-word; }
         }
-
     </style>
 </head>
 <body>
@@ -316,11 +277,11 @@
             <div>PUMP <span style="color: var(--secondary);">PASS</span></div>
         </div>
         
-        <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <div class="mobile-toggle" onclick="toggleMenu()">
             <i class="fa-solid fa-bars"></i>
         </div>
 
-        <div class="nav-links" id="navLinks"> 
+        <div class="nav-links" id="menu"> 
             <a href="#nft-section">NFT</a>
             <a href="#why-pump">WHY PUMP PASS</a>
             <a href="#partners">PARTNER</a>
@@ -349,7 +310,7 @@
             </div>
             <a href="https://pump.fun/coin/a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump" target="_blank" class="btn-buy-hero">BUY $PASS NOW</a>
             <div class="ca-box-hero" onclick="copyCA()">
-                <span id="caFull">CA: a3W4qutoEJA...ppump</span>
+                <span id="caFull">CA: a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump</span>
                 <i class="fa-regular fa-copy"></i>
             </div>
         </div>
@@ -373,7 +334,7 @@
         <div id="why-pump" style="margin-top: 100px; position: relative; scroll-margin-top: 100px;">
             <div style="text-align: center; margin-bottom: 60px;">
                 <h2 class="sec-title" style="margin-bottom: 15px;">Why We Created <span style="color: var(--primary);">Pump Pass</span></h2>
-                <p style="color: #888; max-width: 600px; margin: 0 auto; font-size: 0.9rem; line-height: 1.6;">
+                <p style="color: #888; max-width: 600px; margin: 0 auto; font-size: 0.95rem; line-height: 1.6;">
                     We didn't just build a token; we built a bridge between meme culture and real-world NFT utility on Solana.
                 </p>
             </div>
@@ -384,7 +345,7 @@
                         <i class="fa-solid fa-coins" style="margin-bottom: 0;"></i>
                     </div>
                     <h4>Token Rewards</h4>
-                    <p>We have exclusively reserved 5% to 10% of our total token supply for our NFT holders. This is a firm commitment to your partnership.</p>
+                    <p>We believe that the community is the true owner of a project. To honor your unwavering support and to ensure the project's long-term value, we have taken a major step. We have exclusively reserved 5% to 10% of our total token supply for our NFT holders. This is not just a reward, but a firm commitment to ensuring your partnership in the future of our project.</p>
                 </div>
 
                 <div class="utility-card" style="border-top: 3px solid var(--secondary);">
@@ -392,7 +353,7 @@
                         <i class="fa-solid fa-layer-group" style="margin-bottom: 0;"></i>
                     </div>
                     <h4>Alpha Access</h4>
-                    <p>Exclusive Private Telegram Group specifically for our NFT holders with early access to launches.</p>
+                    <p>We have established an exclusive 'Private Telegram Group' specifically for our NFT holders. Members of this group will enjoy 'Early Access' to our token launch, allowing you to secure your position ahead of the public and maximize your profit potential. Our goal is to ensure the true value of your investment and to achieve success together. This exclusive opportunity is our way of rewarding those who have placed their trust in us from the very beginning.</p>
                 </div>
 
                 <div class="utility-card" style="border-top: 3px solid var(--accent);">
@@ -400,7 +361,7 @@
                         <i class="fa-solid fa-rocket" style="margin-bottom: 0;"></i>
                     </div>
                     <h4>Fair Launch</h4>
-                    <p>100% Fair Launch on pump.fun! No pre-sales, no insider deals. Every member has an equal opportunity.</p>
+                    <p>100% Fair Launch on pump.fun!" Integrity is our core. No pre-sales, no insider deals. We’re ensuring a transparent start where every member has an equal opportunity from day one.</p>
                 </div>
 
                 <div class="utility-card" style="border-top: 3px solid #ff4b4b;">
@@ -408,11 +369,11 @@
                         <i class="fa-solid fa-fire-pulse" style="margin-bottom: 0;"></i>
                     </div>
                     <h4>Pure Passion</h4>
-                    <p>Our mission is to harness the power of this community to push PUMP$PASS to the very top of Solana.</p>
+                    <p>As a creator, my goal is not just to generate profit, but to realize a long-term vision. My mission is to harness the unstoppable power of this community to push PUMP$PASS to the very top of the Solana network. I firmly believe that only a transparent and strong community can lead any project to the pinnacle of success.</p>
                 </div>
             </div>
         </div>
-    </header>
+        </header>
 
     <section id="partners" style="scroll-margin-top: 80px;">
         <h2 class="sec-title">Strategic Partners</h2>
@@ -429,8 +390,21 @@
             <a href="https://jup.ag" target="_blank" style="text-decoration: none;">
                 <div class="partner-card"><img src="https://cryptologos.cc/logos/jupiter-ag-jup-logo.png" alt="Jupiter"></div>
             </a>
+
+            <a href="https://www.meteora.ag" target="_blank" style="text-decoration: none;">
+                <div class="partner-card"><img src="https://raw.githubusercontent.com/MeteoraAg/brand-kit/14588019527b4e99d082a162e6a9957d25afb325/meteora-v2/symbol/symbol.svg" alt="Meteora"></div>
+            </a>
+            <a href="https://solcex.io" target="_blank" style="text-decoration: none;">
+                <div class="partner-card"><img src="images/solcex.png" alt="Solcex"></div>
+            </a>
+            <a href="https://phantom.app" target="_blank" style="text-decoration: none;">
+                <div class="partner-card"><img src="images/phantom.png" alt="Phantom"></div>
+            </a>
+            <a href="https://solflare.com" target="_blank" style="text-decoration: none;">
+                <div class="partner-card"><img src="images/solflare.png" alt="Solflare"></div>
+            </a>
             <a href="https://magiceden.io" target="_blank" style="text-decoration: none;">
-                <div class="partner-card"><img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="Magic Eden"></div>
+                <div class="partner-card"><img src="images/magiceden.png" alt="Magic Eden"></div>
             </a>
         </div>
     </section>
@@ -447,21 +421,33 @@
                     <div style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 20px;"><i class="fa-brands fa-telegram"></i></div>
                     <h3 style="font-family: 'Orbitron'; color: #fff; margin-bottom: 10px; font-size: 1.1rem;">TELEGRAM</h3>
                     <p style="color: #aaa; font-size: 0.8rem; line-height: 1.6;">community discussions.</p>
+                    <div style="margin-top: 20px; font-family: 'Orbitron'; font-size: 0.65rem; color: var(--secondary); letter-spacing: 1px;">JOIN CHANNEL →</div>
                 </div>
             </a>
 
-            <a href="#" target="_blank" style="text-decoration: none;">
+            <a href="https://discord.gg/your-discord-link" target="_blank" style="text-decoration: none;">
+                <div class="com-card" style="background: rgba(88, 101, 242, 0.05); border-color: rgba(88, 101, 242, 0.2); height: 100%;">
+                    <div style="font-size: 2.5rem; color: #5865F2; margin-bottom: 20px;"><i class="fa-brands fa-discord"></i></div>
+                    <h3 style="font-family: 'Orbitron'; color: #fff; margin-bottom: 10px; font-size: 1.1rem;">DISCORD</h3>
+                    <p style="color: #aaa; font-size: 0.8rem; line-height: 1.6;">SOON...</p>
+                    <div style="margin-top: 20px; font-family: 'Orbitron'; font-size: 0.65rem; color: #5865F2; letter-spacing: 1px;">JOIN SERVER →</div>
+                </div>
+            </a>
+
+            <a href="https://x.com/LPTAR_Official" target="_blank" style="text-decoration: none;">
                 <div class="com-card" style="background: rgba(153, 69, 255, 0.03); border-color: rgba(153, 69, 255, 0.2); height: 100%;">
                     <div style="font-size: 2.5rem; color: var(--primary); margin-bottom: 20px;"><i class="fa-brands fa-x-twitter"></i></div>
                     <h3 style="font-family: 'Orbitron'; color: #fff; margin-bottom: 10px; font-size: 1.1rem;">TWITTER / X</h3>
-                    <p style="color: #aaa; font-size: 0.8rem; line-height: 1.6;">Daily updates.</p>
+                    <p style="color: #aaa; font-size: 0.8rem; line-height: 1.6;">Daily updates and official announcements.</p>
+                    <div style="margin-top: 20px; font-family: 'Orbitron'; font-size: 0.65rem; color: var(--primary); letter-spacing: 1px;">FOLLOW US →</div>
                 </div>
             </a>
 
             <div class="com-card" onclick="togglePopup(true)" style="cursor: pointer; background: rgba(255,255,255,0.02); height: 100%;">
                 <div style="font-size: 2.5rem; color: #fff; margin-bottom: 20px;"><i class="fa-solid fa-file-shield"></i></div>
                 <h3 style="font-family: 'Orbitron'; color: #fff; margin-bottom: 10px; font-size: 1.1rem;">WHITEPAPER</h3>
-                <p style="color: #aaa; font-size: 0.8rem; line-height: 1.6;">Tokenomics Roadmap.</p>
+                <p style="color: #aaa; font-size: 0.8rem; line-height: 1.6;">Tokenomics and the PUMP$PASS roadmap.</p>
+                <div style="margin-top: 20px; display: inline-block; padding: 6px 15px; border: 1px solid var(--border); border-radius: 50px; color: #fff; font-family: 'Orbitron'; font-size: 0.6rem;">READ DOCS</div>
             </div>
 
         </div>
@@ -482,18 +468,7 @@
 </div>
 
 <script>
-    // Mobile Menu Toggle Function
-    function toggleMobileMenu() {
-        const navLinks = document.getElementById('navLinks');
-        navLinks.classList.toggle('active');
-    }
-
-    // Close menu when a link is clicked
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            document.getElementById('navLinks').classList.remove('active');
-        });
-    });
+    function toggleMenu() { document.getElementById('menu').classList.toggle('show'); }
 
     const card = document.getElementById('nftCard');
     const container = document.getElementById('nft-section');
