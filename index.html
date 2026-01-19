@@ -6,7 +6,7 @@
     <title>Pump Pass | Official NFT Ecosystem</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@300;500;800&display=swap" rel="stylesheet">
-   
+  
     <style>
         :root {
             --primary: #9945FF;
@@ -45,7 +45,7 @@
             100% { box-shadow: 0 0 0 0 rgba(153, 69, 255, 0); }
         }
         header { padding: 80px 4% 60px; max-width: 1600px; margin: 0 auto; text-align: left; }
-       
+      
         .solana-tag {
             font-size: 0.7rem;
             color: var(--secondary);
@@ -91,6 +91,9 @@
             font-family: monospace; color: var(--secondary); font-size: 0.9rem;
             cursor: pointer; display: flex; align-items: center; gap: 12px;
         }
+        .ca-box-hero span {
+            word-break: break-all;
+        }
         .mint-container {
             max-width: 950px; margin: 60px auto 0;
             background: var(--glass); border: 2px solid var(--border);
@@ -99,7 +102,7 @@
             transition: 0.4s;
             perspective: 1000px;
         }
-       
+      
         .mint-visual {
             padding: 40px;
             display: flex;
@@ -123,7 +126,7 @@
         }
         .mint-info { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
         .mint-info h3 { font-family: 'Orbitron'; color: var(--secondary); margin-bottom: 15px; font-size: 1.8rem; }
-       
+      
         .mint-btn-animated {
             margin-top: 25px;
             display: block;
@@ -224,7 +227,6 @@
         .popup-content { background: #0f0f0f; padding: 40px; border-radius: 24px; border: 1px solid var(--primary); max-width: 500px; text-align: center; transform: scale(0.8); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .popup-overlay.active .popup-content { transform: scale(1); }
         footer { padding: 40px 4%; border-top: 1px solid var(--border); text-align: center; background: rgba(0,0,0,0.5); margin-top: 50px; }
-
         /* ===================== Hamburger & Mobile Menu ===================== */
         .hamburger {
             display: none;
@@ -232,7 +234,6 @@
             gap: 5px;
             cursor: pointer;
         }
-
         .hamburger span {
             width: 28px;
             height: 3px;
@@ -240,13 +241,11 @@
             border-radius: 3px;
             transition: all 0.3s ease;
         }
-
         /* মোবাইল সাইজে (768px এর নিচে) */
         @media (max-width: 768px) {
             .hamburger {
                 display: flex;
             }
-
             .nav-links {
                 position: absolute;
                 top: 100%;
@@ -265,14 +264,12 @@
                 box-shadow: 0 10px 25px rgba(0,0,0,0.1);
                 z-index: 999;
             }
-
             /* মেনু দেখাবে যখন active হবে */
             .nav-links.active {
                 transform: translateY(0);
                 opacity: 1;
                 visibility: visible;
             }
-
             .nav-links a {
                 font-size: 1.1rem; /* মোবাইলে readable, international style - clean & modern */
                 padding: 10px 0;
@@ -280,59 +277,39 @@
                 text-align: center;
                 color: #ddd;
             }
-
             /* Hamburger active অবস্থায় X হবে */
             .hamburger.active span:nth-child(1) {
                 transform: rotate(45deg) translate(7px, 7px);
             }
-
             .hamburger.active span:nth-child(2) {
                 opacity: 0;
             }
-
             .hamburger.active span:nth-child(3) {
                 transform: rotate(-45deg) translate(6px, -6px);
             }
-
             /* Sections mobile friendly করা - grids stack vertically, texts smaller & readable */
             header { padding: 60px 4% 40px; text-align: center; } /* Center for mobile */
-
             .headline { font-size: clamp(2rem, 8vw, 3rem); } /* Smaller headline */
-
             .hero-action-card { padding: 30px; max-width: 100%; } /* Full width */
-
             .stats-display { flex-direction: column; gap: 15px; } /* Stack stats */
-
             .mint-container { grid-template-columns: 1fr; } /* Stack mint sections */
-
             .mint-visual { border-right: none; border-bottom: 1px solid var(--border); }
-
             .utility-grid { grid-template-columns: 1fr; } /* Stack utilities */
-
             .utility-card { padding: 30px 20px; } /* Smaller padding */
-
             .utility-card p { font-size: 0.85rem; } /* Smaller text */
-
             .partner-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); } /* Smaller partners */
-
             .partner-card { height: 100px; } /* Adjust height */
-
             .partner-card img { width: 80px; } /* Smaller images */
-
             section { padding: 60px 4%; } /* Less padding */
-
             .sec-title { font-size: 1.8rem; } /* Smaller titles */
-
             .com-card { padding: 30px 15px; } /* Smaller community cards */
-
             footer p { font-size: 0.7rem; } /* Smaller footer */
-
             /* General text adjustments for international clean look */
             body { font-size: 0.9rem; line-height: 1.5; } /* Base font smaller */
-
             h1, h2, h3, h4 { line-height: 1.2; } /* Tighten headings */
-
-            p { font-size: 0.85rem; } /* Paragraphs readable small */
+            p { font-size: 0.85rem; overflow-wrap: break-word; word-break: break-word; } /* Paragraphs readable small */
+            span, b { overflow-wrap: break-word; word-break: break-word; }
+            .ca-box-hero { font-size: 0.8rem; } /* Smaller CA on mobile */
         }
     </style>
 </head>
@@ -362,9 +339,9 @@
     </nav>
     <header>
         <p class="solana-tag">This project is built on the Solana blockchain</p>
-       
+      
         <h1 class="headline">The next generation of, <br> <span class="grad-text">Meme utility & Nfts.</span></h1>
-       
+      
         <div id="buy-section" class="hero-action-card" style="scroll-margin-top: 100px;">
             <div class="stats-display">
                 <div class="stat-box">
@@ -391,7 +368,7 @@
             <div class="mint-info">
                 <h3>UNLOCK YOUR PASS</h3>
                 <p>Join the Pump Pass elite. Holding a $PASS NFT grants you exclusive access to our community rewards, DAO governance, and future alpha drops.</p>
-               
+              
                 <a href="https://your-mint-link.com" target="_blank" class="mint-btn-animated">
                     <i class="fa-solid fa-wand-magic-sparkles"></i> MINT PASS NOW
                 </a>
@@ -412,7 +389,7 @@
                     <h4>Token Rewards</h4>
                     <p>We believe that the community is the true owner of a project. To honor your unwavering support and to ensure the project's long-term value, we have taken a major step. We have exclusively reserved 5% to 10% of our total token supply for our NFT holders. This is not just a reward, but a firm commitment to ensuring your partnership in the future of our project.</p>
                 </div>
-                <div class="utility-card" style="border-top: 3px solid var(--secondary);">
+                <div class="utility-card" style="border-top: 3px solid var(--secondary);;">
                     <div style="background: rgba(20, 241, 149, 0.1); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
                         <i class="fa-solid fa-layer-group" style="margin-bottom: 0;"></i>
                     </div>
@@ -473,7 +450,7 @@
             <h2 class="sec-title" style="margin-bottom: 10px;">JOIN THE <span style="color: var(--secondary);">COMMUNITY</span></h2>
         </div>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto;">
-           
+          
             <a href="https://t.me/tarsierleapg" target="_blank" style="text-decoration: none;">
                 <div class="com-card" style="background: rgba(20, 241, 149, 0.03); border-color: rgba(20, 241, 149, 0.2); height: 100%;">
                     <div style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 20px;"><i class="fa-brands fa-telegram"></i></div>
@@ -604,16 +581,13 @@
     function copyCA() { navigator.clipboard.writeText("a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump"); alert("Contract Address Copied!"); }
     resize(); animate(); fetchTokenData();
     setInterval(fetchTokenData, 10000);
-
     // Hamburger Menu JS
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
-
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
         navLinks.classList.toggle('active');
     });
-
     // মেনুতে ক্লিক করলে বন্ধ হয়ে যাবে
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
