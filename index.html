@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Changed to device-width for better mobile responsiveness -->
     <title>Pump Pass | Official NFT Ecosystem</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@300;500;800&display=swap" rel="stylesheet">
-  
+ 
     <style>
         :root {
             --primary: #9945FF;
@@ -45,7 +45,7 @@
             100% { box-shadow: 0 0 0 0 rgba(153, 69, 255, 0); }
         }
         header { padding: 80px 4% 60px; max-width: 1600px; margin: 0 auto; text-align: left; }
-      
+     
         .solana-tag {
             font-size: 0.7rem;
             color: var(--secondary);
@@ -102,7 +102,7 @@
             transition: 0.4s;
             perspective: 1000px;
         }
-      
+     
         .mint-visual {
             padding: 40px;
             display: flex;
@@ -126,7 +126,7 @@
         }
         .mint-info { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
         .mint-info h3 { font-family: 'Orbitron'; color: var(--secondary); margin-bottom: 15px; font-size: 1.8rem; }
-      
+     
         .mint-btn-animated {
             margin-top: 25px;
             display: block;
@@ -203,19 +203,19 @@
         .partner-card:hover { transform: translateY(-5px); border-color: var(--secondary); }
         .partner-card img { width: 110px; filter: none; opacity: 1; }
         .com-card {
-            transition: all 0.25s ease;
+            transition: 0.4s;
             position: relative;
             overflow: hidden;
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 24px;
+            padding: 40px 20px;
             text-align: center;
-            background: rgba(255,255,255,0.02);
         }
         .com-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(255, 255, 255, 0.35);
-            background: rgba(255, 255, 255, 0.04);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.4) !important;
+            background: rgba(255, 255, 255, 0.07) !important;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
         .popup-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -227,7 +227,7 @@
         .popup-content { background: #0f0f0f; padding: 40px; border-radius: 24px; border: 1px solid var(--primary); max-width: 500px; text-align: center; transform: scale(0.8); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .popup-overlay.active .popup-content { transform: scale(1); }
         footer { padding: 40px 4%; border-top: 1px solid var(--border); text-align: center; background: rgba(0,0,0,0.5); margin-top: 50px; }
-        /* Hamburger & Mobile Menu */
+        /* ===================== Hamburger & Mobile Menu ===================== */
         .hamburger {
             display: none;
             flex-direction: column;
@@ -241,8 +241,11 @@
             border-radius: 3px;
             transition: all 0.3s ease;
         }
+        /* মোবাইল সাইজে (768px এর নিচে) */
         @media (max-width: 768px) {
-            .hamburger { display: flex; }
+            .hamburger {
+                display: flex;
+            }
             .nav-links {
                 position: absolute;
                 top: 100%;
@@ -258,46 +261,56 @@
                 opacity: 0;
                 visibility: hidden;
                 transition: all 0.35s ease;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
                 z-index: 999;
             }
+            /* মেনু দেখাবে যখন active হবে */
             .nav-links.active {
                 transform: translateY(0);
                 opacity: 1;
                 visibility: visible;
             }
             .nav-links a {
-                font-size: 1.1rem;
+                font-size: 1.1rem; /* মোবাইলে readable, international style - clean & modern */
                 padding: 10px 0;
                 width: 100%;
                 text-align: center;
                 color: #ddd;
             }
-            .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(7px, 7px); }
-            .hamburger.active span:nth-child(2) { opacity: 0; }
-            .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
-            header { padding: 60px 4% 40px; text-align: center; }
-            .headline { font-size: clamp(2rem, 8vw, 3rem); }
-            .hero-action-card { padding: 30px; max-width: 100%; }
-            .stats-display { flex-direction: column; gap: 15px; }
-            .mint-container { grid-template-columns: 1fr; }
+            /* Hamburger active অবস্থায় X হবে */
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(7px, 7px);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(6px, -6px);
+            }
+            /* Sections mobile friendly করা - grids stack vertically, texts smaller & readable */
+            header { padding: 60px 4% 40px; text-align: center; } /* Center for mobile */
+            .headline { font-size: clamp(2rem, 8vw, 3rem); word-break: normal; overflow-wrap: normal; } /* Smaller headline */
+            .headline span { word-break: normal; overflow-wrap: normal; }
+            .hero-action-card { padding: 30px; max-width: 100%; } /* Full width */
+            .stats-display { flex-direction: column; gap: 15px; } /* Stack stats */
+            .mint-container { grid-template-columns: 1fr; } /* Stack mint sections */
             .mint-visual { border-right: none; border-bottom: 1px solid var(--border); }
-            .utility-grid { grid-template-columns: 1fr; }
-            .utility-card { padding: 30px 20px; }
-            .utility-card p { font-size: 0.85rem; }
-            .partner-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
-            .partner-card { height: 100px; }
-            .partner-card img { width: 80px; }
-            section { padding: 60px 4%; }
-            .sec-title { font-size: 1.8rem; }
-            footer p { font-size: 0.7rem; }
-            body { font-size: 0.9rem; line-height: 1.5; }
-            h1, h2, h3, h4 { line-height: 1.2; }
-            p { font-size: 0.85rem; overflow-wrap: break-word; word-break: break-word; }
+            .utility-grid { grid-template-columns: 1fr; } /* Stack utilities */
+            .utility-card { padding: 30px 20px; } /* Smaller padding */
+            .utility-card p { font-size: 0.85rem; } /* Smaller text */
+            .partner-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); } /* Smaller partners */
+            .partner-card { height: 100px; } /* Adjust height */
+            .partner-card img { width: 80px; } /* Smaller images */
+            section { padding: 60px 4%; } /* Less padding */
+            .sec-title { font-size: 1.8rem; } /* Smaller titles */
+            .com-card { padding: 30px 15px; } /* Smaller community cards */
+            footer p { font-size: 0.7rem; } /* Smaller footer */
+            /* General text adjustments for international clean look */
+            body { font-size: 0.9rem; line-height: 1.5; } /* Base font smaller */
+            h1, h2, h3, h4 { line-height: 1.2; } /* Tighten headings */
+            p { font-size: 0.85rem; overflow-wrap: break-word; word-break: break-word; } /* Paragraphs readable small */
             span, b { overflow-wrap: break-word; word-break: break-word; }
-            .ca-box-hero { font-size: 0.8rem; }
-            /* Community mobile adjustments */
-            #community { padding: 50px 4% 70px !important; }
-            .com-card { padding: 18px 16px !important; }
+            .ca-box-hero { font-size: 0.8rem; } /* Smaller CA on mobile */
         }
     </style>
 </head>
@@ -318,17 +331,18 @@
             <a href="#community">COMMUNITY</a>
             <a href="#buy-section" class="nav-buy-btn">BUY $PASS</a>
         </div>
+        <!-- Hamburger Button (মোবাইলের জন্য) -->
         <div class="hamburger">
             <span></span>
             <span></span>
             <span></span>
         </div>
     </nav>
-
     <header>
         <p class="solana-tag">This project is built on the Solana blockchain</p>
+     
         <h1 class="headline">The next generation of, <br> <span class="grad-text">Meme utility & Nfts.</span></h1>
-      
+     
         <div id="buy-section" class="hero-action-card" style="scroll-margin-top: 100px;">
             <div class="stats-display">
                 <div class="stat-box">
@@ -346,7 +360,6 @@
                 <i class="fa-regular fa-copy"></i>
             </div>
         </div>
-
         <div id="nft-section" class="mint-container" style="scroll-margin-top: 120px;">
             <div class="mint-visual">
                 <div class="nft-3d-card" id="nftCard">
@@ -356,12 +369,12 @@
             <div class="mint-info">
                 <h3>UNLOCK YOUR PASS</h3>
                 <p>Join the Pump Pass elite. Holding a $PASS NFT grants you exclusive access to our community rewards, DAO governance, and future alpha drops.</p>
+             
                 <a href="https://your-mint-link.com" target="_blank" class="mint-btn-animated">
                     <i class="fa-solid fa-wand-magic-sparkles"></i> MINT PASS NOW
                 </a>
             </div>
         </div>
-
         <div id="why-pump" style="margin-top: 100px; position: relative; scroll-margin-top: 100px;">
             <div style="text-align: center; margin-bottom: 60px;">
                 <h2 class="sec-title" style="margin-bottom: 15px;">Why We Created <span style="color: var(--primary);">Pump Pass</span></h2>
@@ -377,7 +390,7 @@
                     <h4>Token Rewards</h4>
                     <p>We believe that the community is the true owner of a project. To honor your unwavering support and to ensure the project's long-term value, we have taken a major step. We have exclusively reserved 5% to 10% of our total token supply for our NFT holders. This is not just a reward, but a firm commitment to ensuring your partnership in the future of our project.</p>
                 </div>
-                <div class="utility-card" style="border-top: 3px solid var(--secondary);">
+                <div class="utility-card" style="border-top: 3px solid var(--secondary);;">
                     <div style="background: rgba(20, 241, 149, 0.1); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
                         <i class="fa-solid fa-layer-group" style="margin-bottom: 0;"></i>
                     </div>
@@ -400,8 +413,7 @@
                 </div>
             </div>
         </div>
-    </header>
-
+        </header>
     <section id="partners" style="scroll-margin-top: 80px;">
         <h2 class="sec-title">Strategic Partners</h2>
         <div class="partner-grid">
@@ -434,64 +446,48 @@
             </a>
         </div>
     </section>
-
-    <!-- ==================== UPDATED SUPER COMPACT COMMUNITY SECTION ==================== -->
-    <section id="community" style="scroll-margin-top: 80px; padding: 70px 4% 90px;">
-        <div style="text-align: center; margin-bottom: 40px;">
-            <h2 class="sec-title" style="margin-bottom: 10px; font-size: 1.9rem;">COMMUNITY</h2>
-            <p style="color: #777; font-size: 0.85rem; max-width: 480px; margin: 0 auto; line-height: 1.4;">
-                Join the Pump Pass ecosystem
-            </p>
+    <section id="community" style="scroll-margin-top: 80px; padding: 100px 4%;">
+        <div style="text-align: center; margin-bottom: 60px;">
+            <h2 class="sec-title" style="margin-bottom: 10px;">JOIN THE <span style="color: var(--secondary);">COMMUNITY</span></h2>
         </div>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; max-width: 1000px; margin: 0 auto;">
-            <!-- Telegram -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto;">
+         
             <a href="https://t.me/tarsierleapg" target="_blank" style="text-decoration: none;">
-                <div class="com-card" style="padding: 20px 18px; background: rgba(20, 241, 149, 0.05); border-color: rgba(20, 241, 149, 0.3);">
-                    <i class="fa-brands fa-telegram" style="font-size: 1.8rem; color: var(--secondary); margin-bottom: 12px; display: block;"></i>
-                    <h3 style="font-family: 'Orbitron'; font-size: 0.95rem; margin-bottom: 6px; color: white;">TELEGRAM</h3>
-                    <p style="color: #999; font-size: 0.75rem; line-height: 1.4; margin-bottom: 12px;">Live chat & updates</p>
-                    <span style="font-size: 0.65rem; color: var(--secondary); font-weight: 700; letter-spacing: 1px;">JOIN →</span>
+                <div class="com-card" style="background: rgba(20, 241, 149, 0.03); border-color: rgba(20, 241, 149, 0.2); height: 100%;">
+                    <div style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 20px;"><i class="fa-brands fa-telegram"></i></div>
+                    <h3 style="font-family: 'Orbitron'; color: #fff; margin-bottom: 10px; font-size: 1.1rem;">TELEGRAM</h3>
+                    <p style="color: #aaa; font-size: 0.8rem; line-height: 1.6;">community discussions.</p>
+                    <div style="margin-top: 20px; font-family: 'Orbitron'; font-size: 0.65rem; color: var(--secondary); letter-spacing: 1px;">JOIN CHANNEL →</div>
                 </div>
             </a>
-
-            <!-- Discord -->
             <a href="https://discord.gg/your-discord-link" target="_blank" style="text-decoration: none;">
-                <div class="com-card" style="padding: 20px 18px; background: rgba(88, 101, 242, 0.05); border-color: rgba(88, 101, 242, 0.3);">
-                    <i class="fa-brands fa-discord" style="font-size: 1.8rem; color: #5865F2; margin-bottom: 12px; display: block;"></i>
-                    <h3 style="font-family: 'Orbitron'; font-size: 0.95rem; margin-bottom: 6px; color: white;">DISCORD</h3>
-                    <p style="color: #999; font-size: 0.75rem; line-height: 1.4; margin-bottom: 12px;">Coming soon</p>
-                    <span style="font-size: 0.65rem; color: #5865F2; font-weight: 700; letter-spacing: 1px;">JOIN →</span>
+                <div class="com-card" style="background: rgba(88, 101, 242, 0.05); border-color: rgba(88, 101, 242, 0.2); height: 100%;">
+                    <div style="font-size: 2.5rem; color: #5865F2; margin-bottom: 20px;"><i class="fa-brands fa-discord"></i></div>
+                    <h3 style="font-family: 'Orbitron'; color: #fff; margin-bottom: 10px; font-size: 1.1rem;">DISCORD</h3>
+                    <p style="color: #aaa; font-size: 0.8rem; line-height: 1.6;">SOON...</p>
+                    <div style="margin-top: 20px; font-family: 'Orbitron'; font-size: 0.65rem; color: #5865F2; letter-spacing: 1px;">JOIN SERVER →</div>
                 </div>
             </a>
-
-            <!-- Twitter/X -->
             <a href="https://x.com/LPTAR_Official" target="_blank" style="text-decoration: none;">
-                <div class="com-card" style="padding: 20px 18px; background: rgba(153, 69, 255, 0.05); border-color: rgba(153, 69, 255, 0.3);">
-                    <i class="fa-brands fa-x-twitter" style="font-size: 1.8rem; color: var(--primary); margin-bottom: 12px; display: block;"></i>
-                    <h3 style="font-family: 'Orbitron'; font-size: 0.95rem; margin-bottom: 6px; color: white;">TWITTER / X</h3>
-                    <p style="color: #999; font-size: 0.75rem; line-height: 1.4; margin-bottom: 12px;">Announcements</p>
-                    <span style="font-size: 0.65rem; color: var(--primary); font-weight: 700; letter-spacing: 1px;">FOLLOW →</span>
+                <div class="com-card" style="background: rgba(153, 69, 255, 0.03); border-color: rgba(153, 69, 255, 0.2); height: 100%;">
+                    <div style="font-size: 2.5rem; color: var(--primary); margin-bottom: 20px;"><i class="fa-brands fa-x-twitter"></i></div>
+                    <h3 style="font-family: 'Orbitron'; color: #fff; margin-bottom: 10px; font-size: 1.1rem;">TWITTER / X</h3>
+                    <p style="color: #aaa; font-size: 0.8rem; line-height: 1.6;">Daily updates and official announcements.</p>
+                    <div style="margin-top: 20px; font-family: 'Orbitron'; font-size: 0.65rem; color: var(--primary); letter-spacing: 1px;">FOLLOW US →</div>
                 </div>
             </a>
-
-            <!-- Whitepaper -->
-            <div class="com-card" onclick="togglePopup(true)" style="cursor: pointer; padding: 20px 18px; background: rgba(255,255,255,0.04); border-color: var(--border);">
-                <i class="fa-solid fa-file-lines" style="font-size: 1.8rem; color: #ccc; margin-bottom: 12px; display: block;"></i>
-                <h3 style="font-family: 'Orbitron'; font-size: 0.95rem; margin-bottom: 6px; color: white;">WHITEPAPER</h3>
-                <p style="color: #999; font-size: 0.75rem; line-height: 1.4; margin-bottom: 12px;">Tokenomics & Roadmap</p>
-                <span style="font-size: 0.65rem; color: #aaa; font-weight: 700; letter-spacing: 1px; border: 1px solid var(--border); padding: 4px 10px; border-radius: 30px; display: inline-block;">
-                    READ
-                </span>
+            <div class="com-card" onclick="togglePopup(true)" style="cursor: pointer; background: rgba(255,255,255,0.02); height: 100%;">
+                <div style="font-size: 2.5rem; color: #fff; margin-bottom: 20px;"><i class="fa-solid fa-file-shield"></i></div>
+                <h3 style="font-family: 'Orbitron'; color: #fff; margin-bottom: 10px; font-size: 1.1rem;">WHITEPAPER</h3>
+                <p style="color: #aaa; font-size: 0.8rem; line-height: 1.6;">Tokenomics and the PUMP$PASS roadmap.</p>
+                <div style="margin-top: 20px; display: inline-block; padding: 6px 15px; border: 1px solid var(--border); border-radius: 50px; color: #fff; font-family: 'Orbitron'; font-size: 0.6rem;">READ DOCS</div>
             </div>
         </div>
     </section>
-
     <footer>
         <p style="color: #444; font-size: 0.75rem; letter-spacing: 2px;">© 2026 PUMP PASS • POWERED BY SOLANA</p>
     </footer>
 </div>
-
 <div class="popup-overlay" id="wpPopup" onclick="togglePopup(false)">
     <div class="popup-content" onclick="event.stopPropagation()">
         <i class="fa-solid fa-scroll" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
@@ -500,7 +496,6 @@
         <button onclick="togglePopup(false)" style="margin-top: 30px; padding: 12px 40px; background: var(--primary); border: none; color: white; border-radius: 10px; font-weight: 800; cursor: pointer; font-family: Orbitron;">CLOSE</button>
     </div>
 </div>
-
 <script>
     const card = document.getElementById('nftCard');
     const container = document.getElementById('nft-section');
@@ -587,12 +582,14 @@
     function copyCA() { navigator.clipboard.writeText("a3W4qutoEJA4232T2gwZUfgYJTetr96pU4SJMwppump"); alert("Contract Address Copied!"); }
     resize(); animate(); fetchTokenData();
     setInterval(fetchTokenData, 10000);
+    // Hamburger Menu JS
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
         navLinks.classList.toggle('active');
     });
+    // মেনুতে ক্লিক করলে বন্ধ হয়ে যাবে
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             hamburger.classList.remove('active');
