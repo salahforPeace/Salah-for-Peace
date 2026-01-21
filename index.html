@@ -44,7 +44,7 @@
             100% { box-shadow: 0 0 0 0 rgba(153, 69, 255, 0); }
         }
         header { padding: 80px 4% 60px; max-width: 1600px; margin: 0 auto; text-align: left; }
-  
+ 
         .solana-tag {
             font-size: 0.5rem;
             color: var(--secondary);
@@ -101,7 +101,7 @@
             transition: 0.4s;
             perspective: 1000px;
         }
-  
+ 
         .mint-visual {
             padding: 40px;
             display: flex;
@@ -125,7 +125,7 @@
         }
         .mint-info { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
         .mint-info h3 { font-family: 'Orbitron'; color: var(--secondary); margin-bottom: 15px; font-size: 1.8rem; }
-  
+ 
         .mint-btn-animated {
             margin-top: 25px;
             display: block;
@@ -311,6 +311,17 @@
             span, b { overflow-wrap: break-word; word-break: break-word; }
             .ca-box-hero { font-size: 0.8rem; } /* Smaller CA on mobile */
         }
+
+        /* New CSS for fade-in slide-up animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -325,11 +336,11 @@
     <a href="#nft-section">NFT</a>
     <a href="#why-pump">WHY PUMP PASS</a>
     <a href="#partners">PARTNER</a>
-   
+  
     <a href="https://dexscreener.com/..." target="_blank" rel="noopener noreferrer">DEXSCREENER</a>
     <a href="roadmap.pdf" download="PumpPass_Roadmap">ROADMAP</a>
     <a href="#community">COMMUNITY</a>
-   
+  
     <a href="https://pump.fun" class="nav-buy-btn" target="_blank" rel="noopener noreferrer">BUY $PASS</a>
 </div> <!-- Hamburger Button (মোবাইলের জন্য) -->
         <div class="hamburger">
@@ -339,11 +350,11 @@
         </div>
     </nav>
     <header>
-        <p class="solana-tag">This project is built on the Solana blockchain</p>
-  
-        <h1 class="headline">The next generation of, <br> <span class="grad-text">Meme utility & Nfts.</span></h1>
-  
-        <div id="buy-section" class="hero-action-card" style="scroll-margin-top: 90px;">
+        <p class="solana-tag fade-in">This project is built on the Solana blockchain</p>
+ 
+        <h1 class="headline fade-in">The next generation of, <br> <span class="grad-text">Meme utility & Nfts.</span></h1>
+ 
+        <div id="buy-section" class="hero-action-card fade-in" style="scroll-margin-top: 90px;">
             <div class="stats-display">
                 <div class="stat-box">
                     <span>LIVE PRICE <div class="live-dot"></div></span>
@@ -360,7 +371,7 @@
                 <i class="fa-regular fa-copy"></i>
             </div>
         </div>
-        <div id="nft-section" class="mint-container" style="scroll-margin-top: 100px;">
+        <div id="nft-section" class="mint-container fade-in" style="scroll-margin-top: 100px;">
             <div class="mint-visual">
                 <div class="nft-3d-card" id="nftCard">
                     <img src="nft.jpg" class="mint-img" alt="NFT Preview">
@@ -369,13 +380,13 @@
             <div class="mint-info">
                 <h3>Mint your pass</h3>
                 <p>Holding a $PASS NFT grants you exclusive access to our community rewards.</p>
-          
+         
                 <a href="https://your-mint-link.com" target="_blank" class="mint-btn-animated">
                     <i class="fa-solid fa-wand-magic-sparkles"></i> MINT SOON...
                 </a>
             </div>
         </div>
-        <div id="why-pump" style="margin-top: 90px; position: relative; scroll-margin-top: 90px;">
+        <div id="why-pump" class="fade-in" style="margin-top: 90px; position: relative; scroll-margin-top: 90px;">
             <div style="text-align: center; margin-bottom: 60px;">
                 <h2 class="sec-title" style="margin-bottom: 15px;">Why We Created <span style="color: var(--primary);">Pump Pass</span></h2>
                 <p style="color: #888; max-width: 600px; margin: 0 auto; font-size: 0.95rem; line-height: 1.6;">
@@ -383,28 +394,28 @@
                 </p>
             </div>
             <div class="utility-grid">
-                <div class="utility-card" style="border-top: 3px solid var(--primary);;">
+                <div class="utility-card fade-in" style="border-top: 3px solid var(--primary);;">
                     <div style="background: rgba(153, 69, 255, 0.1); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
                         <i class="fa-solid fa-coins" style="margin-bottom: 0;"></i>
                     </div>
                     <h4>Token Rewards</h4>
                     <p>We have exclusively reserved 5% to 10% of our total token supply for our NFT holders. This is a firm commitment to your partnership.</p>
                 </div>
-                <div class="utility-card" style="border-top: 3px solid var(--secondary);;">
+                <div class="utility-card fade-in" style="border-top: 3px solid var(--secondary);;">
                     <div style="background: rgba(20, 241, 149, 0.1); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
                         <i class="fa-solid fa-layer-group" style="margin-bottom: 0;"></i>
                     </div>
                     <h4>Alpha Access</h4>
                     <p>Exclusive Private Telegram Group specifically for our NFT holders with early access to launches.</p>
                 </div>
-                <div class="utility-card" style="border-top: 3px solid var(--accent);">
+                <div class="utility-card fade-in" style="border-top: 3px solid var(--accent);">
                     <div style="background: rgba(0, 229, 255, 0.1); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
                         <i class="fa-solid fa-rocket" style="margin-bottom: 0;"></i>
                     </div>
                     <h4>Fair Launch</h4>
                     <p>100% Fair Launch on pump.fun! No pre-sales, no insider deals. Every member has an equal opportunity.</p>
                 </div>
-                <div class="utility-card" style="border-top: 3px solid #ff4b4b;">
+                <div class="utility-card fade-in" style="border-top: 3px solid #ff4b4b;">
                     <div style="background: rgba(255, 75, 75, 0.1); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
                         <i class="fa-solid fa-fire-pulse" style="margin-bottom: 0;"></i>
                     </div>
@@ -414,7 +425,7 @@
             </div>
         </div>
         </header>
-    <section id="partners" style="scroll-margin-top: 60px;">
+    <section id="partners" class="fade-in" style="scroll-margin-top: 60px;">
         <h2 class="sec-title">Connected to Our Projec</h2>
         <div class="partner-grid">
             <a href="https://solana.com" target="_blank" style="text-decoration: none;">
@@ -446,12 +457,12 @@
             </a>
         </div>
     </section>
-    <section id="community" style="scroll-margin-top: 80px; padding: 100px 4%;">
+    <section id="community" class="fade-in" style="scroll-margin-top: 80px; padding: 100px 4%;">
         <div style="text-align: center; margin-bottom: 60px;">
             <h2 class="sec-title" style="margin-bottom: 10px;">JOIN THE <span style="color: var(--secondary);">COMMUNITY</span></h2>
         </div>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto;">
-      
+     
             <a href="https://t.me/tarsierleapg" target="_blank" style="text-decoration: none;">
                 <div class="com-card" style="background: rgba(20, 241, 149, 0.03); border-color: rgba(20, 241, 149, 0.2); height: 100%;">
                     <div style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 20px;"><i class="fa-brands fa-telegram"></i></div>
@@ -484,7 +495,7 @@
             </div>
         </div>
     </section>
-    <footer>
+    <footer class="fade-in">
         <p style="color: #444; font-size: 0.75rem; letter-spacing: 2px;">© 2026 PUMP PASS • POWERED BY SOLANA</p>
     </footer>
 </div>
@@ -606,6 +617,17 @@
         const full = document.getElementById('caFull').textContent;
         const short = full.slice(0, 6) + '...' + full.slice(-6);
         document.getElementById('caDisplay').textContent = 'CA: ' + short;
+
+        // New JS for Intersection Observer
+        const fadeInElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        fadeInElements.forEach(el => observer.observe(el));
     });
 </script>
 </body>
