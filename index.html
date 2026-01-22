@@ -44,7 +44,6 @@
  100% { box-shadow: 0 0 0 0 rgba(153, 69, 255, 0); }
  }
  header { padding: 80px 4% 60px; max-width: 1600px; margin: 0 auto; text-align: left; }
- 
  .solana-tag {
  font-size: 0.6rem;
  color: var(--secondary);
@@ -64,11 +63,16 @@
  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
  }
- .hero-action-card:hover { transform: scale(1.02); border-color: var(--primary); }
+ .hero-action-card:hover { transform: scale(1.02) translateY(-10px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
  .stats-display { display: flex; gap: 20px; width: 100%; margin-bottom: 30px; }
  .stat-box {
  flex: 1; padding: 20px; background: rgba(255,255,255,0.03);
  border-radius: 16px; border: 1px solid var(--border); text-align: center;
+ transition: all 0.35s ease;
+ }
+ .stat-box:hover {
+ transform: translateY(-10px);
+ box-shadow: 0 25px 35px rgba(0, 0, 0, 0.18);
  }
  .stat-box span { display: block; font-family: 'Orbitron'; font-size: 0.7rem; color: #888; letter-spacing: 1px; margin-bottom: 8px; }
  .stat-box b { font-size: 1.2rem; color: var(--secondary); font-family: 'Orbitron'; display: block; }
@@ -89,6 +93,11 @@
  border-radius: 10px; border: 1px dotted var(--border);
  font-family: monospace; color: var(--secondary); font-size: 0.9rem;
  cursor: pointer; display: flex; align-items: center; gap: 12px;
+ transition: all 0.35s ease;
+ }
+ .ca-box-hero:hover {
+ transform: translateY(-10px);
+ box-shadow: 0 25px 35px rgba(0, 0, 0, 0.18);
  }
  .ca-box-hero span {
  word-break: break-all;
@@ -101,7 +110,6 @@
  transition: 0.4s;
  perspective: 1000px;
  }
- 
  .mint-visual {
  padding: 40px;
  display: flex;
@@ -114,10 +122,8 @@
   max-width: 320px;
   aspect-ratio: 3 / 4;
   position: relative;
-  transform-style: preserve-3d;
-  animation: slowSpin 17s linear infinite;
   cursor: crosshair;
-  perspective: 1400px;
+  transition: all 0.35s ease;
  }
  .nft-3d-card .front,
  .nft-3d-card .back {
@@ -134,7 +140,7 @@
   transform: rotateY(0deg);
  }
  .nft-3d-card .back {
-  transform: rotateY(180deg);
+  transform: rotateY(0deg);
  }
  .mint-img {
   width: 100%;
@@ -143,16 +149,12 @@
   border-radius: 20px;
   pointer-events: none;
  }
- @keyframes slowSpin {
-  from { transform: rotateY(0deg); }
-  to   { transform: rotateY(360deg); }
- }
  .nft-3d-card:hover {
-  transform: scale(1.04);
+  transform: scale(1.04) translateY(-10px);
+  box-shadow: 0 25px 35px rgba(0, 0, 0, 0.18);
  }
  .mint-info { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
  .mint-info h3 { font-family: 'Orbitron'; color: var(--secondary); margin-bottom: 15px; font-size: 1.8rem; }
- 
  .mint-btn-animated {
  margin-top: 25px;
  display: block;
@@ -201,6 +203,7 @@
  background: rgba(153, 69, 255, 0.1);
  border-color: var(--primary);
  transform: translateY(-10px);
+ box-shadow: 0 25px 35px rgba(0, 0, 0, 0.18);
  }
  .utility-card i {
  font-size: 2.5rem;
@@ -226,7 +229,7 @@
  background: #0a0a0a; border: 1px solid var(--border); border-radius: 16px;
  height: 120px; display: flex; justify-content: center; align-items: center; transition: 0.4s;
  }
- .partner-card:hover { transform: translateY(-5px); border-color: var(--secondary); }
+ .partner-card:hover { transform: translateY(-10px); border-color: var(--secondary); box-shadow: 0 25px 35px rgba(0, 0, 0, 0.18); }
  .partner-card img { width: 110px; filter: none; opacity: 1; }
  .com-card {
  transition: 0.4s;
@@ -333,7 +336,6 @@
  span, b { overflow-wrap: break-word; word-break: break-word; }
  .ca-box-hero { font-size: 0.8rem; }
  }
-
  .fade-in {
  opacity: 0;
  transform: translateY(50px);
@@ -357,11 +359,9 @@
  <a href="#nft-section">NFT</a>
  <a href="#why-pump">WHY PUMP PASS</a>
  <a href="#partners">PARTNER</a>
- 
  <a href="https://dexscreener.com/..." target="_blank" rel="noopener noreferrer">DEXSCREENER</a>
  <a href="roadmap.pdf" download="PumpPass_Roadmap">ROADMAP</a>
  <a href="#community">COMMUNITY</a>
- 
  <a href="https://pump.fun" class="nav-buy-btn" target="_blank" rel="noopener noreferrer">BUY $PASS</a>
 </div>
  <div class="hamburger">
@@ -372,9 +372,7 @@
  </nav>
  <header>
  <p class="solana-tag fade-in">This project is built on the Solana blockchain</p>
- 
  <h1 class="headline fade-in">The next generation of, <br> <span class="grad-text">Meme utility & Nfts.</span></h1>
- 
  <div id="buy-section" class="hero-action-card fade-in" style="scroll-margin-top: 90px;">
  <div class="stats-display">
  <div class="stat-box">
@@ -396,7 +394,7 @@
  <div class="mint-visual">
   <div class="nft-3d-card" id="nftCard">
     <div class="front">
-      <img src="nft.jpg" class="mint-img" alt="NFT Preview">
+      <img src="nft.gif" class="mint-img" alt="NFT Preview">
     </div>
     <div class="back">
       <img src="nft.jpg" class="mint-img" alt="NFT Preview">
@@ -406,7 +404,6 @@
  <div class="mint-info">
  <h3>Mint your pass</h3>
  <p>Holding a $PASS NFT grants you exclusive access to our community rewards.</p>
- 
  <a href="https://your-mint-link.com" target="_blank" class="mint-btn-animated">
  <i class="fa-solid fa-wand-magic-sparkles"></i> MINT SOON...
  </a>
@@ -488,7 +485,6 @@
  <h2 class="sec-title" style="margin-bottom: 10px;">JOIN THE <span style="color: var(--secondary);">COMMUNITY</span></h2>
  </div>
  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto;">
- 
  <a href="https://t.me/tarsierleapg" target="_blank" style="text-decoration: none;">
  <div class="com-card" style="background: rgba(20, 241, 149, 0.03); border-color: rgba(20, 241, 149, 0.2); height: 100%;">
  <div style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 20px;"><i class="fa-brands fa-telegram"></i></div>
@@ -537,16 +533,6 @@
 <script>
  const card = document.getElementById('nftCard');
  const container = document.getElementById('nft-section');
- container.addEventListener('mousemove', (e) => {
- let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
- let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
- card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
- });
- container.addEventListener('mouseenter', (e) => { card.style.transition = 'none'; });
- container.addEventListener('mouseleave', (e) => {
- card.style.transition = 'all 0.5s ease';
- card.style.transform = `rotateY(0deg) rotateX(0deg)`;
- });
  const canvas = document.getElementById('proCanvas');
  const ctx = canvas.getContext('2d');
  let particles = [];
@@ -640,7 +626,6 @@
  const full = document.getElementById('caFull').textContent;
  const short = full.slice(0, 6) + '...' + full.slice(-6);
  document.getElementById('caDisplay').textContent = 'CA: ' + short;
-
  const fadeInElements = document.querySelectorAll('.fade-in');
  const observer = new IntersectionObserver((entries) => {
  entries.forEach(entry => {
@@ -668,5 +653,3 @@
 </script>
 </body>
 </html>
-
-
