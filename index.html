@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -356,13 +357,13 @@
  <div>PUMP <span style="color: var(--secondary);">PASS</span></div>
  </div>
  <div class="nav-links">
- <a href="#home">HOME</a>   <!-- এই লাইনটা যোগ করো -->
- <a href="#nft-section">NFT</a>
- <a href="#why-pump">WHY PUMP PASS</a>
- <a href="#partners">PARTNER</a>
+ <a href="/home" data-link>HOME</a> <!-- এই লাইনটা যোগ করো -->
+ <a href="/nft" data-link>NFT</a>
+ <a href="/why-pump" data-link>WHY PUMP PASS</a>
+ <a href="/partners" data-link>PARTNER</a>
  <a href="https://dexscreener.com/..." target="_blank" rel="noopener noreferrer">DEXSCREENER</a>
  <a href="roadmap.pdf" download="PumpPass_Roadmap">ROADMAP</a>
- <a href="#community">COMMUNITY</a>
+ <a href="/community" data-link>COMMUNITY</a>
  <a href="https://pump.fun" class="nav-buy-btn" target="_blank" rel="noopener noreferrer">BUY $PASS</a>
 </div>
  <div class="hamburger">
@@ -414,7 +415,6 @@
  <div style="text-align: center; margin-bottom: 60px;">
  <h2 class="sec-title" style="margin-bottom: 15px;">Why <span style="color: var(--primary);">Pump Pass</span></h2>
  <p style="color: #888; max-width: 600px; margin: 0 auto; font-size: 0.95rem; line-height: 1.6;">
- 
  </p>
  </div>
  <div class="utility-grid">
@@ -637,22 +637,40 @@
  }, { threshold: 0.1 });
  fadeInElements.forEach(el => observer.observe(el));
  });
- document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
+const routes = {
+  '/home': 'home',
+  '/nft': 'nft-section',
+  '/why-pump': 'why-pump',
+  '/partners': 'partners',
+  '/community': 'community'
+};
+function navigateTo(path) {
+  const sectionId = routes[path] || 'home';
+  const targetElement = document.getElementById(sectionId);
+  if (targetElement) {
+    const offset = targetElement.getBoundingClientRect().top + window.pageYOffset - (parseInt(getComputedStyle(targetElement).scrollMarginTop) || 0);
+    window.scrollTo({
+      top: offset,
+      behavior: 'smooth'
+    });
+  }
+}
+document.querySelectorAll('[data-link]').forEach(link => {
+  link.addEventListener('click', function(e) {
     e.preventDefault();
-    const targetId = this.getAttribute('href').substring(1);
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      const offset = targetElement.getBoundingClientRect().top + window.pageYOffset - (parseInt(getComputedStyle(targetElement).scrollMarginTop) || 0);
-      window.scrollTo({
-        top: offset,
-        behavior: 'smooth'
-      });
+    const path = this.getAttribute('href');
+    if (window.location.protocol !== 'file:') {
+      history.pushState({ path }, '', path);
     }
+    navigateTo(path);
   });
 });
+window.addEventListener('popstate', () => {
+  navigateTo(window.location.pathname);
+});
+// Initial navigation
+navigateTo(window.location.pathname || '/home');
 </script>
 </body>
 </html>
-
-
+```
