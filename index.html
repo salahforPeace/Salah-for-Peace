@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -357,7 +356,7 @@
  <div>PUMP <span style="color: var(--secondary);">PASS</span></div>
  </div>
  <div class="nav-links">
- <a href="/home" data-link>HOME</a> <!-- এই লাইনটা যোগ করো -->
+ <a href="/home" data-link>HOME</a>
  <a href="/nft" data-link>NFT</a>
  <a href="/why-pump" data-link>WHY PUMP PASS</a>
  <a href="/partners" data-link>PARTNER</a>
@@ -659,8 +658,10 @@ document.querySelectorAll('[data-link]').forEach(link => {
   link.addEventListener('click', function(e) {
     e.preventDefault();
     const path = this.getAttribute('href');
-    if (window.location.protocol !== 'file:') {
+    try {
       history.pushState({ path }, '', path);
+    } catch (err) {
+      console.warn("pushState skipped (local file mode)", err);
     }
     navigateTo(path);
   });
@@ -673,4 +674,3 @@ navigateTo(window.location.pathname || '/home');
 </script>
 </body>
 </html>
-```
